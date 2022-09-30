@@ -7,10 +7,10 @@ export const SessionProvider = ({ children }) => {
 
   const login = () => {
     setUser({
-      Name: "Jeff",
-      Last1: "Vargas",
-      Last2: "Barrantes",
-      Role: "Admin",
+      name: "Jeff",
+      last1: "Vargas",
+      last2: "Barrantes",
+      role: "Administrador",
     });
   };
 

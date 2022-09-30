@@ -5,7 +5,7 @@ import { SessionContext } from "../contexts/sessionProvider";
 export const Login = () => {
   const { user, login } = useContext(SessionContext);
 
-  if (user) {
+  if (user && user.role === "Administrador") {
     return <Navigate to="/administracion/" />;
   }
 

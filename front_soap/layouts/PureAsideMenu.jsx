@@ -1,15 +1,15 @@
-import { useContext, useEffect } from "react";
-import { Navigate, Outlet } from "react-router-dom";
+import { useContext } from "react";
+import { Link, Navigate, Outlet } from "react-router-dom";
 import { SessionContext } from "../contexts/sessionProvider";
 import LogoIcon from "../src/assets/logo.jpg";
 
 const AsideMenu = () => {
   const { user, logout } = useContext(SessionContext);
 
-  if (!user) {
+  if (!user || (user && user.role != "Administrador")) {
     return <Navigate to="/" />;
   }
-
+  //cambiar los a por otra cosa mas bonita
   return (
     <>
       <div className="flex fixed font-sans text-black">
@@ -22,9 +22,11 @@ const AsideMenu = () => {
             ></img>
           </div>
           <nav className="text-white h-screen border-t border-r border-black rounded-tr-xl bg-[#EB2234]">
+            <Link to="/administracion/incluir">Incluir</Link>
+            <Link to={`/administracion/editar/${user.id}`}>Editar</Link>
             {user && user.role === "Administrador" ? (
               //Menu para el administrador
-              <a href=""></a>
+              <a></a>
             ) : user && user.role === "JefeBodega" ? (
               //Menu para el jefe de bodega
               <a href=""></a>

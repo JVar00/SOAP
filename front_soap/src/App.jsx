@@ -2,6 +2,7 @@ import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import Create from "../components/userAdmin/AdminCreate";
 import Edit from "../components/userAdmin/AdminEdit";
 import Main from "../components/userAdmin/AdminUI";
+import { Login } from "../components/login";
 import { SessionProvider } from "../contexts/sessionProvider";
 import AsideMenu from "../layouts/PureAsideMenu";
 
@@ -12,6 +13,7 @@ function App() {
         <BrowserRouter>
           <Routes>
             {/* RUTAS ADMINISTRACION, PROTEGER */}
+            <Route path="/" element={<Login />} />
             <Route path="/administracion/" element={<AsideMenu />}>
               <Route index element={<Main />} />
               <Route path="incluir" element={<Create />} />

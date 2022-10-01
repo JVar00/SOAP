@@ -5,22 +5,22 @@
 .navItem {
   @apply hover:bg-white hover:text-red-600  
      bg-white bg-opacity-50
-     font-bold
+     font-bold mt-3
      flex ml-10
      flex-col pt-3 pb-3 text-center transition ease-in-out duration-500;
 }
 
 .navItemActive {
   @apply bg-white text-red-600
-       font-bold
+       font-bold mt-3
        flex ml-10
-       flex-col pt-3 pb-3 text-center transition;
+       flex-col pt-3 pb-3 text-center transition ease-in-out duration-500;
 }
 
 .logoutButton {
   @apply hover:bg-white hover:text-red-600  focus:bg-white focus:text-red-600
     bg-white bg-opacity-50
-    font-bold w-52
-    absolute bottom-20 right-0 ml-10
+    font-bold w-64
+    flex-col flex ml-10 mt-56
     pt-3 pb-3 text-center transition ease-in-out duration-500;
 }

@@ -20,7 +20,7 @@ function App() {
               <Route path="/administracion/editar/:id" element={<Edit />} />
               <Route
                 path="*"
-                element={<Navigate replace to="/administracion/" />}
+                element={<Navigate replace to="/administracion" />}
               />
             </Route>
           </Routes>

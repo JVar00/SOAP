@@ -11,7 +11,11 @@ module.exports = {
       spacing: {
         18: "10rem",
       },
-      color: {},
+      colors: {
+        red: {
+          600: "#EB2234",
+        },
+      },
     },
   },
   plugins: [],

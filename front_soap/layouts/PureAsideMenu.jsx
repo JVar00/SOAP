@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { Navigate, Outlet } from "react-router-dom";
+import { Navigate, NavLink, Outlet } from "react-router-dom";
 import { AdminSideMenu } from "../components/userAdmin/AdminSideMenu";
 import { SessionContext } from "../contexts/sessionProvider";
 import LogoIcon from "../src/assets/logo.jpg";
@@ -7,14 +7,14 @@ import LogoIcon from "../src/assets/logo.jpg";
 const AsideMenu = () => {
   const { user, logout } = useContext(SessionContext);
 
-  if (!user || (user && user.role != "Administrador")) {
+  if (!user) {
     return <Navigate to="/" />;
   }
 
   return (
     <>
       <div className="flex">
-        <aside className="fixed font-sans text-black h-screen w-72">
+        <aside className="fixed font-sans text-black h-screen md:w-72">
           <div className="h-18 flex items-center justify-center ">
             <img
               className="w-40 stroke-current"
@@ -22,7 +22,7 @@ const AsideMenu = () => {
               alt="Jimenes & Tanzi"
             ></img>
           </div>
-          <nav className=" text-white h-screen border-t border-r border-black rounded-tr-xl bg-red-600">
+          <nav className=" text-white h-screen border-t-2 border-r-2 border-black rounded-tr-xl bg-red-600">
             {user && user.role === "Administrador" ? (
               <AdminSideMenu />
             ) : user && user.role === "JefeBodega" ? (
@@ -34,9 +34,9 @@ const AsideMenu = () => {
               //role==="empleadoAlisto", es el mismo menu
             )}
 
-            <button className="logoutButton" onClick={logout}>
+            <NavLink className="logoutButton" onClick={logout}>
               Cerrar sesion
-            </button>
+            </NavLink>
           </nav>
         </aside>
       </div>

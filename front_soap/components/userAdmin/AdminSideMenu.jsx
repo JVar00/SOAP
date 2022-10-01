@@ -1,6 +1,15 @@
+import { useContext } from "react";
+import { Navigate } from "react-router-dom";
+import { SessionContext } from "../../contexts/sessionProvider";
 import { NavButton } from "../../layouts/navButton";
 
 export const AdminSideMenu = () => {
+  const { user } = useContext(SessionContext);
+
+  if (!user || (user && user.role != "Administrador")) {
+    return <Navigate to="/" />;
+  }
+
   return (
     <>
       <div className="flex flex-col items-start justify-center pt-10 pb-10">
@@ -9,8 +18,7 @@ export const AdminSideMenu = () => {
       </div>
 
       <NavButton
-        active={true}
-        redirectTo="/administracion/"
+        redirectTo="/administracion/empleados"
         inputName="Empleados Registrados"
       />
 

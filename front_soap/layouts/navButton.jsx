@@ -1,26 +1,18 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
-export const NavButton = ({
-  active = false,
-  redirectTo = "/",
-  inputName = "null",
-}) => {
-  const [isActive, setIsActive] = useState(active);
-
-  const handleClick = () => {
-    setIsActive((current) => !current);
-  };
+export const NavButton = ({ redirectTo = "/", inputName = "null" }) => {
+  let sleep = "navItem";
+  let active = "navItemActive ";
 
   return (
     <div>
-      <Link
-        className={isActive ? "navItemActive mt-3" : "navItem mt-3"}
-        onClick={handleClick}
+      <NavLink
+        className={({ isActive }) => (isActive ? active : sleep)}
         to={redirectTo}
       >
         {inputName}
-      </Link>
+      </NavLink>
     </div>
   );
 };

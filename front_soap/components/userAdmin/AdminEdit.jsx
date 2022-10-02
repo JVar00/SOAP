@@ -1,7 +1,7 @@
 const Edit = () => {
   return (
-    <div>
-      <h1>View Edit</h1>
+    <div className="md:ml-52 xl:ml-64">
+      v<h1>View Edit</h1>
     </div>
   );
 };

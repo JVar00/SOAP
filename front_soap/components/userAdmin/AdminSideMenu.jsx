@@ -13,7 +13,7 @@ export const AdminSideMenu = () => {
   return (
     <>
       <div className="flex flex-col items-start justify-center pt-10 pb-10">
-        <h2 className="pl-5 font-bold pb-3">Menu Administrador</h2>
+        <h2 className="pl-3 font-bold pb-1 xl:text-lg">Menu Administrador</h2>
         <div className="bg-white w-52 h-1"></div>
       </div>
 

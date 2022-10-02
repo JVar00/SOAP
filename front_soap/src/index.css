@@ -5,22 +5,32 @@
 .navItem {
   @apply hover:bg-white hover:text-red-600  
      bg-white bg-opacity-50
-     font-bold mt-3
-     flex ml-10
-     flex-col pt-3 pb-3 text-center transition ease-in-out duration-500;
+     font-bold mt-3 text-sm xl:text-base
+     flex ml-10 md:ml-6
+     flex-col pt-4 pb-4 md:pt-3 md:pb-3 pl-3 text-left transition ease-in-out duration-500;
 }
 
 .navItemActive {
   @apply bg-white text-red-600
-       font-bold mt-3
-       flex ml-10
-       flex-col pt-3 pb-3 text-center transition ease-in-out duration-500;
+       font-bold text-sm xl:text-base
+       flex ml-10 md:ml-6 mt-3
+       flex-col pt-4 pb-4 md:pt-3 md:pb-3 pl-3 text-left transition ease-in-out duration-500;
 }
 
 .logoutButton {
   @apply hover:bg-white hover:text-red-600  focus:bg-white focus:text-red-600
     bg-white bg-opacity-50
-    font-bold w-64
-    flex-col flex ml-10 mt-56
-    pt-3 pb-3 text-center transition ease-in-out duration-500;
+    font-bold text-sm xl:text-base
+    flex flex-col lg:absolute md:bottom-14 md:right-0
+    mt-32 ml-10 
+    pt-4 pb-4 md:pt-3 md:pb-3 pr-20 pl-3
+    text-left transition ease-in-out duration-500;
+}
+
+.sidebar {
+  @apply absolute font-sans transition duration-200 ease-in-out text-black h-screen w-64 transform -translate-x-full md:fixed md:w-56 xl:w-64 md:visible md:translate-x-0;
+}
+
+.sidebar.active {
+  @apply absolute font-sans transition duration-200 ease-in-out text-black h-screen w-64 transform -translate-x-0 md:fixed md:w-56 xl:w-64 md:visible md:translate-x-0;
 }

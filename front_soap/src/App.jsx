@@ -1,10 +1,10 @@
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
-import { Login } from "../components/login";
+import { Login } from "../components/Login";
 import Create from "../components/userAdmin/AdminCreate";
 import Edit from "../components/userAdmin/AdminEdit";
 import Main from "../components/userAdmin/AdminUI";
 import Users from "../components/userAdmin/AdminUsers";
-import { SessionProvider } from "../contexts/sessionProvider";
+import { SessionProvider } from "../contexts/SessionProvider";
 import AsideMenu from "../layouts/PureAsideMenu";
 
 function App() {

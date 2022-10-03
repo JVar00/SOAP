@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { Navigate } from "react-router-dom";
-import { SessionContext } from "../contexts/sessionProvider";
+import { SessionContext } from "../contexts/SessionProvider";
 
 export const Login = () => {
   const { user, login } = useContext(SessionContext);

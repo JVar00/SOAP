@@ -28,9 +28,17 @@
 }
 
 .sidebar {
-  @apply absolute font-sans transition duration-200 ease-in-out text-black h-screen w-64 transform -translate-x-full md:fixed md:w-56 xl:w-64 md:visible md:translate-x-0;
+  @apply font-sans transition duration-200 ease-in-out text-black h-screen w-64 transform -translate-x-full md:w-56 xl:w-64 md:visible md:translate-x-0;
 }
 
 .sidebar.active {
-  @apply absolute font-sans transition duration-200 ease-in-out text-black h-screen w-64 transform -translate-x-0 md:fixed md:w-56 xl:w-64 md:visible md:translate-x-0;
+  @apply font-sans transition duration-200 ease-in-out text-black h-screen w-64 transform -translate-x-0 md:w-56 xl:w-64 md:visible md:translate-x-0;
+}
+
+.input {
+  @apply block w-full appearance-none  border-0 bg-transparent border-b-2 border-black px-3 py-2    focus:ring-transparent sm:text-sm;
+}
+
+.visibleD {
+  display: visible;
 }

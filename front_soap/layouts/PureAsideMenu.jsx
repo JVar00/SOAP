@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import { Link, Navigate, NavLink, Outlet } from "react-router-dom";
 import { AdminSideMenu } from "../components/userAdmin/AdminSideMenu";
-import { SessionContext } from "../contexts/sessionProvider";
+import { SessionContext } from "../contexts/SessionProvider";
 import LogoIcon from "../src/assets/logo.jpg";
 
 const AsideMenu = () => {
@@ -19,11 +19,11 @@ const AsideMenu = () => {
   //descubrir como hacer en react que aparexca el menu
 
   return (
-    <>
+    <div className="md:flex md:flex-col">
       <div className="relative md:flex">
         {/* Mobile menu */}
 
-        <div className="bg-red-600 md:invisible flex justify-between">
+        <div className="bg-red-600 md:invisible flex sticky justify-between">
           <Link to="#" className="block">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -44,7 +44,11 @@ const AsideMenu = () => {
         </div>
 
         <aside
-          className={sidebar ? "sidebar active md:hidden" : "sidebar md:hidden"}
+          className={
+            sidebar
+              ? "sidebar active md:hidden absolute"
+              : "sidebar absolute md:hidden "
+          }
         >
           <nav className=" text-white h-screen pt-10 pb-5 border-black bg-red-600">
             <div className="ml-5 md:hidden">
@@ -55,7 +59,7 @@ const AsideMenu = () => {
             </div>
 
             {user && user.role === "Administrador" ? (
-              <AdminSideMenu />
+              <AdminSideMenu closeSideBar={closeSidebar} />
             ) : user && user.role === "JefeBodega" ? (
               //Menu para el jefe de bodega
               <a href=""></a>
@@ -72,7 +76,7 @@ const AsideMenu = () => {
         </aside>
 
         {/* Desktop and Tablet Menu */}
-        <aside className={"sidebar"}>
+        <aside className={"sidebar fixed sm:invisible md:visible"}>
           <nav className=" text-white h-screen pt-10 pb-5 border-black bg-red-600">
             {user && user.role === "Administrador" ? (
               <AdminSideMenu />
@@ -106,12 +110,12 @@ const AsideMenu = () => {
               </p>
             </div>
           </div>
-          <section className="flex-1 pl-4 pr-4 md:p-0 md:pl-2 text-lg">
-            <Outlet></Outlet>
-          </section>
         </div>
       </div>
-    </>
+      <section className="pl-4 md:p-0 md:pl-2" onClick={closeSidebar}>
+        <Outlet></Outlet>
+      </section>
+    </div>
   );
 };
 

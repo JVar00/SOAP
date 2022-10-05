@@ -6,17 +6,17 @@ export const Employees = () => {
   return (
     <>
       {/* Tablas desktop y tablet */}
-      <div class="overflow-auto rounded-lg shadow hidden md:block">
+      <div class="overflow-auto rounded-lg shadow hidden lg:block">
         <table class="w-full">
           <thead class="bg-red-600 border-b-2 border-black text-white">
             <tr>
-              <th class="w-20 p-3 text-sm font-semibold tracking-wide text-left">
+              <th class="lg:w-10 p-3 text-sm font-semibold tracking-wide text-left">
                 Nombre Completo
               </th>
-              <th class="p-3 text-sm font-semibold tracking-wide text-left">
+              <th class="lg:w-10 p-3 text-sm font-semibold tracking-wide text-left">
                 Ocupacion
               </th>
-              <th class="w-24 p-3 text-sm font-semibold tracking-wide text-left">
+              <th class="lg:w-10 p-3 text-sm font-semibold tracking-wide text-left">
                 Acciones
               </th>
             </tr>
@@ -39,17 +39,20 @@ export const Employees = () => {
 
       {/* Tabla mobile */}
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:hidden">
+      <div className="grid mr-4 sm:mr-2 grid-cols-1 sm:grid-cols-2 gap-4 lg:hidden">
         {/* Este div es un perfil de usuario, como tal se deberian de cargar de esta forma para cada unao de los usuarios con un map */}
         <div className="bg-white space-y-3 p-4 rounded-lg shadow">
           <div className="flex items-center space-x-2 text-sm">
             <div>
               <span className="p-1.5 text-xs font-medium uppercase tracking-wider text-red-600 bg-red-200 rounded-lg bg-opacity-50">
                 {/* Ocupacion */}
+                Alisto
               </span>
             </div>
           </div>
-          <div className="text-sm text-gray-700">{/* Nombre Completo */}</div>
+          <div className="text-sm text-gray-700">
+            {/* Nombre Completo */} Jeff Vargas Barrantes{" "}
+          </div>
           {/* Los botones deben depender del usuario que este logeado */}
           {user.role === "administrador" ? (
             //Botones para editar y eliminar del administrador

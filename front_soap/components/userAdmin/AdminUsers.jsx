@@ -1,6 +1,7 @@
 import { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { SessionContext } from "../../contexts/SessionProvider";
+import { Employees } from "../TableUsers";
 
 const Users = () => {
   // const { personas, deletePersona, getAllPersonas } =
@@ -11,20 +12,19 @@ const Users = () => {
   // }, []);
 
   return (
-    <div className="w-screen md:max-w-4xl xl:max-w-6xl md:h-screen md:ml-60 xl:ml-72">
-      <div className="flex flex-col md:flex-row xl:justify-between">
-        <h2 className="mb-5 font-bold md:text-lg md:mb-0">
+    <div className="w-full max-w-screen max-h-screen xl:max-w-5xl h-full lg:ml-60 xl:ml-72">
+      <div className="flex flex-col lg:flex-row xl:justify-between">
+        <h2 className="mb-5 font-bold md:text-lg lg:mb-0">
           Empleados Registrados
         </h2>
-        <div className="flex items-center mb-5 md:ml-10 lg:ml-18 xl:ml-24">
-          <div className="">
+        <div className="flex items-center mb-5 lg:ml-18 xl:ml-20">
+          <div>
             <h2 className="text-sm font-bold text-gray-900">
               Filtrar Por Nombre
             </h2>
             <input
               type="search"
               className="input placeholder-red-600 outline-none"
-              placeholder="Ingrese un nombre.."
             />
           </div>
           <div className="ml-10">
@@ -60,39 +60,9 @@ const Users = () => {
           </div>
         </div>
       </div>
-
-      <table className="">
-        <thead className="">
-          <tr>
-            <th>Nombre Completo</th>
-            <th>Ocupacion</th>
-            <th>Acciones</th>
-          </tr>
-        </thead>
-        <tbody>
-          {/* {personas.map((persona) => (
-            <tr key={persona.id}>
-              <td> {persona.identificacion} </td>
-              <td> {persona.nombre} </td>
-              <td> {persona.fecha} </td>
-              <td>
-                <Link
-                  to={`/update/${persona.id}`}
-                  className="btn btn-warning mx-1"
-                >
-                  Edit
-                </Link>
-                <button
-                  onClick={() => deletePersona(persona.id)}
-                  className="btn btn-danger"
-                >
-                  Delete
-                </button>
-              </td>
-            </tr>
-          ))} */}
-        </tbody>
-      </table>
+      <div className="lg:w-3/4 xl:w-full">
+        <Employees />
+      </div>
     </div>
   );
 };

@@ -19,11 +19,11 @@ const AsideMenu = () => {
   //descubrir como hacer en react que aparexca el menu
 
   return (
-    <div className="md:flex md:flex-col">
-      <div className="relative md:flex">
+    <div>
+      <div className="lg:flex">
         {/* Mobile menu */}
 
-        <div className="bg-red-600 md:invisible flex sticky justify-between">
+        <div className="bg-red-600 lg:invisible flex sticky justify-between">
           <Link to="#" className="block">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -46,12 +46,12 @@ const AsideMenu = () => {
         <aside
           className={
             sidebar
-              ? "sidebar active md:hidden absolute"
-              : "sidebar absolute md:hidden "
+              ? "sidebar active lg:hidden absolute"
+              : "sidebar absolute lg:hidden"
           }
         >
           <nav className=" text-white h-screen pt-10 pb-5 border-black bg-red-600">
-            <div className="ml-5 md:hidden">
+            <div className="ml-5 lg:hidden">
               <p>Iniciaste Sesion Como</p>
               <p className="font-bold">
                 {user.name + " " + user.last1 + " " + user.last2}
@@ -76,7 +76,7 @@ const AsideMenu = () => {
         </aside>
 
         {/* Desktop and Tablet Menu */}
-        <aside className={"sidebar fixed sm:invisible md:visible"}>
+        <aside className={"sidebar fixed sm:invisible lg:visible"}>
           <nav className=" text-white h-screen pt-10 pb-5 border-black bg-red-600">
             {user && user.role === "Administrador" ? (
               <AdminSideMenu />
@@ -96,14 +96,14 @@ const AsideMenu = () => {
         </aside>
 
         <div onClick={closeSidebar}>
-          <div className="h-18 md:ml-52 xl:ml-64 flex items-center justify-center transition duration-200 ease-in-out">
+          <div className="h-18 lg:ml-52 xl:ml-64 flex items-center justify-center transition duration-200 ease-in-out">
             <img
               className="w-32 xl:w-40 stroke-current"
               src={LogoIcon}
               alt="Jimenes & Tanzi"
             ></img>
 
-            <div className="text-sm xl:text-base flex-1 md:m-14 hidden md:block">
+            <div className="text-sm xl:text-base flex-1 lg:m-14 hidden lg:block">
               <p>Iniciaste Sesion Como</p>
               <p className="font-bold text-red-600">
                 {user.name + " " + user.last1 + " " + user.last2}
@@ -112,7 +112,7 @@ const AsideMenu = () => {
           </div>
         </div>
       </div>
-      <section className="pl-4 md:p-0 md:pl-2" onClick={closeSidebar}>
+      <section className="pl-4 lg:p-0 md:pl-2" onClick={closeSidebar}>
         <Outlet></Outlet>
       </section>
     </div>

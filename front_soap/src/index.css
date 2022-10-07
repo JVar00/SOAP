@@ -36,7 +36,7 @@
 }
 
 .input {
-  @apply block w-full appearance-none  border-0 bg-transparent border-b-2 border-black px-3 py-2    focus:ring-transparent sm:text-sm;
+  @apply block w-full appearance-none  border-0 bg-transparent border-b-2 border-black px-3 py-2  focus:ring-transparent sm:text-sm;
 }
 
 .visibleD {

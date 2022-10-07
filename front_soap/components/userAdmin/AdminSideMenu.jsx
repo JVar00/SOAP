@@ -3,7 +3,7 @@ import { Navigate } from "react-router-dom";
 import { SessionContext } from "../../contexts/SessionProvider";
 import { NavButton } from "../../layouts/NavButton";
 
-export const AdminSideMenu = ({ closeSideBar }) => {
+export const AdminSideMenu = () => {
   const { user } = useContext(SessionContext);
 
   if (!user || (user && user.role != "Administrador")) {

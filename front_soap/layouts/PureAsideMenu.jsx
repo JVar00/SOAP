@@ -39,6 +39,24 @@ const AsideMenu = () => {
             />
           </svg>
         </Link>
+        <button className="md:flex-row hidden md:flex ">
+          <p className="pt-3 font-bold text-white">Cerrar Sesion</p>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth="1.5"
+            stroke="currentColor"
+            className="w-8 h-8 m-2 text-white"
+            onClick={logout}
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75"
+            />
+          </svg>
+        </button>
       </div>
 
       <div className="lg:flex">
@@ -70,7 +88,7 @@ const AsideMenu = () => {
               //role==="empleadoAlisto", es el mismo menu
             )}
 
-            <NavLink className="logoutButton" onClick={logout}>
+            <NavLink className="logoutButton md:hidden" onClick={logout}>
               Cerrar sesion
             </NavLink>
           </nav>
@@ -99,7 +117,7 @@ const AsideMenu = () => {
         <div onClick={closeSidebar}>
           <div className="h-18 lg:ml-60 xl:ml-72 flex items-center justify-center transition duration-200 ease-in-out">
             <img
-              className="w-32 xl:w-40 stroke-current"
+              className="w-52 md:w-1/4 lg:w-40 stroke-current"
               src={LogoIcon}
               alt="Jimenes & Tanzi"
             ></img>

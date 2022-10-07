@@ -5,8 +5,16 @@ export const AdminContext = createContext();
 
 export const AdminProvider = ({ children }) => {
   const [employees, setEmployees] = useState([]);
-  const [employee, setEmployee] = useState(null);
+  const [employee, setEmployee] = useState({
+    username: "",
+    name: "",
+    last1: "",
+    last2: "",
+    role: "",
+    password: "",
+  });
 
+  //esto solo deberia cargar los empleados de acomodo y alisto, hacer cambio para el siguiente sprint, esto es algo del backend
   const getAllEmployees = async () => {
     setEmployees([
       {
@@ -69,12 +77,24 @@ export const AdminProvider = ({ children }) => {
     //return response.status;
   };
 
-  const updateEmployee = async (user) => {
+  const updateEmployee = async () => {
     await AdminServiceData.update({ jsonparams });
+    cleanData();
     //return response.status;
   };
 
-  const addEmployee = async (user) => {
+  const cleanData = () => {
+    setEmployee({
+      username: "",
+      name: "",
+      last1: "",
+      last2: "",
+      role: "",
+      password: "",
+    });
+  };
+
+  const addEmployee = async () => {
     await AdminServiceData.create({ jsonparams });
     //return response.status;
   };

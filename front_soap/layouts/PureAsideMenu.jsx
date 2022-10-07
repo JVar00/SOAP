@@ -23,7 +23,7 @@ const AsideMenu = () => {
       <div className="lg:flex">
         {/* Mobile menu */}
 
-        <div className="bg-red-600 lg:invisible flex sticky justify-between">
+        <div className="bg-red-600 lg:invisible flex sticky top-0 justify-between">
           <Link to="#" className="block">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -46,8 +46,8 @@ const AsideMenu = () => {
         <aside
           className={
             sidebar
-              ? "sidebar active lg:hidden absolute"
-              : "sidebar absolute lg:hidden"
+              ? "sidebar active lg:hidden fixed"
+              : "sidebar fixed lg:hidden"
           }
         >
           <nav className=" text-white h-screen pt-10 pb-5 border-black bg-red-600">
@@ -112,7 +112,10 @@ const AsideMenu = () => {
           </div>
         </div>
       </div>
-      <section className="pl-4 lg:p-0 md:pl-2" onClick={closeSidebar}>
+      <section
+        className="pl-4 lg:p-0 md:pl-2 overflow-x-hidden"
+        onClick={closeSidebar}
+      >
         <Outlet></Outlet>
       </section>
     </div>

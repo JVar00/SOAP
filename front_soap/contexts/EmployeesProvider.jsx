@@ -10,29 +10,29 @@ export const AdminProvider = ({ children }) => {
   const getAllEmployees = async () => {
     const response = await AdminServiceData.getAll();
     setEmployees(response.data);
-    return response;
+    //return response.status;
   };
 
-  const getOneEmployee = async (id) => {
-    const response = await AdminServiceData.get(id);
+  const getOneEmployee = async (username) => {
+    const response = await AdminServiceData.get(username);
     setEmployee(response.data);
-    return response;
+    //return response.status;
   };
 
-  const deleteEmployee = async (id) => {
-    await AdminServiceData.remove(id);
+  const deleteEmployee = async (username) => {
+    await AdminServiceData.remove(username);
     getAllEmployees();
-    return response;
+    //return response.status;
   };
 
   const updateData = async () => {
     await AdminServiceData.update({ jsonparams });
-    return response;
+    //return response.status;
   };
 
   const storeData = async () => {
     await AdminServiceData.create({ jsonparams });
-    return response;
+    //return response.status;
   };
 
   return (

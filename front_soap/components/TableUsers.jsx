@@ -6,29 +6,31 @@ export const Employees = () => {
   return (
     <>
       {/* Tablas desktop y tablet */}
-      <div class="overflow-auto rounded-lg shadow hidden lg:block">
-        <table class="w-full">
-          <thead class="bg-red-600 border-b-2 border-black text-white">
+      <div className="overflow-auto rounded-lg shadow hidden lg:block">
+        <table className="w-full">
+          <thead className="bg-red-600 border-b-2 border-black text-white">
             <tr>
-              <th class="lg:w-10 p-3 text-sm font-semibold tracking-wide text-left">
+              <th className="lg:w-10 p-3 text-sm font-semibold tracking-wide text-left">
                 Nombre Completo
               </th>
-              <th class="lg:w-10 p-3 text-sm font-semibold tracking-wide text-left">
+              <th className="lg:w-10 p-3 text-sm font-semibold tracking-wide text-left">
                 Ocupacion
               </th>
-              <th class="lg:w-10 p-3 text-sm font-semibold tracking-wide text-left">
+              <th className="lg:w-10 p-3 text-sm font-semibold tracking-wide text-left">
                 Acciones
               </th>
             </tr>
           </thead>
-          <tbody class="divide-y divide-black">
-            <tr class="bg-white">
+          <tbody className="divide-y divide-black">
+            <tr className="bg-white">
               {/* formato para cargar con el map */}
-              <td class="p-3 text-sm text-black whitespace-nowrap">
+              <td className="p-3 text-sm text-black whitespace-nowrap">
                 Jeff Vargas Barrantes
               </td>
-              <td class="p-3 text-sm text-black whitespace-nowrap">Alisto</td>
-              <td class="p-3 text-sm text-black whitespace-nowrap">
+              <td className="p-3 text-sm text-black whitespace-nowrap">
+                Alisto
+              </td>
+              <td className="p-3 text-sm text-black whitespace-nowrap">
                 {/* Button svg link + edit */}
                 {/* Buttons svg onClick + Eliminar */}
               </td>
@@ -39,7 +41,7 @@ export const Employees = () => {
 
       {/* Tabla mobile */}
 
-      <div className="grid mr-4 sm:mr-2 grid-cols-1 sm:grid-cols-2 gap-4 lg:hidden">
+      <div className="grid mr-4 sm:mr-2 sm:mb-2 grid-cols-1 sm:grid-cols-2 gap-4 lg:hidden">
         {/* Este div es un perfil de usuario, como tal se deberian de cargar de esta forma para cada unao de los usuarios con un map */}
         <div className="bg-white space-y-3 p-4 rounded-lg shadow">
           <div className="flex items-center space-x-2 text-sm">

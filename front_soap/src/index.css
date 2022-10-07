@@ -28,11 +28,11 @@
 }
 
 .sidebar {
-  @apply font-sans transition duration-200 ease-in-out text-black h-screen w-64 transform -translate-x-full lg:w-56 xl:w-64 lg:visible lg:translate-x-0;
+  @apply font-sans transition duration-200 ease-in-out text-black w-64 transform -translate-x-full lg:w-56 xl:w-64 lg:visible lg:translate-x-0;
 }
 
 .sidebar.active {
-  @apply font-sans transition duration-200 ease-in-out text-black h-screen w-64 transform -translate-x-0 lg:w-56 xl:w-64 lg:visible lg:translate-x-0;
+  @apply font-sans transition duration-200 ease-in-out text-black w-64 transform -translate-x-0 lg:w-56 xl:w-64 lg:visible lg:translate-x-0;
 }
 
 .input {

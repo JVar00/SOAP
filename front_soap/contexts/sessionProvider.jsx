@@ -9,7 +9,7 @@ export const SessionProvider = ({ children }) => {
   const login = () => {
     //es necesario meterlos al localstorage si no no se guardan
     setUser({
-      id: 1, //identificador unico de la base de datos
+      username: "Var", //identificador unico de la base de datos
       name: "Jeff",
       last1: "Vargas",
       last2: "Barrantes",

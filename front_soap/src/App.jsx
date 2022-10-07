@@ -19,7 +19,10 @@ function App() {
               <Route index element={<Main />} />
               <Route path="/administracion/empleados" element={<Users />} />
               <Route path="/administracion/incluir" element={<Create />} />
-              <Route path="/administracion/editar/:id" element={<Edit />} />
+              <Route
+                path="/administracion/editar/:username"
+                element={<Edit />}
+              />
               <Route
                 path="*"
                 element={<Navigate replace to="/administracion" />}

@@ -1,6 +1,7 @@
 import { useContext, useState } from "react";
 import { Link, Navigate, NavLink, Outlet } from "react-router-dom";
 import { AdminSideMenu } from "../components/userAdmin/AdminSideMenu";
+import { AdminProvider } from "../contexts/EmployeesProvider";
 import { SessionContext } from "../contexts/SessionProvider";
 import LogoIcon from "../src/assets/logo.jpg";
 
@@ -20,28 +21,28 @@ const AsideMenu = () => {
 
   return (
     <div>
+      <div className="bg-red-600 lg:hidden flex sticky top-0 justify-between">
+        <Link to="#" className="block">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth="1.5"
+            stroke="currentColor"
+            className="w-8 h-8 m-2 text-white"
+            onClick={showSidebar}
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+            />
+          </svg>
+        </Link>
+      </div>
+
       <div className="lg:flex">
         {/* Mobile menu */}
-
-        <div className="bg-red-600 lg:invisible flex sticky top-0 justify-between">
-          <Link to="#" className="block">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth="1.5"
-              stroke="currentColor"
-              className="w-8 h-8 m-2 text-white"
-              onClick={showSidebar}
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
-              />
-            </svg>
-          </Link>
-        </div>
 
         <aside
           className={
@@ -96,7 +97,7 @@ const AsideMenu = () => {
         </aside>
 
         <div onClick={closeSidebar}>
-          <div className="h-18 lg:ml-52 xl:ml-64 flex items-center justify-center transition duration-200 ease-in-out">
+          <div className="h-18 lg:ml-60 xl:ml-72 flex items-center justify-center transition duration-200 ease-in-out">
             <img
               className="w-32 xl:w-40 stroke-current"
               src={LogoIcon}
@@ -112,12 +113,14 @@ const AsideMenu = () => {
           </div>
         </div>
       </div>
-      <section
-        className="pl-4 lg:p-0 md:pl-2 overflow-x-hidden"
-        onClick={closeSidebar}
-      >
-        <Outlet></Outlet>
-      </section>
+      <AdminProvider>
+        <section
+          className="pl-4 lg:p-0 md:pl-2 overflow-x-hidden overflow-auto"
+          onClick={closeSidebar}
+        >
+          <Outlet></Outlet>
+        </section>
+      </AdminProvider>
     </div>
   );
 };

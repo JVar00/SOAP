@@ -1,18 +1,8 @@
-import { useContext, useEffect } from "react";
-import { Link } from "react-router-dom";
-import { SessionContext } from "../../contexts/SessionProvider";
 import { Employees } from "../TableUsers";
 
 const Users = () => {
-  // const { personas, deletePersona, getAllPersonas } =
-  //   useContext(PersonaContext);
-
-  // useEffect(() => {
-  //   getAllPersonas();
-  // }, []);
-
   return (
-    <div className="w-full max-w-screen max-h-screen xl:max-w-5xl h-full lg:ml-60 xl:ml-72">
+    <div className="w-full max-w-screen xl:max-w-5xl lg:ml-60 xl:ml-72">
       <div className="flex flex-col lg:flex-row xl:justify-between">
         <h2 className="mb-5 font-bold md:text-lg lg:mb-0">
           Empleados Registrados
@@ -42,7 +32,6 @@ const Users = () => {
                 Alisto
               </label>
             </div>
-            {/*push*/}
 
             <div className="flex items-center">
               <input

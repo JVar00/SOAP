@@ -1,3 +1,44 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.navItem {
+  @apply hover:bg-white hover:text-red-600  
+     bg-white bg-opacity-50
+     font-bold mt-3 text-sm xl:text-base
+     flex ml-10 md:ml-6
+     flex-col pt-4 pb-4 md:pt-3 md:pb-3 pl-3 text-left transition ease-in-out duration-500;
+}
+
+.navItemActive {
+  @apply bg-white text-red-600
+       font-bold text-sm xl:text-base
+       flex ml-10 md:ml-6 mt-3
+       flex-col pt-4 pb-4 md:pt-3 md:pb-3 pl-3 text-left transition ease-in-out duration-500;
+}
+
+.logoutButton {
+  @apply hover:bg-white hover:text-red-600  focus:bg-white focus:text-red-600
+    bg-white bg-opacity-50
+    font-bold text-sm xl:text-base
+    flex flex-col lg:absolute md:bottom-14 md:right-0
+    mt-32 ml-10 
+    pt-4 pb-4 md:pt-3 md:pb-3 pr-20 pl-3
+    text-left transition ease-in-out duration-500;
+}
+
+.sidebar {
+  @apply font-sans transition duration-200 ease-in-out text-black w-64 transform -translate-x-full lg:w-56 xl:w-64 lg:visible lg:translate-x-0;
+}
+
+.sidebar.active {
+  @apply font-sans transition duration-200 ease-in-out text-black w-64 transform -translate-x-0 lg:w-56 xl:w-64 lg:visible lg:translate-x-0;
+}
+
+.input {
+  @apply block w-full appearance-none  border-0 bg-transparent border-b-2 border-black px-3 py-2  focus:ring-transparent sm:text-sm;
+}
+
+.visibleD {
+  display: visible;
+}

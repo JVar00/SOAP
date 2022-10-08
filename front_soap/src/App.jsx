@@ -1,34 +1,38 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import './App.css'
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import { Login } from "../components/Login";
+import Create from "../components/userAdmin/AdminCreate";
+import Edit from "../components/userAdmin/AdminEdit";
+import Main from "../components/userAdmin/AdminUI";
+import Users from "../components/userAdmin/AdminUsers";
+import { SessionProvider } from "../contexts/SessionProvider";
+import AsideMenu from "../layouts/PureAsideMenu";
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <SessionProvider>
+      <div className="App">
+        <BrowserRouter>
+          <Routes>
+            {/* RUTAS ADMINISTRACION, PROTEGER */}
+            <Route path="/" element={<Login />} />
+            <Route path="/administracion" element={<AsideMenu />}>
+              <Route index element={<Main />} />
+              <Route path="/administracion/empleados" element={<Users />} />
+              <Route path="/administracion/incluir" element={<Create />} />
+              <Route
+                path="/administracion/editar/:username"
+                element={<Edit />}
+              />
+              <Route
+                path="*"
+                element={<Navigate replace to="/administracion" />}
+              />
+            </Route>
+          </Routes>
+        </BrowserRouter>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </div>
-  )
+    </SessionProvider>
+  );
 }
 
-export default App
+export default App;

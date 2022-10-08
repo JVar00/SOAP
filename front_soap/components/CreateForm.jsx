@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AdminContext } from "../contexts/EmployeesProvider";
 
-export const Form = ({ funcType, path }) => {
+export const Form = () => {
   const { setEmployee, addEmployee } = useContext(AdminContext);
   //store or update
 
@@ -15,15 +15,16 @@ export const Form = ({ funcType, path }) => {
 
   //hay que ocultar el username No se debe de editar Solo crear
 
-  const create = async () => {
-    return await addEmployee();
+  const create = async (data) => {
+    return await addEmployee(data);
   };
 
   const handleFuncType = (e) => {
     e.preventDefault();
     //modal para aceptar si esta seguro de guardar los cambios
     //
-    setEmployee({
+
+    const response = create({
       username: username,
       name: firstName,
       last1: lastName,
@@ -31,9 +32,6 @@ export const Form = ({ funcType, path }) => {
       password: password,
       role: role,
     });
-
-    funcType();
-    //response = funcType();
     //depende de la respuesta tira un mensaje de exito o error
   };
 

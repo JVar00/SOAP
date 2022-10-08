@@ -24,23 +24,22 @@ export const UpdateForm = () => {
     setRole(employee.role);
   }, []);
 
-  const update = async () => {
-    return await updateEmployee();
+  const update = async (data) => {
+    return await updateEmployee(data);
   };
 
   const handleFuncType = (e) => {
     e.preventDefault();
     //modal para aceptar si esta seguro de guardar los cambios
-    setEmployee({
+
+    update({
       username: username,
+      password: password,
       name: firstName,
       last1: lastName,
       last2: lastName2,
-      password: password,
       role: role,
     });
-
-    update();
     //response = funcType();
     //depende de la respuesta tira un mensaje de exito o error
   };
@@ -55,7 +54,7 @@ export const UpdateForm = () => {
                 <div className="flex flex-row">
                   <p className="text-red-600 mr-2">*</p>
                   <label
-                    htmlFor="username"
+                    htmlFor="grid-first-name"
                     className="block text-sm font-medium"
                   >
                     Nombre
@@ -77,7 +76,7 @@ export const UpdateForm = () => {
                 <div className="flex flex-row">
                   <p className="text-red-600 mr-2">*</p>
                   <label
-                    htmlFor="username"
+                    htmlFor="grid-last-name"
                     className="block text-sm font-medium"
                   >
                     Primer Apellido
@@ -99,7 +98,7 @@ export const UpdateForm = () => {
                 <div className="flex flex-row">
                   <p className="text-red-600 mr-2">*</p>
                   <label
-                    htmlFor="username"
+                    htmlFor="grid-last-name2"
                     className="block text-sm font-medium"
                   >
                     Segundo Apellido

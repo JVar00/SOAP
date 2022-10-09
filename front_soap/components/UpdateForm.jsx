@@ -24,7 +24,6 @@ export const UpdateForm = () => {
     setFirstName(employee.name);
     setLastName(employee.lastName1);
     setLastName2(employee.lastName2);
-    setPassword(employee.password);
     setRole(employee.rol);
     setActive(true);
   };
@@ -39,15 +38,24 @@ export const UpdateForm = () => {
     e.preventDefault();
 
     //falta modal para aceptar si esta seguro de guardar los cambios
-
-    const response = update({
-      name,
-      lastName1,
-      lastName2,
-      user,
-      password,
-      rol,
-    });
+    if (password == "") {
+      const response = update({
+        name,
+        lastName1,
+        lastName2,
+        user,
+        rol,
+      });
+    } else {
+      const response = update({
+        name,
+        lastName1,
+        lastName2,
+        user,
+        password,
+        rol,
+      });
+    }
 
     //depende de la respuesta debera tirar un mensaje de exito o error
   };
@@ -138,9 +146,9 @@ export const UpdateForm = () => {
 
             <div className="md:w-1/2">
               <div className="flex flex-row">
-                <p className="text-red-600 mr-2">*</p>
+                <p className="text-red-600 mr-2"></p>
                 <label htmlFor="password" className="block text-sm font-medium">
-                  Contraseña
+                  Nueva Contraseña, si no desea cambiarla deje el campo vacio
                 </label>
               </div>
               <div className="mt-1">

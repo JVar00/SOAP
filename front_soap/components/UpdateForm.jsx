@@ -3,52 +3,70 @@ import { useNavigate } from "react-router-dom";
 import { AdminContext } from "../contexts/EmployeesProvider";
 
 export const UpdateForm = () => {
-  const { employee, setEmployee, updateEmployee } = useContext(AdminContext);
-  //store or update
+  const { employee, updateEmployee } = useContext(AdminContext);
 
-  const [username, setUsername] = useState("");
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
+  //se inicializan los estados
+  const [user, setUsername] = useState("");
+  const [name, setFirstName] = useState("");
+  const [lastName1, setLastName] = useState("");
   const [lastName2, setLastName2] = useState("");
   const [password, setPassword] = useState("");
-  const [role, setRole] = useState("");
+  const [rol, setRole] = useState("");
+  const [active, setActive] = useState(false);
 
   //hay que ocultar el username No se debe de editar Solo crear
+  //lo llamo solo para tenerlo y poderlo enviar al backend como un {}
 
-  useEffect(() => {
-    setUsername(employee.username);
+  //al cargar la pagina coloco los datos de la persona llamada
+
+  const cargarDatos = () => {
+    setUsername(employee.user);
     setFirstName(employee.name);
-    setLastName(employee.last1);
-    setLastName2(employee.last2);
+    setLastName(employee.lastName1);
+    setLastName2(employee.lastName2);
     setPassword(employee.password);
-    setRole(employee.role);
-  }, []);
+    setRole(employee.rol);
+    setActive(true);
+  };
 
   const update = async (data) => {
     return await updateEmployee(data);
   };
 
+  //se crea el objeto que se enviara al backend antes del submit
+
   const handleFuncType = (e) => {
     e.preventDefault();
-    //modal para aceptar si esta seguro de guardar los cambios
 
-    update({
-      username: username,
-      password: password,
-      name: firstName,
-      last1: lastName,
-      last2: lastName2,
-      role: role,
+    //falta modal para aceptar si esta seguro de guardar los cambios
+
+    const response = update({
+      name,
+      lastName1,
+      lastName2,
+      user,
+      password,
+      rol,
     });
-    //response = funcType();
-    //depende de la respuesta tira un mensaje de exito o error
+
+    //depende de la respuesta debera tirar un mensaje de exito o error
   };
 
   return (
     <div className="flex flex-col justify-center py-5 px-6 lg:px-8">
-      <div className=" sm:mx-auto sm:w-full sm:max-w-screen">
+      <div className={active ? "hidden" : "btn btn-primary py-0 "}>
+        <button
+          className="w-1/2 flex justify-center mt-10 py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
+          onClick={cargarDatos}
+        >
+          Cargar Datos
+        </button>
+      </div>
+      <div
+        className={active ? "sm:mx-auto sm:w-full sm:max-w-screen" : "hidden"}
+      >
         <div className="sm:px-10">
-          <form className="mb-0 space-y-6" onSubmit={() => handleFuncType()}>
+          <form className="mb-0 space-y-6" onSubmit={handleFuncType}>
             <div className="flex flex-wrap -mx-3 mb-6">
               <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
                 <div className="flex flex-row">
@@ -65,7 +83,7 @@ export const UpdateForm = () => {
                   id="grid-first-name"
                   type="text"
                   autoComplete="off"
-                  value={firstName}
+                  value={name}
                   onChange={(e) => setFirstName(e.target.value)}
                 />
                 <p className="text-red-500 text-xs italic hidden">
@@ -87,7 +105,7 @@ export const UpdateForm = () => {
                   id="grid-last-name"
                   type="text"
                   autoComplete="off"
-                  value={lastName}
+                  value={lastName1}
                   onChange={(e) => setLastName(e.target.value)}
                 />
                 <p className="text-red-500 text-xs italic hidden">
@@ -128,7 +146,6 @@ export const UpdateForm = () => {
               <div className="mt-1">
                 <input
                   id="password"
-                  name="password"
                   type="password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
@@ -150,12 +167,11 @@ export const UpdateForm = () => {
               </div>
               <div className="mt-3 ">
                 <select
-                  name="user_type"
                   id="user_type"
                   className="w-full md:w-1/2 font-medium text-sm border-black border rounded-md py-1 pl-2 pr-6"
                   onChange={(e) => setRole(e.target.value)}
                 >
-                  <option value={role}>Rol actual : {role}</option>
+                  <option value={rol}>Rol actual : {rol}</option>
                   <option value="Alisto">Alisto</option>
                   <option value="Acomodo">Acomodo</option>
                 </select>

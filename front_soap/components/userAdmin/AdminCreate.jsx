@@ -1,7 +1,7 @@
 import { Form } from "../CreateForm";
 
 const Create = () => {
-  //create y edit van a traer un formulario en comun
+  //Ui general para crear un usuario, llama al formulacion de creacion
   return (
     <div className="w-full max-w-screen xl:max-w-5xl lg:ml-60 xl:ml-72">
       <div className="flex flex-col xl:justify-start">

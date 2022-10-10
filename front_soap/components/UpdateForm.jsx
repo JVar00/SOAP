@@ -1,9 +1,11 @@
 import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AdminContext } from "../contexts/EmployeesProvider";
+import { Modal } from "../layouts/confirmationModal";
 
 export const UpdateForm = () => {
   const { employee, updateEmployee } = useContext(AdminContext);
+  const [confirm, setConfirm] = useState(false);
 
   //se inicializan los estados
   const [name, setFirstName] = useState("");
@@ -32,18 +34,16 @@ export const UpdateForm = () => {
 
   //se crea el objeto que se enviara al backend antes del submit
 
-  const handleFuncType = (e) => {
-    e.preventDefault();
-
-    //falta modal para aceptar si esta seguro de guardar los cambios
-    if (password == "") {
+  const updateConfirm = (confirm) => {
+    if (confirm && password == "") {
       const response = update({
         name,
         lastName1,
         lastName2,
         role,
       });
-    } else {
+      setConfirm(false);
+    } else if (confirm && password != "") {
       const response = update({
         name,
         lastName1,
@@ -51,13 +51,32 @@ export const UpdateForm = () => {
         password,
         role,
       });
+      setConfirm(false);
+    } else {
+      setConfirm(false);
     }
+  };
+
+  const handleFuncType = (e) => {
+    e.preventDefault();
+
+    //falta modal para aceptar si esta seguro de guardar los cambios
+    setConfirm(true);
 
     //depende de la respuesta debera tirar un mensaje de exito o error
   };
 
   return (
     <div className="flex flex-col justify-center py-5 px-6 lg:px-8">
+      <div
+        className={
+          confirm
+            ? "justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none"
+            : "hidden"
+        }
+      >
+        <Modal funct={updateConfirm} />
+      </div>
       <div className={active ? "hidden" : "btn btn-primary py-0 "}>
         <button
           className="w-1/2 flex justify-center mt-10 py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"

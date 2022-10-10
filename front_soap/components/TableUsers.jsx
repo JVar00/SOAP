@@ -1,7 +1,8 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { AdminContext } from "../contexts/EmployeesProvider";
 import { SessionContext } from "../contexts/SessionProvider";
+import { Modal } from "../layouts/confirmationModal";
 
 export const Employees = () => {
   const { user } = useContext(SessionContext);
@@ -9,14 +10,42 @@ export const Employees = () => {
   const { employees, getAllEmployees, deleteEmployee } =
     useContext(AdminContext);
 
+  const [confirm, setConfirm] = useState(false);
+  const [username, setUsername] = useState("");
+
   useEffect(() => {
     getAllEmployees();
   }, []);
 
-  const deleteHandler = (username) => {};
+  const deleteConfirm = (confirm) => {
+    if (confirm) {
+      deleteEmployee(username);
+      getAllEmployees();
+      setConfirm(false);
+      setUsername("");
+    } else {
+      setConfirm(false);
+      setUsername("");
+    }
+  };
+
+  const deleteHandler = (username) => {
+    setConfirm(true);
+    setUsername(username);
+  };
 
   return (
     <>
+      <div
+        className={
+          confirm
+            ? "justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none"
+            : "hidden"
+        }
+      >
+        <Modal funct={deleteConfirm} />
+      </div>
+
       {/* Tablas desktop y tablet */}
       <div className="overflow-auto rounded-lg shadow hidden lg:block mb-5">
         <table className="w-full">

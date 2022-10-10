@@ -1,9 +1,11 @@
 import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AdminContext } from "../contexts/EmployeesProvider";
+import { Modal } from "../layouts/confirmationModal";
 
 export const Form = () => {
   const { addEmployee } = useContext(AdminContext);
+  const [confirm, setConfirm] = useState(false);
   //store or update
 
   const [user, setUsername] = useState("");
@@ -19,26 +21,44 @@ export const Form = () => {
     return addEmployee(data);
   };
 
-  const handleFuncType = (e) => {
-    e.preventDefault();
-    //falta modal para aceptar si esta seguro de guardar los cambios
+  const createConfirm = (confirm) => {
     //verificaciones
     //respuesta
-    const response = create({
-      user,
-      name,
-      lastName1,
-      lastName2,
-      password,
-      role,
-    });
+    if (confirm) {
+      const response = create({
+        user,
+        name,
+        lastName1,
+        lastName2,
+        password,
+        role,
+      });
+      setConfirm(false);
+    } else {
+      setConfirm(false);
+    }
     //catch si no guardo
 
     //depende de la respuesta debera tirar un mensaje de exito o error
   };
 
+  const handleFuncType = (e) => {
+    e.preventDefault();
+
+    setConfirm(true);
+  };
+
   return (
     <div className="flex flex-col justify-center py-5 px-6 lg:px-8">
+      <div
+        className={
+          confirm
+            ? "justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none"
+            : "hidden"
+        }
+      >
+        <Modal funct={createConfirm} />
+      </div>
       <div className=" sm:mx-auto sm:w-full sm:max-w-screen">
         <div className="sm:px-10">
           <form className="mb-0 space-y-6" onSubmit={handleFuncType}>
@@ -125,7 +145,6 @@ export const Form = () => {
                   autoComplete="off"
                   value={user}
                   onChange={(e) => setUsername(e.target.value)}
-                  required
                   className="appearance-none block w-full input py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-red-600"
                 />
               </div>
@@ -143,7 +162,6 @@ export const Form = () => {
                   id="password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  required
                   className="appearance-none block w-full input py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-red-600"
                 />
               </div>

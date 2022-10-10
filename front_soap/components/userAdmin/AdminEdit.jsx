@@ -4,20 +4,23 @@ import { AdminContext } from "../../contexts/EmployeesProvider";
 import { UpdateForm } from "../UpdateForm";
 
 const Edit = () => {
+  //  ../administracion/editar/username
   const { username } = useParams();
+  // Necesito el setEmployee y el getOneEmployee
   const { setEmployee, getOneEmployee } = useContext(AdminContext);
 
-  const getEmployee = async () => {
-    return await getOneEmployee(`${username}`);
-  };
+  //Ui general para crear un usuario, llama al formulacion de creacion
+
+  //Obtengo el empleado que se va a editar
+
+  //Obtengo el empleado que se va a editar y lo guardo en el estado para utilizarlo ene l formualrio
 
   useEffect(() => {
-    const response = getEmployee();
-    if (response.status === 200) {
+    const getByID = async () => {
+      const response = await getOneEmployee(`${username}`);
       setEmployee(response.data);
-    } else {
-      //falta el que hacer si no lo encuentra
-    }
+    };
+    getByID();
   }, []);
 
   return (

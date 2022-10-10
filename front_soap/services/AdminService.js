@@ -13,15 +13,15 @@ const create = (data) => {
   return http.post("/users", data);
 };
 
-const update = (data) => {
-  return http.put(`/users`, data);
+const update = (data, username) => {
+  return http.put(`/users/${username}`, data);
 };
 
 const remove = (username) => {
   return http.delete(`/users/${username}`);
 };
 
-const UserServiceData = {
+const AdminServiceData = {
   getAll,
   get,
   remove,
@@ -29,4 +29,4 @@ const UserServiceData = {
   update,
 };
 
-export default UserServiceData;
+export default AdminServiceData;

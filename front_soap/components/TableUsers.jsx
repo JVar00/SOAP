@@ -35,16 +35,20 @@ export const Employees = () => {
           </thead>
           <tbody className="divide-y divide-black">
             {employees.map((employee) => (
-              <tr className="bg-white" key={employee.username}>
+              <tr className="bg-white" key={employee.user}>
                 {/* formato para cargar con el map */}
                 <td className="p-3 text-sm text-black whitespace-nowrap">
-                  {employee.name + " " + employee.last1 + " " + employee.last2}
+                  {employee.name +
+                    " " +
+                    employee.lastName1 +
+                    " " +
+                    employee.lastName2}
                 </td>
                 <td className="p-3 text-sm text-black whitespace-nowrap">
                   {employee.role}
                 </td>
                 <td className="p-3 text-sm text-black whitespace-nowrap flex flex-row">
-                  <Link to={`/administracion/editar/${employee.username}`}>
+                  <Link to={`/administracion/editar/${employee.user}`}>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
@@ -68,7 +72,7 @@ export const Employees = () => {
                       strokeWidth="1.5"
                       stroke="currentColor"
                       className="w-6 h-6"
-                      onClick={() => deleteHandler(employee.username)}
+                      onClick={() => deleteHandler(employee.user)}
                     >
                       <path
                         strokeLinecap="round"
@@ -91,7 +95,7 @@ export const Employees = () => {
         {employees.map((employee) => (
           <div
             className="bg-white space-y-3 p-4 rounded-lg shadow"
-            key={employee.username}
+            key={employee.user}
           >
             <div className="flex items-center space-x-2 text-sm">
               <div>
@@ -101,13 +105,17 @@ export const Employees = () => {
               </div>
             </div>
             <div className="text-sm text-gray-700">
-              {employee.name + " " + employee.last1 + " " + employee.last2}
+              {employee.name +
+                " " +
+                employee.lastName1 +
+                " " +
+                employee.lastName2}
             </div>
             {/* Los botones deben depender del usuario que este logeado */}
             {user.role == "Administrador" ? (
               //Botones para editar y eliminar del administrador
               <div className="text-sm font-medium text-black flex flex-row">
-                <Link to={`/administracion/editar/${employee.username}`}>
+                <Link to={`/administracion/editar/${employee.user}`}>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
@@ -131,7 +139,7 @@ export const Employees = () => {
                     strokeWidth="1.5"
                     stroke="currentColor"
                     className="w-6 h-6"
-                    onClick={() => deleteHandler(employee.username)}
+                    onClick={() => deleteHandler(employee.user)}
                   >
                     <path
                       strokeLinecap="round"

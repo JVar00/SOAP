@@ -45,10 +45,10 @@ export const Employees = () => {
                     employee.lastName2}
                 </td>
                 <td className="p-3 text-sm text-black whitespace-nowrap">
-                  {employee.rol}
+                  {employee.role}
                 </td>
                 <td className="p-3 text-sm text-black whitespace-nowrap flex flex-row">
-                  <Link to={`/administracion/editar/${employee.id}`}>
+                  <Link to={`/administracion/editar/${employee.user}`}>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
@@ -72,7 +72,7 @@ export const Employees = () => {
                       strokeWidth="1.5"
                       stroke="currentColor"
                       className="w-6 h-6"
-                      onClick={() => deleteHandler(employee.id)}
+                      onClick={() => deleteHandler(employee.user)}
                     >
                       <path
                         strokeLinecap="round"
@@ -100,7 +100,7 @@ export const Employees = () => {
             <div className="flex items-center space-x-2 text-sm">
               <div>
                 <span className="p-1.5 text-xs font-medium uppercase tracking-wider text-red-600 bg-red-200 rounded-lg bg-opacity-50">
-                  {employee.rol}
+                  {employee.role}
                 </span>
               </div>
             </div>
@@ -115,7 +115,7 @@ export const Employees = () => {
             {user.role == "Administrador" ? (
               //Botones para editar y eliminar del administrador
               <div className="text-sm font-medium text-black flex flex-row">
-                <Link to={`/administracion/editar/${employee.id}`}>
+                <Link to={`/administracion/editar/${employee.user}`}>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
@@ -139,7 +139,7 @@ export const Employees = () => {
                     strokeWidth="1.5"
                     stroke="currentColor"
                     className="w-6 h-6"
-                    onClick={() => deleteHandler(employee.id)}
+                    onClick={() => deleteHandler(employee.user)}
                   >
                     <path
                       strokeLinecap="round"

@@ -11,7 +11,7 @@ export const Form = () => {
   const [lastName1, setLastName] = useState("");
   const [lastName2, setLastName2] = useState("");
   const [password, setPassword] = useState("");
-  const [rol, setRole] = useState("");
+  const [role, setRole] = useState("");
 
   //hay que ocultar el username No se debe de editar Solo crear
 
@@ -25,12 +25,12 @@ export const Form = () => {
     //verificaciones
     //respuesta
     const response = create({
+      user,
       name,
       lastName1,
       lastName2,
-      user,
       password,
-      rol,
+      role,
     });
     //catch si no guardo
 

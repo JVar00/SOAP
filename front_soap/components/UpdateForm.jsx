@@ -6,12 +6,11 @@ export const UpdateForm = () => {
   const { employee, updateEmployee } = useContext(AdminContext);
 
   //se inicializan los estados
-  const [user, setUsername] = useState("");
   const [name, setFirstName] = useState("");
   const [lastName1, setLastName] = useState("");
   const [lastName2, setLastName2] = useState("");
   const [password, setPassword] = useState("");
-  const [rol, setRole] = useState("");
+  const [role, setRole] = useState("");
   const [active, setActive] = useState(false);
 
   //hay que ocultar el username No se debe de editar Solo crear
@@ -20,11 +19,10 @@ export const UpdateForm = () => {
   //al cargar la pagina coloco los datos de la persona llamada
 
   const cargarDatos = () => {
-    setUsername(employee.user);
     setFirstName(employee.name);
     setLastName(employee.lastName1);
     setLastName2(employee.lastName2);
-    setRole(employee.rol);
+    setRole(employee.role);
     setActive(true);
   };
 
@@ -43,17 +41,15 @@ export const UpdateForm = () => {
         name,
         lastName1,
         lastName2,
-        user,
-        rol,
+        role,
       });
     } else {
       const response = update({
         name,
         lastName1,
         lastName2,
-        user,
         password,
-        rol,
+        role,
       });
     }
 
@@ -136,7 +132,7 @@ export const UpdateForm = () => {
                   type="text"
                   autoComplete="off"
                   value={lastName2}
-                  onChange={(e) => setLastName(e.target.value)}
+                  onChange={(e) => setLastName2(e.target.value)}
                 />
                 <p className="text-red-500 text-xs italic hidden">
                   Este campo es requerido.
@@ -157,7 +153,6 @@ export const UpdateForm = () => {
                   type="password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  required
                   className="appearance-none block w-full input py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-red-600"
                 />
               </div>
@@ -179,7 +174,7 @@ export const UpdateForm = () => {
                   className="w-full md:w-1/2 font-medium text-sm border-black border rounded-md py-1 pl-2 pr-6"
                   onChange={(e) => setRole(e.target.value)}
                 >
-                  <option value={rol}>Rol actual : {rol}</option>
+                  <option value={role}>Rol actual : {role}</option>
                   <option value="Alisto">Alisto</option>
                   <option value="Acomodo">Acomodo</option>
                 </select>

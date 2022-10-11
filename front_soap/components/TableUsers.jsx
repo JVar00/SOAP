@@ -13,20 +13,30 @@ export const Employees = () => {
   const [confirm, setConfirm] = useState(false);
   const [username, setUsername] = useState("");
 
+  const [error, setError] = useState(false);
+  const [nice, setNice] = useState(false);
+
   useEffect(() => {
     getAllEmployees();
   }, []);
 
-  const deleteConfirm = (confirm) => {
+  const deleteConfirm = async (confirm) => {
     if (confirm) {
-      deleteEmployee(username);
-      getAllEmployees();
-      setConfirm(false);
-      setUsername("");
+      try {
+        await deleteEmployee(username);
+        setNice(true);
+        setError(false);
+        getAllEmployees();
+      } catch {
+        setNice(false);
+        setError(true);
+      }
     } else {
-      setConfirm(false);
-      setUsername("");
+      setNice(false);
+      setError(false);
     }
+    setConfirm(false);
+    setUsername("");
   };
 
   const deleteHandler = (username) => {
@@ -36,6 +46,13 @@ export const Employees = () => {
 
   return (
     <>
+      <p className={error ? "text-red-600 text-base italic" : "hidden"}>
+        Error al intentar eliminar el usuario.
+      </p>
+
+      <p className={nice ? "text-green-600 text-base italic" : "hidden"}>
+        El usuario se elimino con exito!
+      </p>
       <div
         className={
           confirm

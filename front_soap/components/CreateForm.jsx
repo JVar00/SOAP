@@ -180,6 +180,7 @@ export const Form = () => {
               <div className="mt-1">
                 <input
                   id="password"
+                  type="password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   className="appearance-none block w-full input py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-red-600"
@@ -211,7 +212,8 @@ export const Form = () => {
             </div>
 
             <p className={error ? "text-red-600 text-base italic" : "hidden"}>
-              Por favor, rellene todos los campos antes de continuar.
+              Por favor, rellene todos los campos antes de continuar o intente
+              con otro nombre de usuario.
             </p>
 
             <p className={nice ? "text-green-600 text-base italic" : "hidden"}>

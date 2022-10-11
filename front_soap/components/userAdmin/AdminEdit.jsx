@@ -9,6 +9,8 @@ const Edit = () => {
   // Necesito el setEmployee y el getOneEmployee
   const { setEmployee, getOneEmployee } = useContext(AdminContext);
 
+  const [error, setError] = useState(false);
+
   //Ui general para crear un usuario, llama al formulacion de creacion
 
   //Obtengo el empleado que se va a editar
@@ -17,13 +19,21 @@ const Edit = () => {
 
   useEffect(() => {
     const getByID = async () => {
-      const response = await getOneEmployee(`${username}`);
-      setEmployee(response.data);
+      try {
+        const response = await getOneEmployee(`${username}`);
+        setEmployee(response.data);
+      } catch (response) {
+        setError(true);
+      }
     };
     getByID();
   }, []);
 
-  return (
+  return error ? (
+    <p className={error ? "text-red-600 text-base italic" : "hidden"}>
+      Error, no se encontro el usuario.
+    </p>
+  ) : (
     <div className="w-full max-w-screen xl:max-w-5xl lg:ml-60 xl:ml-72">
       <div className="flex flex-col xl:justify-start">
         <h2 className="font-bold ml-5 lg:ml-16 text-lg lg:mb-0">

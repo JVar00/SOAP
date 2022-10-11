@@ -19,13 +19,10 @@ export const AdminProvider = ({ children }) => {
     const response = await AdminServiceData.get(username);
     setUser(response.data.user);
     return response;
-    //return response.status;
   };
 
-  const deleteEmployee = async (username) => {
-    await AdminServiceData.remove(username);
-    getAllEmployees();
-    //return response.status;
+  const deleteEmployee = (username) => {
+    return AdminServiceData.remove(username);
   };
 
   const updateEmployee = (data) => {

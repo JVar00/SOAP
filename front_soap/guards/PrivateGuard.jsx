@@ -31,3 +31,9 @@ const PrivateGuard = ({ children, rol }) => {
     return children ? children : <Outlet />;
 };
 export default PrivateGuard;
+
+/*
+Elemento encargado de verificar si ya habia una sesion iniciada para permitir acceso a las rutas privadas y redirigir
+a la pagina correcta de acuerdo al rol del usuario y si no hay sesion iniciada redirigir al login
+Oscar Zamora Ramirez
+*/

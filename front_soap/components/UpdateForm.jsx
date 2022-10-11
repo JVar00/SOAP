@@ -1,9 +1,16 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AdminContext } from "../contexts/EmployeesProvider";
+import { Modal } from "../layouts/confirmationModal";
 
 export const UpdateForm = () => {
   const { employee, updateEmployee } = useContext(AdminContext);
+  const [confirm, setConfirm] = useState(false);
+
+  const navigate = useNavigate();
+
+  const [error, setError] = useState(false);
+  const [nice, setNice] = useState(false);
 
   //se inicializan los estados
   const [name, setFirstName] = useState("");
@@ -13,10 +20,13 @@ export const UpdateForm = () => {
   const [role, setRole] = useState("");
   const [active, setActive] = useState(false);
 
-  //hay que ocultar el username No se debe de editar Solo crear
-  //lo llamo solo para tenerlo y poderlo enviar al backend como un {}
-
-  //al cargar la pagina coloco los datos de la persona llamada
+  const validate = () => {
+    if (name === "" || lastName1 === "" || lastName2 === "" || role === "") {
+      setError(true);
+      return false;
+    }
+    return true;
+  };
 
   const cargarDatos = () => {
     setFirstName(employee.name);
@@ -26,41 +36,73 @@ export const UpdateForm = () => {
     setActive(true);
   };
 
-  const update = async (data) => {
-    return await updateEmployee(data);
+  const update = (data) => {
+    return updateEmployee(data);
   };
 
-  //se crea el objeto que se enviara al backend antes del submit
+  const updateConfirm = async (confirm) => {
+    if (confirm && password == "") {
+      if (validate()) {
+        try {
+          await update({
+            name,
+            lastName1,
+            lastName2,
+            role,
+          });
+          setError(false);
+          setNice(true);
+        } catch {
+          setError(true);
+          setNice(false);
+        }
+      } else {
+        setError(true);
+        setNice(false);
+      }
+    } else if (confirm && password != "") {
+      if (validate()) {
+        try {
+          await update({
+            name,
+            lastName1,
+            lastName2,
+            password,
+            role,
+          });
+          setError(false);
+          setNice(true);
+        } catch {
+          setError(true);
+          setNice(false);
+        }
+      } else {
+        setError(true);
+        setNice(false);
+      }
+    }
+    setConfirm(false);
+  };
 
   const handleFuncType = (e) => {
     e.preventDefault();
-
-    //falta modal para aceptar si esta seguro de guardar los cambios
-    if (password == "") {
-      const response = update({
-        name,
-        lastName1,
-        lastName2,
-        role,
-      });
-    } else {
-      const response = update({
-        name,
-        lastName1,
-        lastName2,
-        password,
-        role,
-      });
-    }
-
-    //depende de la respuesta debera tirar un mensaje de exito o error
+    setConfirm(true);
   };
 
   return (
     <div className="flex flex-col justify-center py-5 px-6 lg:px-8">
+      <div
+        className={
+          confirm
+            ? "justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none"
+            : "hidden"
+        }
+      >
+        <Modal funct={updateConfirm} />
+      </div>
       <div className={active ? "hidden" : "btn btn-primary py-0 "}>
         <button
-          className="w-1/2 flex justify-center mt-10 py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
+          className="w-1/2 flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
           onClick={cargarDatos}
         >
           Cargar Datos
@@ -181,15 +223,31 @@ export const UpdateForm = () => {
               </div>
             </div>
 
+            <p className={error ? "text-red-600 text-base italic" : "hidden"}>
+              Por favor, rellene todos los campos antes de continuar.
+            </p>
+
+            <p className={nice ? "text-green-600 text-base italic" : "hidden"}>
+              El usuario se edito con exito!
+            </p>
+
             <div>
               <button
                 type="submit"
-                className="w-1/2 flex justify-center mt-10 py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
+                className="w-1/2 flex justify-center mt-7 py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
               >
                 Confirmar Cambios
               </button>
             </div>
           </form>
+          <div>
+            <button
+              className="w-36 flex justify-center mt-5 py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
+              onClick={() => navigate("/administracion/empleados")}
+            >
+              Volver...
+            </button>
+          </div>
         </div>
       </div>
     </div>

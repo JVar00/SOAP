@@ -28,14 +28,12 @@ export const AdminProvider = ({ children }) => {
     //return response.status;
   };
 
-  const updateEmployee = async (data) => {
-    await AdminServiceData.update(data, user);
-    //return response.status;
+  const updateEmployee = (data) => {
+    return AdminServiceData.update(data, user);
   };
 
-  const addEmployee = async (data) => {
-    const response = await AdminServiceData.create(data);
-    return response;
+  const addEmployee = (data) => {
+    return AdminServiceData.create(data);
   };
 
   return (

@@ -1,12 +1,12 @@
-import { useContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useContext, useState } from "react";
 import { AdminContext } from "../contexts/EmployeesProvider";
 import { Modal } from "../layouts/confirmationModal";
 
 export const Form = () => {
   const { addEmployee } = useContext(AdminContext);
   const [confirm, setConfirm] = useState(false);
-  //store or update
+  const [error, setError] = useState(false);
+  const [nice, setNice] = useState(false);
 
   const [user, setUsername] = useState("");
   const [name, setFirstName] = useState("");
@@ -15,36 +15,62 @@ export const Form = () => {
   const [password, setPassword] = useState("");
   const [role, setRole] = useState("");
 
-  //hay que ocultar el username No se debe de editar Solo crear
-
   const create = (data) => {
     return addEmployee(data);
   };
 
-  const createConfirm = (confirm) => {
-    //verificaciones
-    //respuesta
-    if (confirm) {
-      const response = create({
-        user,
-        name,
-        lastName1,
-        lastName2,
-        password,
-        role,
-      });
-      setConfirm(false);
-    } else {
-      setConfirm(false);
+  const validate = () => {
+    if (
+      user === "" ||
+      name === "" ||
+      lastName1 === "" ||
+      lastName2 === "" ||
+      password === "" ||
+      role === ""
+    ) {
+      setError(true);
+      return false;
     }
-    //catch si no guardo
+    return true;
+  };
 
-    //depende de la respuesta debera tirar un mensaje de exito o error
+  const clearData = () => {
+    setUsername("");
+    setLastName("");
+    setLastName2("");
+    setFirstName("");
+    setPassword("");
+  };
+
+  const createConfirm = async (confirm) => {
+    if (validate()) {
+      if (confirm) {
+        try {
+          await create({
+            user,
+            name,
+            lastName1,
+            lastName2,
+            password,
+            role,
+          });
+          setError(false);
+          setNice(true);
+          clearData();
+        } catch {
+          setError(true);
+          setNice(false);
+        }
+      }
+    } else {
+      setError(true);
+      setNice(false);
+    }
+    setConfirm(false);
   };
 
   const handleFuncType = (e) => {
     e.preventDefault();
-
     setConfirm(true);
   };
 
@@ -81,9 +107,6 @@ export const Form = () => {
                   value={name}
                   onChange={(e) => setFirstName(e.target.value)}
                 />
-                <p className="text-red-500 text-xs italic hidden">
-                  Este campo es requerido.
-                </p>
               </div>
               <div className="w-full md:w-1/3  px-3 mb-6 md:mb-0">
                 <div className="flex flex-row">
@@ -125,9 +148,6 @@ export const Form = () => {
                   value={lastName2}
                   onChange={(e) => setLastName2(e.target.value)}
                 />
-                <p className="text-red-500 text-xs italic hidden">
-                  Este campo es requerido.
-                </p>
               </div>
             </div>
 
@@ -189,6 +209,14 @@ export const Form = () => {
                 </select>
               </div>
             </div>
+
+            <p className={error ? "text-red-600 text-base italic" : "hidden"}>
+              Por favor, rellene todos los campos antes de continuar.
+            </p>
+
+            <p className={nice ? "text-green-600 text-base italic" : "hidden"}>
+              El usuario se agrego con exito!
+            </p>
 
             <div>
               <button

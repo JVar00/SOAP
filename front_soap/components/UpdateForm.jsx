@@ -2,14 +2,23 @@ import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AdminContext } from "../contexts/EmployeesProvider";
 import { Modal } from "../layouts/confirmationModal";
+import { DBError } from "./errorMessages/dbError";
+import { InputError } from "./errorMessages/inputError";
+import { PasswordError } from "./errorMessages/paswordError";
 
 export const UpdateForm = () => {
   const { employee, updateEmployee } = useContext(AdminContext);
+
+  //modal
   const [confirm, setConfirm] = useState(false);
 
+  //navigate
   const navigate = useNavigate();
 
+  //validaciones
   const [error, setError] = useState(false);
+  const [passError, setPassError] = useState(false);
+  const [dbError, setDBError] = useState(false);
   const [nice, setNice] = useState(false);
 
   //se inicializan los estados
@@ -20,10 +29,24 @@ export const UpdateForm = () => {
   const [role, setRole] = useState("");
   const [active, setActive] = useState(false);
 
+  const validatePassword = (password) => {
+    var re = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/;
+    return re.test(password);
+  };
+
   const validate = () => {
+    setDBError(false);
+    setError(false);
+    setPassError(false);
     if (name === "" || lastName1 === "" || lastName2 === "" || role === "") {
       setError(true);
       return false;
+    }
+    if (password != "") {
+      if (validatePassword(password) == false) {
+        setPassError(true);
+        return false;
+      }
     }
     return true;
   };
@@ -50,14 +73,19 @@ export const UpdateForm = () => {
             lastName2,
             role,
           });
+          //resets
           setError(false);
+          setPassError(false);
+          setDBError(false);
+          //nice
           setNice(true);
         } catch {
-          setError(true);
+          setDBError(true);
+          setError(false);
+          setPassError(false);
           setNice(false);
         }
       } else {
-        setError(true);
         setNice(false);
       }
     } else if (confirm && password != "") {
@@ -71,13 +99,16 @@ export const UpdateForm = () => {
             role,
           });
           setError(false);
+          setPassError(false);
+          setDBError(false);
           setNice(true);
         } catch {
-          setError(true);
+          setDBError(true);
           setNice(false);
+          setError(false);
+          setPassError(false);
         }
       } else {
-        setError(true);
         setNice(false);
       }
     }
@@ -223,9 +254,17 @@ export const UpdateForm = () => {
               </div>
             </div>
 
-            <p className={error ? "text-red-600 text-base italic" : "hidden"}>
-              Por favor, rellene todos los campos antes de continuar.
-            </p>
+            <div className={error ? "" : "hidden"}>
+              <InputError />
+            </div>
+
+            <div className={passError ? "" : "hidden"}>
+              <PasswordError />
+            </div>
+
+            <div className={dbError ? "" : "hidden"}>
+              <DBError />
+            </div>
 
             <p className={nice ? "text-green-600 text-base italic" : "hidden"}>
               El usuario se edito con exito!

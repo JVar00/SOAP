@@ -1,13 +1,22 @@
 import { useContext, useState } from "react";
 import { AdminContext } from "../contexts/EmployeesProvider";
 import { Modal } from "../layouts/confirmationModal";
+import { DBError } from "./errorMessages/dbError";
+import { InputError } from "./errorMessages/inputError";
+import { PasswordError } from "./errorMessages/paswordError";
 
 export const Form = () => {
   const { addEmployee } = useContext(AdminContext);
+  //modal
   const [confirm, setConfirm] = useState(false);
+
+  //validaciones
   const [error, setError] = useState(false);
+  const [passError, setPassError] = useState(false);
+  const [dbError, setDBError] = useState(false);
   const [nice, setNice] = useState(false);
 
+  //estados
   const [user, setUsername] = useState("");
   const [name, setFirstName] = useState("");
   const [lastName1, setLastName] = useState("");
@@ -19,7 +28,15 @@ export const Form = () => {
     return addEmployee(data);
   };
 
+  const validatePassword = (password) => {
+    var re = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/;
+    return re.test(password);
+  };
+
   const validate = () => {
+    setDBError(false);
+    setError(false);
+    setPassError(false);
     if (
       user === "" ||
       name === "" ||
@@ -31,8 +48,14 @@ export const Form = () => {
       setError(true);
       return false;
     }
+    if (validatePassword(password) == false) {
+      setPassError(true);
+      return false;
+    }
     return true;
   };
+
+  //regex for a string with 8 characters, minimun one letter uppercase,
 
   const clearData = () => {
     setUsername("");
@@ -43,8 +66,8 @@ export const Form = () => {
   };
 
   const createConfirm = async (confirm) => {
-    if (validate()) {
-      if (confirm) {
+    if (confirm) {
+      if (validate()) {
         try {
           await create({
             user,
@@ -54,17 +77,22 @@ export const Form = () => {
             password,
             role,
           });
+          //resets
           setError(false);
+          setPassError(false);
+          setDBError(false);
+          //nice
           setNice(true);
           clearData();
         } catch {
-          setError(true);
+          setDBError(true); //cambiar por error del servidor
+          setError(false);
+          setPassError(false);
           setNice(false);
         }
+      } else {
+        setNice(false);
       }
-    } else {
-      setError(true);
-      setNice(false);
     }
     setConfirm(false);
   };
@@ -126,9 +154,6 @@ export const Form = () => {
                   value={lastName1}
                   onChange={(e) => setLastName(e.target.value)}
                 />
-                <p className="text-red-500 text-xs italic hidden">
-                  Este campo es requerido.
-                </p>
               </div>
               <div className="w-full md:w-1/3  px-3">
                 <div className="flex flex-row">
@@ -211,10 +236,17 @@ export const Form = () => {
               </div>
             </div>
 
-            <p className={error ? "text-red-600 text-base italic" : "hidden"}>
-              Por favor, rellene todos los campos antes de continuar o intente
-              con otro nombre de usuario.
-            </p>
+            <div className={error ? "" : "hidden"}>
+              <InputError />
+            </div>
+
+            <div className={passError ? "" : "hidden"}>
+              <PasswordError />
+            </div>
+
+            <div className={dbError ? "" : "hidden"}>
+              <DBError />
+            </div>
 
             <p className={nice ? "text-green-600 text-base italic" : "hidden"}>
               El usuario se agrego con exito!

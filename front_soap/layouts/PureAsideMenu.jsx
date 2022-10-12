@@ -1,17 +1,13 @@
 import { useContext, useState } from "react";
-import { Link, Navigate, NavLink, Outlet } from "react-router-dom";
+import { Link, NavLink, Outlet } from "react-router-dom";
 import { AdminSideMenu } from "../components/userAdmin/AdminSideMenu";
+import { AuthContext } from "../contexts/authContext";
 import { AdminProvider } from "../contexts/EmployeesProvider";
-import { SessionContext } from "../contexts/SessionProvider";
 import LogoIcon from "../src/assets/logo.jpg";
 
 const AsideMenu = () => {
   const [sidebar, setSidebar] = useState(false);
-  const { user, logout } = useContext(SessionContext);
-
-  if (!user) {
-    return <Navigate to="/" />;
-  }
+  const { isAuthenticated, logOut } = useContext(AuthContext);
 
   const showSidebar = () => setSidebar(!sidebar);
 
@@ -48,7 +44,7 @@ const AsideMenu = () => {
             strokeWidth="1.5"
             stroke="currentColor"
             className="w-8 h-8 m-2 text-white"
-            onClick={logout}
+            onClick={logOut}
           >
             <path
               strokeLinecap="round"
@@ -73,13 +69,13 @@ const AsideMenu = () => {
             <div className="ml-5 lg:hidden">
               <p>Iniciaste Sesion Como</p>
               <p className="font-bold">
-                {user.name + " " + user.last1 + " " + user.last2}
+                {isAuthenticated.name + " " + isAuthenticated.last1 + " " + isAuthenticated.last2}
               </p>
             </div>
 
-            {user && user.role === "Administrador" ? (
+            {isAuthenticated &&isAuthenticated.role === "Administrador" ? (
               <AdminSideMenu closeSideBar={closeSidebar} />
-            ) : user && user.role === "JefeBodega" ? (
+            ) :isAuthenticated && isAuthenticated.role === "JefeBodega" ? (
               //Menu para el jefe de bodega
               <a href=""></a>
             ) : (
@@ -88,7 +84,7 @@ const AsideMenu = () => {
               //role==="empleadoAlisto", es el mismo menu
             )}
 
-            <NavLink className="logoutButton md:hidden" onClick={logout}>
+            <NavLink className="logoutButton md:hidden" onClick={logOut}>
               Cerrar sesion
             </NavLink>
           </nav>
@@ -97,9 +93,9 @@ const AsideMenu = () => {
         {/* Desktop and Tablet Menu */}
         <aside className={"sidebar fixed sm:invisible lg:visible"}>
           <nav className=" text-white h-screen pt-10 pb-5 border-black bg-red-600">
-            {user && user.role === "Administrador" ? (
+            {isAuthenticated && isAuthenticated.role === "Administrador" ? (
               <AdminSideMenu />
-            ) : user && user.role === "JefeBodega" ? (
+            ) :isAuthenticated && isAuthenticated.role === "JefeBodega" ? (
               //Menu para el jefe de bodega
               <a href=""></a>
             ) : (
@@ -108,7 +104,7 @@ const AsideMenu = () => {
               //role==="empleadoAlisto", es el mismo menu
             )}
 
-            <NavLink className="logoutButton" onClick={logout}>
+            <NavLink className="logoutButton" onClick={logOut}>
               Cerrar sesion
             </NavLink>
           </nav>
@@ -125,7 +121,7 @@ const AsideMenu = () => {
             <div className="text-sm xl:text-base flex-1 lg:m-14 hidden lg:block">
               <p>Iniciaste Sesion Como</p>
               <p className="font-bold text-red-600">
-                {user.name + " " + user.last1 + " " + user.last2}
+                {isAuthenticated.name + " " + isAuthenticated.last1 + " " + isAuthenticated.last2}
               </p>
             </div>
           </div>

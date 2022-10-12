@@ -1,12 +1,10 @@
 import { useContext } from "react";
 import { Navigate, Outlet } from "react-router-dom";
 import { AuthContext } from "../contexts/authContext"
-import { PrivateRoutes } from "../../models/routes";
+import { PrivateRoutes } from '../models/routes';
 
 const PrivateValidation = (
-    <Navigate
-        replace
-        to={PrivateRoutes.ALISTO}
+    <Navigate replace to={PrivateRoutes.ALISTO}
     />
 );
 const PublicValidation = <Outlet />;

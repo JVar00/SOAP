@@ -10,5 +10,5 @@ export const PublicRoutes = {
 export const PrivateRoutes = {
     ACOMODO: "acomodo",
     ALISTO: "alisto",
-    ADMIN: "admin",
+    ADMIN: "administracion",
 };

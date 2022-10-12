@@ -1,11 +1,12 @@
 import { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../contexts/authContext";
 import { AdminContext } from "../contexts/EmployeesProvider";
-import { SessionContext } from "../contexts/SessionProvider";
+
 
 export const Employees = () => {
-  const { user } = useContext(SessionContext);
 
+  const { isAuthenticated } = useContext(AuthContext);
   const { employees, getAllEmployees, deleteEmployee } =
     useContext(AdminContext);
 
@@ -112,7 +113,7 @@ export const Employees = () => {
                 employee.lastName2}
             </div>
             {/* Los botones deben depender del usuario que este logeado */}
-            {user.role == "Administrador" ? (
+            {isAuthenticated.role == "Administrador" ? (
               //Botones para editar y eliminar del administrador
               <div className="text-sm font-medium text-black flex flex-row">
                 <Link to={`/administracion/editar/${employee.user}`}>

@@ -18,13 +18,13 @@ const PrivateGuard = ({ children, rol }) => {
     if (!isAuthenticated) {
         return LoginValidation;
     }
-    const rolUser = isAuthenticated.rol;
+    const rolUser = isAuthenticated.role;
 
     if (rol !== rolUser && rolUser === "Acomodo") {
         return AcomodoValidation;
     } else if (rol !== rolUser && rolUser === "Alisto") {
         return AlistoValidation;
-    } else if (rol !== rolUser && rolUser === "Admin") {
+    } else if (rol !== rolUser && rolUser === "Administrador") {
         return AdminValidation;
     }
 

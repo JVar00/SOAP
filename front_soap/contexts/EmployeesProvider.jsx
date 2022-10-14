@@ -43,7 +43,7 @@ export const AdminProvider = ({ children }) => {
   //buscar solo los empleados con rol de acomodo, ya sea en general o digitando tambien nombre Oscar Zamora
   const getAcomodoEmployees = (userName) => {
     const aux = { ...cacheEmployees };
-    const getAcomodo = user => user.role.includes('acomodo');
+    const getAcomodo = user => user.role.includes('Acomodo');
     if (!userName) {
       setEmployees(Object.values(aux).filter(getAcomodo));
     } else {
@@ -57,7 +57,7 @@ export const AdminProvider = ({ children }) => {
   //buscar solo los empleados con rol de alisto, ya sea en general o digitando tambien el nombre Oscar Zamora
   const getAlistoEmployees = (userName) => {
     const aux = { ...cacheEmployees };
-    const getAlisto = user => user.role.includes('alisto');
+    const getAlisto = user => user.role.includes('Alisto');
     if (!userName) {
       setEmployees(Object.values(aux).filter(getAlisto));
     } else {

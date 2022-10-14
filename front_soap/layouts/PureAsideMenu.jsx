@@ -14,7 +14,6 @@ const AsideMenu = () => {
   const closeSidebar = () => setSidebar(false);
 
   //descubrir como hacer en react que aparexca el menu
-
   return (
     <div>
       <div className="bg-red-600 lg:hidden flex sticky top-0 justify-between">
@@ -69,7 +68,7 @@ const AsideMenu = () => {
             <div className="ml-5 lg:hidden">
               <p>Iniciaste Sesion Como</p>
               <p className="font-bold">
-                {isAuthenticated.name + " " + isAuthenticated.last1 + " " + isAuthenticated.last2}
+                {isAuthenticated.name + " " + isAuthenticated.lastName1 + " " + isAuthenticated.lastName2}
               </p>
             </div>
 
@@ -121,7 +120,7 @@ const AsideMenu = () => {
             <div className="text-sm xl:text-base flex-1 lg:m-14 hidden lg:block">
               <p>Iniciaste Sesion Como</p>
               <p className="font-bold text-red-600">
-                {isAuthenticated.name + " " + isAuthenticated.last1 + " " + isAuthenticated.last2}
+                {isAuthenticated.name + " " + isAuthenticated.lastName1 + " " + isAuthenticated.lastName2}
               </p>
             </div>
           </div>

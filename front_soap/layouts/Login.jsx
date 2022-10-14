@@ -1,5 +1,21 @@
+import { useContext, useState } from 'react'
+import { AuthContext } from '../contexts/authContext'
 import Logo from '../src/assets/JT_Logo.svg'
+import LogingService from '../services/LoginService'
+import InvalidAccess from '../components/AlertInvalidAccess'
 const Login = () => {
+    const { login } = useContext(AuthContext);
+    const [alert, setAlert] = useState();
+    
+    async function requestLogin(userName, password) {
+        try {
+            const response = await LogingService.getAuthentication(userName, password);
+            login(response.data[0]);
+        } catch (error) {
+                setAlert(<InvalidAccess />);
+        }
+    }
+
     return (
         <div className="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8  ">
             <div className="w-full max-w-md  ">
@@ -12,7 +28,13 @@ const Login = () => {
                 </div>
                 <form
                     className=" space-y-6 pt-8 bg-J&T rounded-3xl px-9 text-center font-bold text-slate-50 text-xl"
-                    >
+                    onSubmit={e => {
+                       e.preventDefault();
+                        const txtuserName = e.target.userName.value;
+                        const txtPassword = e.target.password.value;
+                        requestLogin(txtuserName, txtPassword);
+                    }}
+                >
                     <div className="flex flex-col space-y-6  rounded-md shadow-sm">
                         <div>
                             <label htmlFor="userName">Nombre de usuario</label>
@@ -38,6 +60,9 @@ const Login = () => {
                                 placeholder="Contraseña"
                             />
                         </div>
+                    </div>
+                    <div>
+                        {alert}
                     </div>
                     <div className="py-6 ">
                         <button

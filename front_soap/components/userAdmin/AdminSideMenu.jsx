@@ -4,11 +4,6 @@ import { SessionContext } from "../../contexts/SessionProvider";
 import { NavButton } from "../../layouts/NavButton";
 
 export const AdminSideMenu = () => {
-  const { user } = useContext(SessionContext);
-
-  if (!user || (user && user.role != "Administrador")) {
-    return <Navigate to="/" />;
-  }
 
   return (
     <>

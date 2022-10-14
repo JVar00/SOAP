@@ -44,7 +44,6 @@ const AsideMenu = () => {
             strokeWidth="1.5"
             stroke="currentColor"
             className="w-8 h-8 m-2 text-white"
-            
           >
             <path
               strokeLinecap="round"
@@ -69,13 +68,17 @@ const AsideMenu = () => {
             <div className="ml-5 lg:hidden">
               <p>Iniciaste Sesion Como</p>
               <p className="font-bold">
-                {isAuthenticated.name + " " + isAuthenticated.last1 + " " + isAuthenticated.last2}
+                {isAuthenticated.name +
+                  " " +
+                  isAuthenticated.last1 +
+                  " " +
+                  isAuthenticated.last2}
               </p>
             </div>
 
-            {isAuthenticated &&isAuthenticated.role === "Administrador" ? (
+            {isAuthenticated && isAuthenticated.role === "Administrador" ? (
               <AdminSideMenu closeSideBar={closeSidebar} />
-            ) :isAuthenticated && isAuthenticated.role === "JefeBodega" ? (
+            ) : isAuthenticated && isAuthenticated.role === "JefeBodega" ? (
               //Menu para el jefe de bodega
               <a href=""></a>
             ) : (
@@ -95,7 +98,7 @@ const AsideMenu = () => {
           <nav className=" text-white h-screen pt-10 pb-5 border-black bg-red-600">
             {isAuthenticated && isAuthenticated.role === "Administrador" ? (
               <AdminSideMenu />
-            ) :isAuthenticated && isAuthenticated.role === "JefeBodega" ? (
+            ) : isAuthenticated && isAuthenticated.role === "JefeBodega" ? (
               //Menu para el jefe de bodega
               <a href=""></a>
             ) : (
@@ -121,7 +124,11 @@ const AsideMenu = () => {
             <div className="text-sm xl:text-base flex-1 lg:m-14 hidden lg:block">
               <p>Iniciaste Sesion Como</p>
               <p className="font-bold text-red-600">
-                {isAuthenticated.name + " " + isAuthenticated.last1 + " " + isAuthenticated.last2}
+                {isAuthenticated.name +
+                  " " +
+                  isAuthenticated.last1 +
+                  " " +
+                  isAuthenticated.last2}
               </p>
             </div>
           </div>

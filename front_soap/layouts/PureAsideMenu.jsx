@@ -35,7 +35,7 @@ const AsideMenu = () => {
             />
           </svg>
         </Link>
-        <button className="md:flex-row hidden md:flex ">
+        <button className="md:flex-row hidden md:flex " onClick={logOut}>
           <p className="pt-3 font-bold text-white">Cerrar Sesion</p>
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -44,7 +44,7 @@ const AsideMenu = () => {
             strokeWidth="1.5"
             stroke="currentColor"
             className="w-8 h-8 m-2 text-white"
-            onClick={logOut}
+            
           >
             <path
               strokeLinecap="round"

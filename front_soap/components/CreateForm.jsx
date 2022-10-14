@@ -1,11 +1,22 @@
-import { useContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useContext, useState } from "react";
 import { AdminContext } from "../contexts/EmployeesProvider";
+import { Modal } from "../layouts/confirmationModal";
+import { DBError } from "./errorMessages/dbError";
+import { InputError } from "./errorMessages/inputError";
+import { PasswordError } from "./errorMessages/paswordError";
 
 export const Form = () => {
   const { addEmployee } = useContext(AdminContext);
-  //store or update
+  //modal
+  const [confirm, setConfirm] = useState(false);
 
+  //validaciones
+  const [error, setError] = useState(false);
+  const [passError, setPassError] = useState(false);
+  const [dbError, setDBError] = useState(false);
+  const [nice, setNice] = useState(false);
+
+  //estados
   const [user, setUsername] = useState("");
   const [name, setFirstName] = useState("");
   const [lastName1, setLastName] = useState("");
@@ -13,32 +24,95 @@ export const Form = () => {
   const [password, setPassword] = useState("");
   const [role, setRole] = useState("");
 
-  //hay que ocultar el username No se debe de editar Solo crear
-
   const create = (data) => {
     return addEmployee(data);
   };
 
+  const validatePassword = (password) => {
+    var re = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/;
+    return re.test(password);
+  };
+
+  const validate = () => {
+    setDBError(false);
+    setError(false);
+    setPassError(false);
+    if (
+      user === "" ||
+      name === "" ||
+      lastName1 === "" ||
+      lastName2 === "" ||
+      password === "" ||
+      role === ""
+    ) {
+      setError(true);
+      return false;
+    }
+    if (validatePassword(password) == false) {
+      setPassError(true);
+      return false;
+    }
+    return true;
+  };
+
+  //regex for a string with 8 characters, minimun one letter uppercase,
+
+  const clearData = () => {
+    setUsername("");
+    setLastName("");
+    setLastName2("");
+    setFirstName("");
+    setPassword("");
+  };
+
+  const createConfirm = async (confirm) => {
+    if (confirm) {
+      if (validate()) {
+        try {
+          await create({
+            user,
+            name,
+            lastName1,
+            lastName2,
+            password,
+            role,
+          });
+          //resets
+          setError(false);
+          setPassError(false);
+          setDBError(false);
+          //nice
+          setNice(true);
+          clearData();
+        } catch {
+          setDBError(true); //cambiar por error del servidor
+          setError(false);
+          setPassError(false);
+          setNice(false);
+        }
+      } else {
+        setNice(false);
+      }
+    }
+    setConfirm(false);
+  };
+
   const handleFuncType = (e) => {
     e.preventDefault();
-    //falta modal para aceptar si esta seguro de guardar los cambios
-    //verificaciones
-    //respuesta
-    const response = create({
-      user,
-      name,
-      lastName1,
-      lastName2,
-      password,
-      role,
-    });
-    //catch si no guardo
-
-    //depende de la respuesta debera tirar un mensaje de exito o error
+    setConfirm(true);
   };
 
   return (
     <div className="flex flex-col justify-center py-5 px-6 lg:px-8">
+      <div
+        className={
+          confirm
+            ? "justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none"
+            : "hidden"
+        }
+      >
+        <Modal funct={createConfirm} />
+      </div>
       <div className=" sm:mx-auto sm:w-full sm:max-w-screen">
         <div className="sm:px-10">
           <form className="mb-0 space-y-6" onSubmit={handleFuncType}>
@@ -61,9 +135,6 @@ export const Form = () => {
                   value={name}
                   onChange={(e) => setFirstName(e.target.value)}
                 />
-                <p className="text-red-500 text-xs italic hidden">
-                  Este campo es requerido.
-                </p>
               </div>
               <div className="w-full md:w-1/3  px-3 mb-6 md:mb-0">
                 <div className="flex flex-row">
@@ -83,9 +154,6 @@ export const Form = () => {
                   value={lastName1}
                   onChange={(e) => setLastName(e.target.value)}
                 />
-                <p className="text-red-500 text-xs italic hidden">
-                  Este campo es requerido.
-                </p>
               </div>
               <div className="w-full md:w-1/3  px-3">
                 <div className="flex flex-row">
@@ -105,9 +173,6 @@ export const Form = () => {
                   value={lastName2}
                   onChange={(e) => setLastName2(e.target.value)}
                 />
-                <p className="text-red-500 text-xs italic hidden">
-                  Este campo es requerido.
-                </p>
               </div>
             </div>
 
@@ -125,7 +190,6 @@ export const Form = () => {
                   autoComplete="off"
                   value={user}
                   onChange={(e) => setUsername(e.target.value)}
-                  required
                   className="appearance-none block w-full input py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-red-600"
                 />
               </div>
@@ -141,9 +205,9 @@ export const Form = () => {
               <div className="mt-1">
                 <input
                   id="password"
+                  type="password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  required
                   className="appearance-none block w-full input py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-red-600"
                 />
               </div>
@@ -171,6 +235,22 @@ export const Form = () => {
                 </select>
               </div>
             </div>
+
+            <div className={error ? "" : "hidden"}>
+              <InputError />
+            </div>
+
+            <div className={passError ? "" : "hidden"}>
+              <PasswordError />
+            </div>
+
+            <div className={dbError ? "" : "hidden"}>
+              <DBError />
+            </div>
+
+            <p className={nice ? "text-green-600 text-base italic" : "hidden"}>
+              El usuario se agrego con exito!
+            </p>
 
             <div>
               <button

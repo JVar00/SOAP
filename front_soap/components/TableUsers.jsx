@@ -1,12 +1,13 @@
 import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../contexts/authContext";
 import { AdminContext } from "../contexts/EmployeesProvider";
-import { SessionContext } from "../contexts/SessionProvider";
 import { Modal } from "../layouts/confirmationModal";
 
-export const Employees = () => {
-  const { user } = useContext(SessionContext);
 
+export const Employees = () => {
+
+  const { isAuthenticated } = useContext(AuthContext);
   const { employees, getAllEmployees, deleteEmployee } =
     useContext(AdminContext);
 
@@ -142,6 +143,7 @@ export const Employees = () => {
 
       <div className="grid mr-4 sm:mr-2 mb-5 grid-cols-1 sm:grid-cols-2 gap-4 lg:hidden">
         {/* Este div es un perfil de usuario, como tal se deberian de cargar de esta forma para cada unao de los usuarios con un map */}
+
         {
           (employees[0]) ?
             (

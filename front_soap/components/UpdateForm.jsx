@@ -29,6 +29,11 @@ export const UpdateForm = () => {
   const [role, setRole] = useState("");
   const [active, setActive] = useState(false);
 
+  const handlePassword = (e) => {
+    setPassword(e.target.value);
+    validatePassword();
+  };
+
   const validatePassword = (password) => {
     var re = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/;
     if (re.test(password)) {
@@ -212,7 +217,7 @@ export const UpdateForm = () => {
                   id="password"
                   type="password"
                   value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  onChange={(e) => handlePassword(e)}
                   className="appearance-none block w-full input py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-red-600"
                 />
               </div>

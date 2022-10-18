@@ -37,6 +37,7 @@ export const UpdateForm = () => {
   const validatePassword = (password) => {
     var re = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/;
     if (re.test(password)) {
+      setPassError(false);
       return true;
     }
     setPassError(true);

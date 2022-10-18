@@ -29,24 +29,28 @@ export const UpdateForm = () => {
   const [role, setRole] = useState("");
   const [active, setActive] = useState(false);
 
+  const handlePassword = (e) => {
+    setPassword(e.target.value);
+    validatePassword();
+  };
+
   const validatePassword = (password) => {
     var re = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/;
-    return re.test(password);
+    if (re.test(password)) {
+      setPassError(false);
+      return true;
+    }
+    setPassError(true);
+    return false;
   };
 
   const validate = () => {
-    setDBError(false);
-    setError(false);
-    setPassError(false);
     if (name === "" || lastName1 === "" || lastName2 === "" || role === "") {
       setError(true);
       return false;
     }
     if (password != "") {
-      if (validatePassword(password) == false) {
-        setPassError(true);
-        return false;
-      }
+      return validatePassword(password);
     }
     return true;
   };
@@ -65,51 +69,30 @@ export const UpdateForm = () => {
 
   const updateConfirm = async (confirm) => {
     if (confirm && password == "") {
-      if (validate()) {
-        try {
-          await update({
-            name,
-            lastName1,
-            lastName2,
-            role,
-          });
-          //resets
-          setError(false);
-          setPassError(false);
-          setDBError(false);
-          //nice
-          setNice(true);
-        } catch {
-          setDBError(true);
-          setError(false);
-          setPassError(false);
-          setNice(false);
-        }
-      } else {
-        setNice(false);
+      try {
+        await update({
+          name,
+          lastName1,
+          lastName2,
+          role,
+        });
+        //nice
+        setNice(true);
+      } catch {
+        setDBError(true);
       }
     } else if (confirm && password != "") {
-      if (validate()) {
-        try {
-          await update({
-            name,
-            lastName1,
-            lastName2,
-            password,
-            role,
-          });
-          setError(false);
-          setPassError(false);
-          setDBError(false);
-          setNice(true);
-        } catch {
-          setDBError(true);
-          setNice(false);
-          setError(false);
-          setPassError(false);
-        }
-      } else {
-        setNice(false);
+      try {
+        await update({
+          name,
+          lastName1,
+          lastName2,
+          password,
+          role,
+        });
+        setNice(true);
+      } catch {
+        setDBError(true);
       }
     }
     setConfirm(false);
@@ -117,7 +100,17 @@ export const UpdateForm = () => {
 
   const handleFuncType = (e) => {
     e.preventDefault();
-    setConfirm(true);
+
+    setError(false);
+    setPassError(false);
+    setDBError(false);
+    setNice(false);
+
+    if (validate()) {
+      setConfirm(true);
+    } else {
+      setNice(false);
+    }
   };
 
   return (
@@ -225,7 +218,7 @@ export const UpdateForm = () => {
                   id="password"
                   type="password"
                   value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  onChange={(e) => handlePassword(e)}
                   className="appearance-none block w-full input py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-red-600"
                 />
               </div>

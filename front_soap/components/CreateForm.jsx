@@ -28,15 +28,22 @@ export const Form = () => {
     return addEmployee(data);
   };
 
+  const handlePassword = (e) => {
+    setPassword(e.target.value);
+    validatePassword();
+  };
+
   const validatePassword = (password) => {
     var re = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/;
-    return re.test(password);
+    if (re.test(password)) {
+      setPassError(false);
+      return true;
+    }
+    setPassError(true);
+    return false;
   };
 
   const validate = () => {
-    setDBError(false);
-    setError(false);
-    setPassError(false);
     if (
       user === "" ||
       name === "" ||
@@ -48,11 +55,7 @@ export const Form = () => {
       setError(true);
       return false;
     }
-    if (validatePassword(password) == false) {
-      setPassError(true);
-      return false;
-    }
-    return true;
+    return validatePassword(password);
   };
 
   //regex for a string with 8 characters, minimun one letter uppercase,
@@ -67,31 +70,20 @@ export const Form = () => {
 
   const createConfirm = async (confirm) => {
     if (confirm) {
-      if (validate()) {
-        try {
-          await create({
-            user,
-            name,
-            lastName1,
-            lastName2,
-            password,
-            role,
-          });
-          //resets
-          setError(false);
-          setPassError(false);
-          setDBError(false);
-          //nice
-          setNice(true);
-          clearData();
-        } catch {
-          setDBError(true); //cambiar por error del servidor
-          setError(false);
-          setPassError(false);
-          setNice(false);
-        }
-      } else {
-        setNice(false);
+      try {
+        await create({
+          user,
+          name,
+          lastName1,
+          lastName2,
+          password,
+          role,
+        });
+        //nice
+        setNice(true);
+        clearData();
+      } catch {
+        setDBError(true);
       }
     }
     setConfirm(false);
@@ -99,7 +91,17 @@ export const Form = () => {
 
   const handleFuncType = (e) => {
     e.preventDefault();
-    setConfirm(true);
+
+    setError(false);
+    setPassError(false);
+    setDBError(false);
+    setNice(false);
+
+    if (validate()) {
+      setConfirm(true);
+    } else {
+      setNice(false);
+    }
   };
 
   return (
@@ -207,7 +209,7 @@ export const Form = () => {
                   id="password"
                   type="password"
                   value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  onChange={(e) => handlePassword(e)}
                   className="appearance-none block w-full input py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-red-600"
                 />
               </div>

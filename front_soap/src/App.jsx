@@ -9,7 +9,7 @@ import AsideMenu from "../layouts/PureAsideMenu";
 import RoutesNotFound from "../utilities/RoutesNotFound";
 //Componentes de rutas
 import adminRoutes from "../routes/adminRoutes";
-import chiefRoutes from "../routes/chiefRoutes";
+//import chiefRoutes from "../routes/chiefRoutes";
 //Guards
 import PrivateGuard from "../guards/PrivateGuard";
 import PublicGuard from "../guards/PublicGuard";
@@ -45,12 +45,11 @@ function App() {
             <Route path={PrivateRoutes.JEFE} element={<AsideMenu />}>
               {/* <Route index element={<ChiefUI />} />
               {chiefRoutes.map(({ path, component: Component, title }) => {
-                console.log(`/${PrivateRoutes.ADMIN}${path}`);
                 return (
                   <Route
                     title={title}
                     key={path}
-                    path={`/${PrivateRoutes.ADMIN}${path}`}
+                    path={`/${PrivateRoutes.JEFE}${path}`}
                     element={<Component />}
                   />
                 );
@@ -90,7 +89,6 @@ function App() {
             <Route path={`${PrivateRoutes.ADMIN}/`} element={<AsideMenu />}>
               <Route index element={<AdminUI />} />
               {adminRoutes.map(({ path, component: Component }) => {
-                console.log(`/${PrivateRoutes.ADMIN}${path}`);
                 return (
                   <Route
                     key={path}

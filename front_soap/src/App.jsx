@@ -1,16 +1,17 @@
-import { BrowserRouter, Route } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { AuthContextProvider } from "../contexts/authContext";
 //Componentes Main
 import AdminUI from "../components/userAdmin/AdminUI";
-import AsideMenu from "../layouts/PureAsideMenu";
-import RoutesNotFound from "../utilities/RoutesNotFound";
 //chiefUI
 //userUI
-//Componentes de rutas, modularizar!
+//Layouts
+import AsideMenu from "../layouts/PureAsideMenu";
+import RoutesNotFound from "../utilities/RoutesNotFound";
+//Componentes de rutas
 import Create from "../components/userAdmin/AdminCreate";
 import AdminEdit from "../components/userAdmin/AdminEdit";
-import AdminUI from "../components/userAdmin/AdminUI";
 import AdminUsers from "../components/userAdmin/AdminUsers";
+import adminRoutes from "../routes/adminRoutes";
 //Guards
 import PrivateGuard from "../guards/PrivateGuard";
 import PublicGuard from "../guards/PublicGuard";
@@ -21,74 +22,83 @@ import Login from "../layouts/Login";
 import { Role } from "../models/roles";
 import { PrivateRoutes, PublicRoutes } from "../models/routes";
 
-//
+//faltan titles para cada ruta
 function App() {
   return (
     <AuthContextProvider>
-      <div className="App">
-        <BrowserRouter>
-          <RoutesNotFound>
-            {/*RUTAS PUBLICAS*/}
-            <Route element={<PublicGuard />}>
-              <Route index element={<Login />} />
-              <Route path={PublicRoutes.LOGIN} element={<Login />} />
-            </Route>
+      <BrowserRouter>
+        <RoutesNotFound>
+          {/*RUTAS PUBLICAS*/}
+          <Route element={<PublicGuard />}>
+            <Route index element={<Login />} />
+            <Route path={PublicRoutes.LOGIN} element={<Login />} />
+          </Route>
 
-            {/*RUTAS PRIVADAS */}
-            <Route element={<PrivateGuard rol={Role.ALISTO} />}>
-              <Route path={PrivateRoutes.ALISTO} element={<AyA />} />
-            </Route>
+          {/*RUTAS PRIVADAS */}
+          <Route element={<PrivateGuard rol={Role.ALISTO} />}>
+            <Route path={PrivateRoutes.ALISTO} element={<AyA />} />
+          </Route>
 
-            <Route element={<PrivateGuard rol={Role.ACOMODO} />}>
-              <Route path={PrivateRoutes.ACOMODO} element={<AyA />} />
-            </Route>
+          <Route element={<PrivateGuard rol={Role.ACOMODO} />}>
+            <Route path={PrivateRoutes.ACOMODO} element={<AyA />} />
+          </Route>
 
-            <Route element={<PrivateGuard rol={Role.JEFE} />}>
-              <Route path={PrivateRoutes.JEFE} element={<AsideMenu />}>
-                {/* <Route index element={<ChiefUI />} />
+          <Route element={<PrivateGuard rol={Role.JEFE} />}>
+            <Route path={PrivateRoutes.JEFE} element={<AsideMenu />}>
+              {/* <Route index element={<ChiefUI />} />
                 <Route
                   path={`/${PrivateRoutes.JEFE}/empleados`}
-                  element={<AdminUsers />}
+                  element={<WarehouseEmployees />}
+                />
+                <Route
+                  path={`/${PrivateRoutes.JEFE}/empleados/empleado/:username`}
+                  element={<WarehouseEmployee />}
                 />
                 <Route
                   path={`/${PrivateRoutes.JEFE}/bodega`}
-                  element={<Create />}
+                  element={<Warehouse />}
                 />
                 <Route
                   path={`/${PrivateRoutes.JEFE}/bodega/editarBodega/:id`}
-                  element={<AdminEdit />}
+                  element={<WarehouseEdit />}
                 />
                 <Route
-                  path={`/${PrivateRoutes.JEFE}/bodega/editarCabecera/:id`}
-                  element={<AdminEdit />}
+                  path={`/${PrivateRoutes.JEFE}/bodega/agregarCabecera`}
+                  element={<HeadboardCreate />}
                 />
                 <Route
                   path={`/${PrivateRoutes.JEFE}/cabecera`}
-                  element={<Create />}
+                  element={<Headboard />}
+                ></Route>
+                <Route
+                  path={`/${PrivateRoutes.JEFE}/cabecera/rack/:numero`}
+                  element={<Rack />}
                 ></Route> */}
-              </Route>
             </Route>
+          </Route>
 
-            <Route element={<PrivateGuard rol={Role.ADMIN} />}>
-              <Route path={`${PrivateRoutes.ADMIN}/`} element={<AsideMenu />}>
-                <Route index element={<AdminUI />} />
-                <Route
-                  path={`/${PrivateRoutes.ADMIN}/empleados`}
-                  element={<AdminUsers />}
-                />
-                <Route
-                  path={`/${PrivateRoutes.ADMIN}/incluir`}
-                  element={<Create />}
-                />
-                <Route
-                  path={`/${PrivateRoutes.ADMIN}/editar/:username`}
-                  element={<AdminEdit />}
-                />
-              </Route>
+          <Route element={<PrivateGuard rol={Role.ADMIN} />}>
+            <Route path={`${PrivateRoutes.ADMIN}/`} element={<AsideMenu />}>
+              <Route index element={<AdminUI />} />
+              {/* {adminRoutes.map(({ url, component: Component }) => {
+                return <Route key={url} path={url} element={<Component />} />;
+              })} */}
+              <Route
+                path={`/${PrivateRoutes.ADMIN}/empleados`}
+                element={<AdminUsers />}
+              />
+              <Route
+                path={`/${PrivateRoutes.ADMIN}/incluir`}
+                element={<Create />}
+              />
+              <Route
+                path={`/${PrivateRoutes.ADMIN}/editar/:username`}
+                element={<AdminEdit />}
+              />
             </Route>
-          </RoutesNotFound>
-        </BrowserRouter>
-      </div>
+          </Route>
+        </RoutesNotFound>
+      </BrowserRouter>
     </AuthContextProvider>
   );
 }

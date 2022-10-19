@@ -1,26 +1,28 @@
 import { BrowserRouter, Route } from "react-router-dom";
 import { AuthContextProvider } from "../contexts/authContext";
+
 //Componentes Main
 import AdminUI from "../components/userAdmin/AdminUI";
+import Login from "../layouts/Login";
 //chiefUI
 //userUI
+
 //Layouts
 import AsideMenu from "../layouts/PureAsideMenu";
 import RoutesNotFound from "../utilities/RoutesNotFound";
+
 //Componentes de rutas
 import adminRoutes from "../routes/adminRoutes";
 //import chiefRoutes from "../routes/chiefRoutes";
+
 //Guards
 import PrivateGuard from "../guards/PrivateGuard";
 import PublicGuard from "../guards/PublicGuard";
-//Login, eliminar AyA
-import AyA from "../layouts/AyA";
-import Login from "../layouts/Login";
+
 //Roles y rutas
 import { Role } from "../models/roles";
 import { PrivateRoutes, PublicRoutes } from "../models/routes";
 
-//faltan titles para cada ruta
 function App() {
   return (
     <AuthContextProvider>
@@ -34,11 +36,11 @@ function App() {
 
           {/*RUTAS PRIVADAS */}
           <Route element={<PrivateGuard rol={Role.ALISTO} />}>
-            <Route path={PrivateRoutes.ALISTO} element={<AyA />} />
+            <Route path={PrivateRoutes.ALISTO} element={<AsideMenu />}></Route>
           </Route>
 
           <Route element={<PrivateGuard rol={Role.ACOMODO} />}>
-            <Route path={PrivateRoutes.ACOMODO} element={<AyA />} />
+            <Route path={PrivateRoutes.ACOMODO} element={<AsideMenu />}></Route>
           </Route>
 
           <Route element={<PrivateGuard rol={Role.JEFE} />}>
@@ -88,9 +90,10 @@ function App() {
           <Route element={<PrivateGuard rol={Role.ADMIN} />}>
             <Route path={`${PrivateRoutes.ADMIN}/`} element={<AsideMenu />}>
               <Route index element={<AdminUI />} />
-              {adminRoutes.map(({ path, component: Component }) => {
+              {adminRoutes.map(({ path, component: Component, title }) => {
                 return (
                   <Route
+                    title={title}
                     key={path}
                     path={`/${PrivateRoutes.ADMIN}${path}`}
                     element={<Component />}

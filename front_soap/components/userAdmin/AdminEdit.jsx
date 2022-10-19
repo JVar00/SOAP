@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { AdminContext } from "../../contexts/EmployeesProvider";
-import { UpdateForm } from "../UpdateForm";
+import { UpdateForm } from "./Forms/UpdateForm";
 
 const Edit = () => {
   //  ../administracion/editar/username

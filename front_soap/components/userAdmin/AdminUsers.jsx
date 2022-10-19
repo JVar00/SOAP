@@ -1,6 +1,6 @@
 import { useContext, useRef, useState } from "react";
 import { AdminContext } from "../../contexts/EmployeesProvider";
-import { Employees } from "../TableUsers";
+import { Employees } from "../user/TableUsers";
 
 const Users = () => {
   const checkAcomodo = useRef();

@@ -1,9 +1,9 @@
 import { useContext, useState } from "react";
-import { AdminContext } from "../contexts/EmployeesProvider";
-import { Modal } from "../layouts/confirmationModal";
-import { DBError } from "./errorMessages/dbError";
-import { InputError } from "./errorMessages/inputError";
-import { PasswordError } from "./errorMessages/paswordError";
+import { AdminContext } from "../../../contexts/EmployeesProvider";
+import { Modal } from "../../../layouts/confirmationModal";
+import { DBError } from "../../errorMessages/dbError";
+import { InputError } from "../../errorMessages/inputError";
+import { PasswordError } from "../../errorMessages/paswordError";
 
 export const Form = () => {
   const { addEmployee } = useContext(AdminContext);

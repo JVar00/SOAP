@@ -1,4 +1,4 @@
-import { Form } from "../CreateForm";
+import { Form } from "./Forms/CreateForm";
 
 const Create = () => {
   //Ui general para crear un usuario, llama al formulacion de creacion

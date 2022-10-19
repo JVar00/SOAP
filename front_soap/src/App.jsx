@@ -8,10 +8,8 @@ import AdminUI from "../components/userAdmin/AdminUI";
 import AsideMenu from "../layouts/PureAsideMenu";
 import RoutesNotFound from "../utilities/RoutesNotFound";
 //Componentes de rutas
-import Create from "../components/userAdmin/AdminCreate";
-import AdminEdit from "../components/userAdmin/AdminEdit";
-import AdminUsers from "../components/userAdmin/AdminUsers";
 import adminRoutes from "../routes/adminRoutes";
+import chiefRoutes from "../routes/chiefRoutes";
 //Guards
 import PrivateGuard from "../guards/PrivateGuard";
 import PublicGuard from "../guards/PublicGuard";
@@ -46,6 +44,17 @@ function App() {
           <Route element={<PrivateGuard rol={Role.JEFE} />}>
             <Route path={PrivateRoutes.JEFE} element={<AsideMenu />}>
               {/* <Route index element={<ChiefUI />} />
+              {chiefRoutes.map(({ path, component: Component, title }) => {
+                console.log(`/${PrivateRoutes.ADMIN}${path}`);
+                return (
+                  <Route
+                    title={title}
+                    key={path}
+                    path={`/${PrivateRoutes.ADMIN}${path}`}
+                    element={<Component />}
+                  />
+                );
+              })}
                 <Route
                   path={`/${PrivateRoutes.JEFE}/empleados`}
                   element={<WarehouseEmployees />}
@@ -80,21 +89,16 @@ function App() {
           <Route element={<PrivateGuard rol={Role.ADMIN} />}>
             <Route path={`${PrivateRoutes.ADMIN}/`} element={<AsideMenu />}>
               <Route index element={<AdminUI />} />
-              {/* {adminRoutes.map(({ url, component: Component }) => {
-                return <Route key={url} path={url} element={<Component />} />;
-              })} */}
-              <Route
-                path={`/${PrivateRoutes.ADMIN}/empleados`}
-                element={<AdminUsers />}
-              />
-              <Route
-                path={`/${PrivateRoutes.ADMIN}/incluir`}
-                element={<Create />}
-              />
-              <Route
-                path={`/${PrivateRoutes.ADMIN}/editar/:username`}
-                element={<AdminEdit />}
-              />
+              {adminRoutes.map(({ path, component: Component }) => {
+                console.log(`/${PrivateRoutes.ADMIN}${path}`);
+                return (
+                  <Route
+                    key={path}
+                    path={`/${PrivateRoutes.ADMIN}${path}`}
+                    element={<Component />}
+                  />
+                );
+              })}
             </Route>
           </Route>
         </RoutesNotFound>

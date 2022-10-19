@@ -5,9 +5,13 @@ import { Employees } from "../TableUsers";
 const Users = () => {
   const checkAcomodo = useRef();
   const checkAlisto = useRef();
-  const [ userName, setUserName] = useState("");
-  const { getAlistoEmployees, getAcomodoEmployees, getAllEmployees,getSpecificEmployee} = useContext(AdminContext);
-
+  const [userName, setUserName] = useState("");
+  const {
+    getAlistoEmployees,
+    getAcomodoEmployees,
+    getAllEmployees,
+    getSpecificEmployee,
+  } = useContext(AdminContext);
 
   return (
     <div className="w-full max-w-screen xl:max-w-5xl lg:ml-60 xl:ml-72">
@@ -15,9 +19,8 @@ const Users = () => {
         <h2 className="mb-5 font-bold ml-5 lg:ml-0 text-lg lg:mb-0">
           Empleados Registrados
         </h2>
-       
-        <div className="sm:flex-col md:flex md:flex-row items-center mb-5 ml-5 mr-8 lg:ml-10 md:mr-0"
-        >
+
+        <div className="sm:flex-col md:flex md:flex-row items-center mb-5 ml-5 mr-8 lg:ml-10 md:mr-0">
           <div>
             <h2 className="text-sm font-bold text-gray-900">
               Filtrar Por Nombre
@@ -26,11 +29,14 @@ const Users = () => {
               type="search"
               className="input placeholder-red-600 outline-none"
               value={userName}
-              onChange={e => {
-                  setUserName(e.target.value);
-                  getSpecificEmployee(e.target.value, checkAlisto.current.checked, checkAcomodo.current.checked);
-                }
-              }
+              onChange={(e) => {
+                setUserName(e.target.value);
+                getSpecificEmployee(
+                  e.target.value,
+                  checkAlisto.current.checked,
+                  checkAcomodo.current.checked
+                );
+              }}
             />
           </div>
           <div className="flex flex-row mt-5 md:mt-0 md:flex-col md:ml-7">
@@ -44,13 +50,13 @@ const Users = () => {
                 onClick={() => {
                   if (checkAlisto.current.checked) {
                     checkAcomodo.current.checked = false;
-                    getAlistoEmployees(userName)
+                    getAlistoEmployees(userName);
                   } else {
-                     if (!userName) {
+                    if (!userName) {
                       getAllEmployees();
                     } else {
                       getSpecificEmployee(userName);
-                  }
+                    }
                   }
                 }}
               />
@@ -91,7 +97,6 @@ const Users = () => {
             </div>
           </div>
         </div>
-        
       </div>
       <div className="lg:w-3/4 xl:w-full mt-3">
         <Employees />

@@ -1,17 +1,27 @@
 import { BrowserRouter, Route } from "react-router-dom";
+import { AuthContextProvider } from "../contexts/authContext";
+//Componentes Main
+import AdminUI from "../components/userAdmin/AdminUI";
+import AsideMenu from "../layouts/PureAsideMenu";
+import RoutesNotFound from "../utilities/RoutesNotFound";
+//chiefUI
+//userUI
+//Componentes de rutas, modularizar!
 import Create from "../components/userAdmin/AdminCreate";
 import AdminEdit from "../components/userAdmin/AdminEdit";
 import AdminUI from "../components/userAdmin/AdminUI";
 import AdminUsers from "../components/userAdmin/AdminUsers";
-import { AuthContextProvider } from "../contexts/authContext";
+//Guards
 import PrivateGuard from "../guards/PrivateGuard";
 import PublicGuard from "../guards/PublicGuard";
+//Login, eliminar AyA
 import AyA from "../layouts/AyA";
 import Login from "../layouts/Login";
-import AsideMenu from "../layouts/PureAsideMenu";
+//Roles y rutas
 import { Role } from "../models/roles";
 import { PrivateRoutes, PublicRoutes } from "../models/routes";
-import RoutesNotFound from "../utilities/RoutesNotFound";
+
+//
 function App() {
   return (
     <AuthContextProvider>
@@ -23,6 +33,7 @@ function App() {
               <Route index element={<Login />} />
               <Route path={PublicRoutes.LOGIN} element={<Login />} />
             </Route>
+
             {/*RUTAS PRIVADAS */}
             <Route element={<PrivateGuard rol={Role.ALISTO} />}>
               <Route path={PrivateRoutes.ALISTO} element={<AyA />} />
@@ -33,7 +44,29 @@ function App() {
             </Route>
 
             <Route element={<PrivateGuard rol={Role.JEFE} />}>
-              <Route path={PrivateRoutes.JEFE} element={<AsideMenu />} />
+              <Route path={PrivateRoutes.JEFE} element={<AsideMenu />}>
+                {/* <Route index element={<ChiefUI />} />
+                <Route
+                  path={`/${PrivateRoutes.JEFE}/empleados`}
+                  element={<AdminUsers />}
+                />
+                <Route
+                  path={`/${PrivateRoutes.JEFE}/bodega`}
+                  element={<Create />}
+                />
+                <Route
+                  path={`/${PrivateRoutes.JEFE}/bodega/editarBodega/:id`}
+                  element={<AdminEdit />}
+                />
+                <Route
+                  path={`/${PrivateRoutes.JEFE}/bodega/editarCabecera/:id`}
+                  element={<AdminEdit />}
+                />
+                <Route
+                  path={`/${PrivateRoutes.JEFE}/cabecera`}
+                  element={<Create />}
+                ></Route> */}
+              </Route>
             </Route>
 
             <Route element={<PrivateGuard rol={Role.ADMIN} />}>

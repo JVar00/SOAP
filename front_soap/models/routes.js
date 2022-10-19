@@ -4,11 +4,12 @@ del login de acuerdo al rol del usuario
 Oscar Zamora Ramirez
 */
 export const PublicRoutes = {
-    LOGIN: "login",
+  LOGIN: "login",
 };
 
 export const PrivateRoutes = {
-    ACOMODO: "acomodo",
-    ALISTO: "alisto",
-    ADMIN: "administracion",
+  ACOMODO: "acomodo",
+  ALISTO: "alisto",
+  ADMIN: "administracion",
+  JEFE: "jefeBodega",
 };

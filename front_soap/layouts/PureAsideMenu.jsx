@@ -1,6 +1,7 @@
 import { useContext, useState } from "react";
 import { Link, NavLink, Outlet } from "react-router-dom";
 import { AdminSideMenu } from "../components/userAdmin/AdminSideMenu";
+import { ChiefSideMenu } from "../components/warehouseAdmin/ChiefSideMenu";
 import { AuthContext } from "../contexts/authContext";
 import { AdminProvider } from "../contexts/EmployeesProvider";
 import LogoIcon from "../src/assets/logo.jpg";
@@ -67,15 +68,19 @@ const AsideMenu = () => {
             <div className="ml-5 lg:hidden">
               <p>Iniciaste Sesion Como</p>
               <p className="font-bold">
-                {isAuthenticated.name + " " + isAuthenticated.lastName1 + " " + isAuthenticated.lastName2}
+                {isAuthenticated.name +
+                  " " +
+                  isAuthenticated.lastName1 +
+                  " " +
+                  isAuthenticated.lastName2}
               </p>
             </div>
 
             {isAuthenticated && isAuthenticated.role === "Administrador" ? (
-              <AdminSideMenu closeSideBar={closeSidebar} />
+              <AdminSideMenu />
             ) : isAuthenticated && isAuthenticated.role === "JefeBodega" ? (
               //Menu para el jefe de bodega
-              <a href=""></a>
+              <ChiefSideMenu />
             ) : (
               <a href=""></a>
               //Menu para el empleado de alistamiento o Acomodo
@@ -119,7 +124,11 @@ const AsideMenu = () => {
             <div className="text-sm xl:text-base flex-1 lg:m-14 hidden lg:block">
               <p>Iniciaste Sesion Como</p>
               <p className="font-bold text-red-600">
-                {isAuthenticated.name + " " + isAuthenticated.lastName1 + " " + isAuthenticated.lastName2}
+                {isAuthenticated.name +
+                  " " +
+                  isAuthenticated.lastName1 +
+                  " " +
+                  isAuthenticated.lastName2}
               </p>
             </div>
           </div>

@@ -1,10 +1,6 @@
-import { useContext } from "react";
-import { Navigate } from "react-router-dom";
-import { SessionContext } from "../../contexts/SessionProvider";
 import { NavButton } from "../../layouts/NavButton";
 
 export const AdminSideMenu = () => {
-
   return (
     <>
       <div className="flex flex-col items-start justify-center pt-10 pb-10">

@@ -5,7 +5,8 @@
 */
 
 export const Role = {
-    ACOMODO: "Acomodo",
-    ALISTO: "Alisto",
-    ADMIN: "Administrador",
+  ACOMODO: "Acomodo",
+  ALISTO: "Alisto",
+  ADMIN: "Administrador",
+  JEFE: "JefeBodega",
 };

@@ -10,7 +10,7 @@ su path y el titulo de la ruta Jeff
 const create = {
   path: "/incluir",
   component: Create,
-  title: "Incluir",
+  title: "Incluir Empleado",
 };
 
 const edit = {

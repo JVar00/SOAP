@@ -13,13 +13,13 @@ su path y el titulo de la ruta Jeff
 
 const employees = {
   path: "/empleados/",
-  component: Create,
+  component: WarehouseEmployees,
   title: "Empleados",
 };
 
 const employee = {
   path: "/empleados/empleado/:username",
-  component: Edit,
+  component: WarehouseEmployee,
   title: "Perfil de empleado",
 };
 

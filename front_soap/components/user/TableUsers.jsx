@@ -1,8 +1,8 @@
 import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { AuthContext } from "../contexts/authContext";
-import { AdminContext } from "../contexts/EmployeesProvider";
-import { Modal } from "../layouts/confirmationModal";
+import { AuthContext } from "../../contexts/authContext";
+import { AdminContext } from "../../contexts/EmployeesProvider";
+import { Modal } from "../../layouts/confirmationModal";
 
 export const Employees = () => {
   const { isAuthenticated } = useContext(AuthContext);

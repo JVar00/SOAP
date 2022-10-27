@@ -2,10 +2,8 @@ import { BrowserRouter, Route } from "react-router-dom";
 import { AuthContextProvider } from "../contexts/authContext";
 
 //Componentes Main
-import AdminUI from "../components/userAdmin/AdminUI";
-import ChiefUI from "../components/warehouseAdmin/MainFiles/ChiefUI";
 import Login from "../layouts/Login";
-//userUI
+import MainUI from "../layouts/mainUI";
 
 //Layouts
 import AsideMenu from "../layouts/PureAsideMenu";
@@ -45,7 +43,7 @@ function App() {
 
           <Route element={<PrivateGuard rol={Role.JEFE} />}>
             <Route path={PrivateRoutes.JEFE} element={<AsideMenu />}>
-              <Route index element={<ChiefUI />} />
+              <Route index element={<MainUI name="Jefe De Bodega" />} />
               {chiefRoutes.map(({ path, component: Component, title }) => {
                 return (
                   <Route
@@ -61,7 +59,7 @@ function App() {
 
           <Route element={<PrivateGuard rol={Role.ADMIN} />}>
             <Route path={`${PrivateRoutes.ADMIN}/`} element={<AsideMenu />}>
-              <Route index element={<AdminUI />} />
+              <Route index element={<MainUI name="Administrador" />} />
               {adminRoutes.map(({ path, component: Component, title }) => {
                 return (
                   <Route

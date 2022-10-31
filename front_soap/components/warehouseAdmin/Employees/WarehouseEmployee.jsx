@@ -1,11 +1,13 @@
 import { useContext, useEffect, useState } from "react";
 
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { AdminContext } from "../../../contexts/EmployeesProvider";
 import CompletedOrderPerUser from "../../user/Orders/CompletedOrderPerUser";
 import Filter from "../../user/Orders/Filter";
 
 function WarehouseEmployee() {
+  const navigate = useNavigate();
+
   return (
     <div className="w-full max-w-screen xl:max-w-5xl lg:ml-60 xl:ml-72">
       <div className=" md:ml-5 ">
@@ -20,7 +22,10 @@ function WarehouseEmployee() {
           </div>
           <div className="flex order-1 md:order-2 md:justify-end md:mr-10 lg:mr-72 xl:mr-7 mb-10 md:mb-0 col-auto">
             <div>
-              <button className="bg-red-600 py-2 px-5 rounded-md text-white font-bold">
+              <button
+                className="bg-red-600 py-2 px-5 rounded-md text-white font-bold"
+                onClick={() => navigate("/jefeBodega/empleados")}
+              >
                 Volver
               </button>
             </div>

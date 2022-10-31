@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { DateRange, DateRangePicker } from "react-date-range";
 
-import { addDays } from "date-fns";
+import { subDays } from "date-fns";
 import format from "date-fns/format";
 
 import "react-date-range/dist/styles.css";
@@ -11,8 +11,8 @@ function Filter() {
   //Filtrador de ordenes
   const [range, setRange] = useState([
     {
-      startDate: new Date(),
-      endDate: addDays(new Date(), 7),
+      startDate: subDays(new Date(), 7),
+      endDate: new Date(),
       key: "selection",
     },
   ]);

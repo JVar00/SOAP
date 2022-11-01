@@ -16,7 +16,7 @@ const AsideMenu = () => {
 
   //descubrir como hacer en react que aparexca el menu
   return (
-    <div>
+    <div className="">
       <div className="bg-red-600 lg:hidden flex sticky top-0 justify-between">
         <Link to="#" className="block">
           <svg
@@ -36,7 +36,7 @@ const AsideMenu = () => {
           </svg>
         </Link>
         <button className="md:flex-row hidden md:flex " onClick={logOut}>
-          <p className="pt-3 font-bold text-white">Cerrar Sesion</p>
+          <p className="pt-3 font-bold text-white">Cerrar Sesión</p>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -66,7 +66,7 @@ const AsideMenu = () => {
         >
           <nav className=" text-white h-screen pt-10 pb-5 border-black bg-red-600">
             <div className="ml-5 lg:hidden">
-              <p>Iniciaste Sesion Como</p>
+              <p>Iniciaste Sesión Como</p>
               <p className="font-bold">
                 {isAuthenticated.name +
                   " " +
@@ -88,7 +88,7 @@ const AsideMenu = () => {
             )}
 
             <NavLink className="logoutButton md:hidden" onClick={logOut}>
-              Cerrar sesion
+              Cerrar sesión
             </NavLink>
           </nav>
         </aside>
@@ -108,7 +108,7 @@ const AsideMenu = () => {
             )}
 
             <NavLink className="logoutButton" onClick={logOut}>
-              Cerrar sesion
+              Cerrar sesión
             </NavLink>
           </nav>
         </aside>
@@ -122,7 +122,7 @@ const AsideMenu = () => {
             ></img>
 
             <div className="text-sm xl:text-base flex-1 lg:m-14 hidden lg:block">
-              <p>Iniciaste Sesion Como</p>
+              <p>Iniciaste Sesión Como</p>
               <p className="font-bold text-red-600">
                 {isAuthenticated.name +
                   " " +

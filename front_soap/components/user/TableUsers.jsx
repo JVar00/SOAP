@@ -81,19 +81,19 @@ export const Employees = () => {
                 Nombre Completo
               </th>
               <th className="lg:w-10 p-3 text-sm font-semibold tracking-wide text-left">
-                Ocupacion
+                Ocupación
               </th>
               <th className="lg:w-10 p-3 text-sm font-semibold tracking-wide text-left">
                 Acciones
               </th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-black">
+          <tbody className="divide-y divide-black font-bold">
             {employees[0] ? (
               employees.map((employee) => (
                 <tr className="bg-white" key={employee.user}>
                   {/* formato para cargar con el map */}
-                  <td className="p-3 text-sm text-black whitespace-nowrap">
+                  <td className="p-3 text-sm text-gray-800 whitespace-nowrap ">
                     {employee.name +
                       " " +
                       employee.lastName1 +
@@ -145,7 +145,7 @@ export const Employees = () => {
                       <div className="text-sm font-medium text-white bg-red-600  p-2 rounded-md">
                         {/* Button svg link + ver perfil */}
                         <Link to={`empleado/${employee.user}`}>
-                          <button className="flex">
+                          <button className="flex font-bold">
                             Ver perfil
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
@@ -153,7 +153,7 @@ export const Employees = () => {
                               viewBox="0 0 24 24"
                               strokeWidth={1.5}
                               stroke="currentColor"
-                              className="w-6 h-6 ml-2"
+                              className="w-6 h-5 ml-2"
                             >
                               <path
                                 strokeLinecap="round"

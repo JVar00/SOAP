@@ -1,4 +1,7 @@
-export const Orders = () => {
+export const Orders = ({ user }) => {
+  //
+  // infinity scroll implementation
+  //
   return (
     <div className="grid grid-cols-1 gap-4 mr-7 lg:mr-72 xl:mr-7">
       {/* Este div es una orden completa, como tal se deberian de cargar de esta forma 

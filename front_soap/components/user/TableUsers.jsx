@@ -14,10 +14,20 @@ export const Employees = () => {
 
   const [error, setError] = useState(false);
   const [nice, setNice] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    getAllEmployees();
+    search();
   }, []);
+
+  const search = async () => {
+    try {
+      await getAllEmployees();
+      setLoading(false);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const deleteConfirm = async (confirm) => {
     if (confirm) {
@@ -43,7 +53,7 @@ export const Employees = () => {
     setUsername(username);
   };
 
-  return (
+  return !loading ? (
     <>
       <p className={error ? "text-red-600 text-base italic" : "hidden"}>
         Error al intentar eliminar el usuario.
@@ -266,5 +276,7 @@ export const Employees = () => {
         )}
       </div>
     </>
+  ) : (
+    <p className="text-black text-base italic">Cargando...</p>
   );
 };

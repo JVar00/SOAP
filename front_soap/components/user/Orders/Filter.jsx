@@ -8,7 +8,7 @@ import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
 
 function Filter() {
-  //Filtrador de ordenes
+  // Filtrador de ordenes
   const [range, setRange] = useState([
     {
       startDate: subDays(new Date(), 7),
@@ -17,37 +17,35 @@ function Filter() {
     },
   ]);
 
-  // open close
-  const [open, setOpen] = useState(false);
+  // Visibilidad de cada calendario
+  const [desktopOpen, setDesktopOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
 
-  // get the target element to toggle
-  const refOne = useRef(null);
-  const refOneMobile = useRef(null);
+  // Referencia de cada calendario
+  const desktop = useRef(null);
+  const mobile = useRef(null);
 
   useEffect(() => {
-    // event listeners
+    // Listeners de cada evento
     document.addEventListener("keydown", hideOnEscape, true);
     document.addEventListener("click", hideOnClickOutside, true);
   }, []);
 
-  // hide dropdown on ESC press
+  // cerrar calendario al presionar ESC
   const hideOnEscape = (e) => {
     // console.log(e.key)
     if (e.key === "Escape") {
-      setOpen(false);
+      setDesktopOpen(false);
       setMobileOpen(false);
     }
   };
 
-  // Hide dropdown on outside click
+  // Esconder al hacer click fuera del calendario
   const hideOnClickOutside = (e) => {
-    // console.log(refOne.current)
-    // console.log(e.target)
-    if (refOne.current && !refOne.current.contains(e.target)) {
-      setOpen(false);
+    if (desktop.current && !desktop.current.contains(e.target)) {
+      setDesktopOpen(false);
     }
-    if (refOneMobile.current && !refOneMobile.current.contains(e.target)) {
+    if (mobile.current && !mobile.current.contains(e.target)) {
       setMobileOpen(false);
     }
   };
@@ -65,16 +63,16 @@ function Filter() {
             readOnly
             className="input text-black outline-none focus:border-red-600 hover:border-red-600"
             onClick={() => {
-              setOpen((open) => !open);
+              setDesktopOpen((open) => !open);
               setMobileOpen((mobileOpen) => !mobileOpen);
             }}
           />
 
           <div
-            ref={refOne}
+            ref={desktop}
             className="hidden md:block md:absolute  lg:left-60 xl:left-72"
           >
-            {open && (
+            {desktopOpen && (
               <DateRangePicker
                 onChange={(item) => setRange([item.selection])}
                 editableDateInputs={true}
@@ -87,7 +85,7 @@ function Filter() {
             )}
           </div>
 
-          <div ref={refOneMobile} className="absolute md:hidden">
+          <div ref={mobile} className="absolute md:hidden">
             {mobileOpen && (
               <DateRange
                 onChange={(item) => setRange([item.selection])}

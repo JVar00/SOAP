@@ -2,6 +2,7 @@ import { BrowserRouter, Route } from "react-router-dom";
 import { AuthContextProvider } from "../contexts/authContext";
 
 //Componentes Main
+import MainMenu from "../components/user/MainFiles/MainMenu";
 import Login from "../layouts/Login";
 import MainUI from "../layouts/mainUI";
 
@@ -12,6 +13,7 @@ import RoutesNotFound from "../utilities/RoutesNotFound";
 //Componentes de rutas
 import adminRoutes from "../routes/adminRoutes";
 import chiefRoutes from "../routes/chiefRoutes";
+import employeeRoutes from "../routes/employeeRoutes";
 
 //Guards
 import PrivateGuard from "../guards/PrivateGuard";
@@ -34,11 +36,35 @@ function App() {
 
           {/*RUTAS PRIVADAS */}
           <Route element={<PrivateGuard rol={Role.ALISTO} />}>
-            <Route path={PrivateRoutes.ALISTO} element={<AsideMenu />}></Route>
+            <Route path={PrivateRoutes.ALISTO} element={<AsideMenu />}>
+              <Route index element={<MainMenu />} />
+              {employeeRoutes.map(({ path, component: Component, title }) => {
+                return (
+                  <Route
+                    title={title}
+                    key={path}
+                    path={`/${PrivateRoutes.ALISTO}${path}`}
+                    element={<Component />}
+                  />
+                );
+              })}
+            </Route>
           </Route>
 
           <Route element={<PrivateGuard rol={Role.ACOMODO} />}>
-            <Route path={PrivateRoutes.ACOMODO} element={<AsideMenu />}></Route>
+            <Route path={PrivateRoutes.ACOMODO} element={<AsideMenu />}>
+              <Route index element={<MainMenu />} />
+              {employeeRoutes.map(({ path, component: Component, title }) => {
+                return (
+                  <Route
+                    title={title}
+                    key={path}
+                    path={`/${PrivateRoutes.ACOMODO}${path}`}
+                    element={<Component />}
+                  />
+                );
+              })}
+            </Route>
           </Route>
 
           <Route element={<PrivateGuard rol={Role.JEFE} />}>

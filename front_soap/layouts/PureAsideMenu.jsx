@@ -1,5 +1,6 @@
 import { useContext, useState } from "react";
 import { Link, NavLink, Outlet } from "react-router-dom";
+import { UserSideMenu } from "../components/user/MainFiles/UserSideMenu";
 import { AdminSideMenu } from "../components/userAdmin/AdminSideMenu";
 import { ChiefSideMenu } from "../components/warehouseAdmin/MainFiles/ChiefSideMenu";
 import { AuthContext } from "../contexts/authContext";
@@ -79,12 +80,9 @@ const AsideMenu = () => {
             {isAuthenticated && isAuthenticated.role === "Administrador" ? (
               <AdminSideMenu />
             ) : isAuthenticated && isAuthenticated.role === "JefeBodega" ? (
-              //Menu para el jefe de bodega
               <ChiefSideMenu />
             ) : (
-              <a href=""></a>
-              //Menu para el empleado de alistamiento o Acomodo
-              //role==="empleadoAlisto", es el mismo menu
+              <UserSideMenu />
             )}
 
             <NavLink className="logoutButton md:hidden" onClick={logOut}>
@@ -99,12 +97,9 @@ const AsideMenu = () => {
             {isAuthenticated && isAuthenticated.role === "Administrador" ? (
               <AdminSideMenu />
             ) : isAuthenticated && isAuthenticated.role === "JefeBodega" ? (
-              //Menu para el jefe de bodega
               <ChiefSideMenu />
             ) : (
-              <a href=""></a>
-              //Menu para el empleado de alistamiento o Acomodo
-              //role==="empleadoAlisto", es el mismo menu
+              <UserSideMenu />
             )}
 
             <NavLink className="logoutButton" onClick={logOut}>

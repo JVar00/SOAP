@@ -1,4 +1,4 @@
-import { AuthContext } from "../contexts/authContext";
+import { AuthContext } from "../../../contexts/authContext";
 
 /*
  Para las rutas, primero deben ir en el local storage,

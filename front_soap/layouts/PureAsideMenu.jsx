@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import { Link, NavLink, Outlet } from "react-router-dom";
-import { UserSideMenu } from "../components/user/MainFiles/UserSideMenu";
+import UserSideMenu from "../components/user/MainFiles/UserSideMenu";
 import { AdminSideMenu } from "../components/userAdmin/AdminSideMenu";
 import { ChiefSideMenu } from "../components/warehouseAdmin/MainFiles/ChiefSideMenu";
 import { AuthContext } from "../contexts/authContext";

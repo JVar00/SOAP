@@ -13,7 +13,7 @@ import PasswordRecovery from "../components/user/Password/PasswordRecovery.jsx";
 
 const passwordRecovery = {
   path: "/recuperarContraseña/",
-  component: passwordRecovery,
+  component: PasswordRecovery,
   title: "Recuperar Contraseña",
 };
 

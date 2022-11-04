@@ -1,8 +1,21 @@
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import Accordion from "@mui/material/Accordion";
+import AccordionDetails from "@mui/material/AccordionDetails";
+import AccordionSummary from "@mui/material/AccordionSummary";
+import { useState } from "react";
+
 export const Orders = ({ user }) => {
   //
   // infinity scroll implementation
   // Esto se implementa una vez la logica en el backend este lista
   //
+
+  const [expanded, setExpanded] = useState(false);
+
+  const handleChange = (panel) => (event, isExpanded) => {
+    setExpanded(isExpanded ? panel : false);
+  };
+
   return (
     <div className="grid grid-cols-1 gap-4 mr-7 lg:mr-72 xl:mr-7">
       <div className="bg-white space-y-3 p-4 rounded-lg shadow">
@@ -21,8 +34,23 @@ export const Orders = ({ user }) => {
 
         <div className="text-sm font-medium text-black">Tiempo tomado</div>
 
-        <div className="text-sm text-gray-700">
-          Descripcion {/* Esto va en el acordeon*/}
+        <div>
+          <Accordion
+            expanded={expanded === "Descripcion"}
+            onChange={handleChange("Descripcion")} // Aqui se debe poner el id de la orden
+            className="text-sm font-medium text-black"
+          >
+            <AccordionSummary
+              expandIcon={<ExpandMoreIcon />}
+              aria-controls="Descripcion-content"
+              id="Descripcion-header"
+            >
+              <p>Detalles de la orden</p>
+            </AccordionSummary>
+            <AccordionDetails>
+              <p>Detalles...</p>
+            </AccordionDetails>
+          </Accordion>
         </div>
       </div>
     </div>

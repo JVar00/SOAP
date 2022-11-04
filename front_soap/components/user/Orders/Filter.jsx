@@ -1,3 +1,4 @@
+import ClearIcon from "@mui/icons-material/Clear";
 import { useEffect, useRef, useState } from "react";
 import { DateRange, DateRangePicker } from "react-date-range";
 
@@ -40,6 +41,11 @@ function Filter() {
     }
   };
 
+  const hide = () => {
+    setDesktopOpen(false);
+    setMobileOpen(false);
+  };
+
   // Esconder al hacer click fuera del calendario
   const hideOnClickOutside = (e) => {
     if (desktop.current && !desktop.current.contains(e.target)) {
@@ -51,7 +57,7 @@ function Filter() {
   };
   return (
     <div className="sm:flex-col md:flex md:flex-row items-center mb-5 lg:ml-5 mr-8 md:mr-0 w-3/2">
-      <div className="flex flex-row md:mt-0 ">
+      <div className="flex flex-row md:mt-0">
         <div className="text-sm font-bold text-red-600">
           <h2>Elegir Fechas: </h2>
 
@@ -70,32 +76,59 @@ function Filter() {
 
           <div
             ref={desktop}
-            className="hidden md:block md:absolute  lg:left-60 xl:left-72"
+            className="hidden lg:block lg:fixed lg:top-1/2 lg:left-1/2 lg:transform lg:-translate-x-1/2 lg:-translate-y-1/2"
           >
             {desktopOpen && (
-              <DateRangePicker
-                onChange={(item) => setRange([item.selection])}
-                editableDateInputs={true}
-                moveRangeOnFirstSelection={false}
-                ranges={range}
-                months={2}
-                direction="horizontal"
-                className="calendarElement md:w-0.5 lg:w-auto"
-              />
+              <>
+                <div className="flex justify-center bg-red-400 pb-2 pt-2 text-white">
+                  <p className="basis-1/3"></p>
+                  <p className="basis-1/3 pl-5">
+                    Seleccione una fecha / rango de fechas
+                  </p>
+                  <div className="basis-1/3">
+                    <button className="ml-64">
+                      <ClearIcon onClick={hide}>Salir</ClearIcon>
+                    </button>
+                  </div>
+                </div>
+
+                <DateRangePicker
+                  onChange={(item) => setRange([item.selection])}
+                  editableDateInputs={true}
+                  moveRangeOnFirstSelection={false}
+                  ranges={range}
+                  months={2}
+                  direction="horizontal"
+                  className="calendarElement lg:w-auto border-8 border-red-400"
+                />
+              </>
             )}
           </div>
 
-          <div ref={mobile} className="absolute md:hidden">
+          <div
+            ref={mobile}
+            className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 lg:hidden"
+          >
             {mobileOpen && (
-              <DateRange
-                onChange={(item) => setRange([item.selection])}
-                editableDateInputs={true}
-                moveRangeOnFirstSelection={false}
-                ranges={range}
-                months={1}
-                direction="horizontal"
-                className="calendarElement"
-              />
+              <>
+                <div className="flex justify-center bg-red-400 pb-1 pt-3 text-white">
+                  <p className="basis-2/4 pl-2">Seleccione las Fechas</p>
+                  <div className="ml-32 mr-2">
+                    <button>
+                      <ClearIcon onClick={hide}>Salir</ClearIcon>
+                    </button>
+                  </div>
+                </div>
+                <DateRange
+                  onChange={(item) => setRange([item.selection])}
+                  editableDateInputs={true}
+                  moveRangeOnFirstSelection={false}
+                  ranges={range}
+                  months={1}
+                  direction="horizontal"
+                  className="calendarElement border-8 border-red-400"
+                />
+              </>
             )}
           </div>
         </div>

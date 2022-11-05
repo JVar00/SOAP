@@ -37,7 +37,9 @@ function WarehouseEmployee() {
     );
 
   return isLoading ? (
-    <h2 className="text-black text-2xl italic">Cargando...</h2>
+    <h2 className="lg:ml-60 xl:ml-72 text-black text-2xl italic">
+      Cargando...
+    </h2>
   ) : (
     <div className="w-full max-w-screen xl:max-w-5xl lg:ml-60 xl:ml-72">
       <div className=" md:ml-5 ">

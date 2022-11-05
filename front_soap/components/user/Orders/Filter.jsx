@@ -8,6 +8,11 @@ import format from "date-fns/format";
 import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
 
+///MUI
+import Box from "@mui/material/Box";
+import Modal from "@mui/material/Modal";
+///
+
 function Filter() {
   // Filtrador de ordenes
   const [range, setRange] = useState([
@@ -17,6 +22,15 @@ function Filter() {
       key: "selection",
     },
   ]);
+
+  const style = {
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    bgcolor: "background.paper",
+    boxShadow: 24,
+  };
 
   // Visibilidad de cada calendario
   const [desktopOpen, setDesktopOpen] = useState(false);
@@ -74,63 +88,67 @@ function Filter() {
             }}
           />
 
-          <div
+          <Modal
             ref={desktop}
-            className="hidden lg:block lg:fixed lg:top-1/2 lg:left-1/2 lg:transform lg:-translate-x-1/2 lg:-translate-y-1/2"
+            open={desktopOpen}
+            onClose={hide}
+            aria-labelledby="modal-modal-title"
+            aria-describedby="modal-modal-description"
+            className="hidden lg:block"
           >
-            {desktopOpen && (
-              <>
-                <div className="flex justify-center bg-red-400 pb-2 pt-2 text-white">
-                  <p className="basis-1/3"></p>
-                  <p className="basis-1/3 pl-5">
-                    Seleccione una fecha / rango de fechas
-                  </p>
-                  <div className="basis-1/3">
-                    <button className="ml-64">
-                      <ClearIcon onClick={hide}>Salir</ClearIcon>
-                    </button>
-                  </div>
+            <Box sx={style}>
+              <div className="flex justify-center bg-red-400 pb-2 pt-3 text-white">
+                <p className="basis-1/3"></p>
+                <p className="basis-1/3 pl-5">
+                  Seleccione una fecha / rango de fechas
+                </p>
+                <div className="basis-1/3">
+                  <button className="ml-64">
+                    <ClearIcon onClick={hide}>Salir</ClearIcon>
+                  </button>
                 </div>
+              </div>
 
-                <DateRangePicker
-                  onChange={(item) => setRange([item.selection])}
-                  editableDateInputs={true}
-                  moveRangeOnFirstSelection={false}
-                  ranges={range}
-                  months={2}
-                  direction="horizontal"
-                  className="calendarElement lg:w-auto border-8 border-red-400"
-                />
-              </>
-            )}
-          </div>
+              <DateRangePicker
+                onChange={(item) => setRange([item.selection])}
+                editableDateInputs={true}
+                moveRangeOnFirstSelection={false}
+                ranges={range}
+                months={2}
+                direction="horizontal"
+                className="calendarElement lg:w-auto border-8 border-red-400"
+              />
+            </Box>
+          </Modal>
 
-          <div
+          <Modal
             ref={mobile}
-            className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 lg:hidden"
+            open={mobileOpen}
+            onClose={hide}
+            aria-labelledby="modal-modal-title"
+            aria-describedby="modal-modal-description"
+            className="lg:hidden"
           >
-            {mobileOpen && (
-              <>
-                <div className="flex justify-center bg-red-400 pb-1 pt-3 text-white">
-                  <p className="basis-2/4 pl-2">Seleccione las Fechas</p>
-                  <div className="ml-32 mr-2">
-                    <button>
-                      <ClearIcon onClick={hide}>Salir</ClearIcon>
-                    </button>
-                  </div>
+            <Box sx={style}>
+              <div className="flex justify-center bg-red-400 pb-1 pt-3 text-white">
+                <p className="basis-2/4 pl-2">Seleccione las Fechas</p>
+                <div className="ml-32 mr-2">
+                  <button>
+                    <ClearIcon onClick={hide}>Salir</ClearIcon>
+                  </button>
                 </div>
-                <DateRange
-                  onChange={(item) => setRange([item.selection])}
-                  editableDateInputs={true}
-                  moveRangeOnFirstSelection={false}
-                  ranges={range}
-                  months={1}
-                  direction="horizontal"
-                  className="calendarElement border-8 border-red-400"
-                />
-              </>
-            )}
-          </div>
+              </div>
+              <DateRange
+                onChange={(item) => setRange([item.selection])}
+                editableDateInputs={true}
+                moveRangeOnFirstSelection={false}
+                ranges={range}
+                months={1}
+                direction="horizontal"
+                className="calendarElement border-8 border-red-400"
+              />
+            </Box>
+          </Modal>
         </div>
       </div>
     </div>

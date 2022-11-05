@@ -10,6 +10,7 @@ const Edit = () => {
   const { setEmployee, getOneEmployee } = useContext(AdminContext);
 
   const [error, setError] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   //Ui general para crear un usuario, llama al formulacion de creacion
 
@@ -22,12 +23,21 @@ const Edit = () => {
       try {
         const response = await getOneEmployee(`${username}`);
         setEmployee(response.data);
+        setLoading(false);
       } catch (response) {
+        setLoading(false);
         setError(true);
       }
     };
     getByID();
   }, []);
+
+  if (loading)
+    return (
+      <h1 className="lg:ml-60 xl:ml-72 text-black text-base italic">
+        Cargando..
+      </h1>
+    );
 
   return error ? (
     <p className={error ? "text-red-600 text-base italic" : "hidden"}>

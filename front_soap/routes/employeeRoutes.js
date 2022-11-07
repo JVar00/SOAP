@@ -3,7 +3,7 @@ Se deben incluir para cada ruta su respectivo componentes
 su path y el titulo de la ruta Jeff
 */
 
-import PasswordRecovery from "../components/user/Password/PasswordRecovery.jsx";
+// import PasswordRecovery from "../components/user/Password/PasswordRecovery.jsx";
 
 // const warehouseRouting = {
 //   path: "/ruta/",
@@ -11,10 +11,10 @@ import PasswordRecovery from "../components/user/Password/PasswordRecovery.jsx";
 //   title: "En ruta...",
 // };
 
-const passwordRecovery = {
-  path: "/recuperarContraseña/",
-  component: PasswordRecovery,
-  title: "Recuperar Contraseña",
-};
+// const passwordRecovery = {
+//   path: "/recuperarContraseña/",
+//   component: PasswordRecovery,
+//   title: "Recuperar Contraseña",
+// };
 
-export default [passwordRecovery];
+export default [];

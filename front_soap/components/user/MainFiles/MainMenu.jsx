@@ -16,8 +16,8 @@ function MainMenu() {
   return (
     <div className="w-full max-w-screen xl:max-w-5xl lg:ml-60 xl:ml-72">
       <div className="flex flex-col md:ml-5 ">
-        <h2 className="mb-5 font-bold text-5xl md:text-7xl lg:mb-0">Menú</h2>
-        <h2 className="pb-5 mb-5 font-bold text-5xl md:text-7xl lg:mb-0 text-red-600">
+        <h2 className="mb-5 font-bold text-2xl md:text-3xl lg:mb-0">Menú</h2>
+        <h2 className="pb-5 mb-5 font-bold text-2xl md:text-3xl lg:mb-0 text-red-600">
           de {isAuthenticated.role}
         </h2>
       </div>

@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import { AuthContext } from "../../../contexts/authContext";
+import Order from "../Orders/Order";
 
 /*
  Para las rutas, primero deben ir en el local storage,
@@ -13,6 +14,11 @@ import { AuthContext } from "../../../contexts/authContext";
 
 function MainMenu() {
   const { isAuthenticated } = useContext(AuthContext);
+
+  const sinOrdenes = (
+    <p className="text-medium text-green-600">Sin ordenes para mostrar...</p>
+  );
+
   return (
     <div className="w-full max-w-screen xl:max-w-5xl lg:ml-60 xl:ml-72">
       <div className="flex flex-col md:ml-5 ">
@@ -22,13 +28,17 @@ function MainMenu() {
         </h2>
       </div>
 
-      {/* <SearchScan orders={orders}/> */}
+      {/* TABLA DE ORDENES SMALL, AL LADO VA EL SEARCH SCAN Y EN MOBILE VA ARRIBA */}
+      {/* <SearchScan /> */}
 
-      {/* { orders[0] ? () : () } */}
+      {/* {orders[0] ? (
+        { sinOrdenes }
+      ) : (
+        <ScannedOrders orders={orders} setCurrentOrder={setCurrentOrder} />
+      )} */}
 
-      {/* <ScannedOrders orders={orders} setCurrentOrder = {setCurrentOrder}/> */}
-
-      {/* <Order currentOrder = { currentOrder }/> */}
+      {/* <h2>Descripcion de la orden: {currentOrder.number} </h2> */}
+      {/* <Order order={currentOrder} /> */}
     </div>
   );
 }

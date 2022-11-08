@@ -3,18 +3,17 @@ import Accordion from "@mui/material/Accordion";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import { useState } from "react";
+import { AuthContext } from "../../../contexts/authContext";
 
-export const Orders = ({ user }) => {
-  //
-  // infinity scroll implementation
-  // Esto se implementa una vez la logica en el backend este lista
-  //
-
+export const Order = ({ order }) => {
   const [expanded, setExpanded] = useState(false);
+  const { isAuthenticated } = useContext(AuthContext);
 
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
+
+  //agregar una key
 
   return (
     <div className="grid grid-cols-1 gap-4 mr-7 lg:mr-72 xl:mr-7">
@@ -23,21 +22,31 @@ export const Orders = ({ user }) => {
           <div>
             <a href="#" className="text-red-600 font-bold hover:underline">
               Numero de la orden
+              {/* { order.number } */}
             </a>
           </div>
           <div>
             <span className="p-1.5 text-xs font-medium uppercase tracking-wider text-green-800 bg-green-200 rounded-lg bg-opacity-50">
               Fecha
+              {/* { order.date } */}
             </span>
           </div>
         </div>
 
-        <div className="text-sm font-medium text-black">Tiempo tomado</div>
+        {isAuthenticated.role != "Alisto" &&
+          isAuthenticated.role !=
+            "Acomodo"(
+              <div className="text-sm font-medium text-black">
+                Tiempo tomado
+                {/* { order.time } */}
+              </div>
+              //No se si sirve
+            )}
 
         <div>
           <Accordion
             expanded={expanded === "Descripcion"}
-            onChange={handleChange("Descripcion")} // Aqui se debe poner el id de la orden
+            onChange={handleChange("Descripcion")} // Aqui se debe poner el id de la orden {/* { order.id } */}
             className="text-sm font-medium text-black"
           >
             <AccordionSummary
@@ -48,7 +57,7 @@ export const Orders = ({ user }) => {
               <p>Detalles de la orden</p>
             </AccordionSummary>
             <AccordionDetails>
-              <p>Detalles...</p>
+              <p>Detalles...</p> {/* { order.product1234....N } */}
             </AccordionDetails>
           </Accordion>
         </div>
@@ -57,4 +66,4 @@ export const Orders = ({ user }) => {
   );
 };
 
-export default Orders;
+export default Order;

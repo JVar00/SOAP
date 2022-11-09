@@ -8,6 +8,7 @@ import MainUI from "../layouts/mainUI";
 
 //Layouts
 import AsideMenu from "../layouts/PureAsideMenu";
+import UserAsideMenu from "../layouts/UserSideMenu";
 import RoutesNotFound from "../utilities/RoutesNotFound";
 
 //Componentes de rutas
@@ -36,7 +37,7 @@ function App() {
 
           {/*RUTAS PRIVADAS */}
           <Route element={<PrivateGuard rol={Role.ALISTO} />}>
-            <Route path={PrivateRoutes.ALISTO} element={<AsideMenu />}>
+            <Route path={PrivateRoutes.ALISTO} element={<UserAsideMenu />}>
               <Route index element={<MainMenu />} />
               {employeeRoutes.map(({ path, component: Component, title }) => {
                 return (
@@ -52,7 +53,7 @@ function App() {
           </Route>
 
           <Route element={<PrivateGuard rol={Role.ACOMODO} />}>
-            <Route path={PrivateRoutes.ACOMODO} element={<AsideMenu />}>
+            <Route path={PrivateRoutes.ACOMODO} element={<UserAsideMenu />}>
               <Route index element={<MainMenu />} />
               {employeeRoutes.map(({ path, component: Component, title }) => {
                 return (

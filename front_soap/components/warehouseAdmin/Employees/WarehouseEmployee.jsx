@@ -1,5 +1,4 @@
 import { useContext, useEffect, useState } from "react";
-
 import { useNavigate, useParams } from "react-router-dom";
 import { AdminContext } from "../../../contexts/EmployeesProvider";
 import Filter from "../../user/Orders/Filter";
@@ -84,13 +83,14 @@ function WarehouseEmployee() {
             </h2>
             <Filter />
           </div>
-          {orders[0] ? (
+          <Order />
+          {/* {orders[0] ? (
             orders.map((order) => <Order order={order} key={1} />) // falta el key
           ) : (
             <p className="text-medium text-red-600">
               Este usuario no ha hecho ninguna orden
             </p>
-          )}
+          )} */}
         </section>
       </div>
     </div>

@@ -1,6 +1,6 @@
 import React from "react";
 
-function ScannedOrders() {
+function ScannedOrders({ orders, setCurrentOrder }) {
   return <div>ScannedOrders</div>;
 }
 

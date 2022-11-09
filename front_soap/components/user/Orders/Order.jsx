@@ -2,7 +2,7 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Accordion from "@mui/material/Accordion";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import AccordionSummary from "@mui/material/AccordionSummary";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../../../contexts/authContext";
 
 export const Order = ({ order }) => {
@@ -33,20 +33,20 @@ export const Order = ({ order }) => {
           </div>
         </div>
 
-        {isAuthenticated.role != "Alisto" &&
-          isAuthenticated.role !=
-            "Acomodo"(
-              <div className="text-sm font-medium text-black">
-                Tiempo tomado
-                {/* { order.time } */}
-              </div>
-              //No se si sirve
-            )}
+        {isAuthenticated.role != "Alisto" ||
+        isAuthenticated.role != "Acomodo" ? (
+          <div className="text-sm font-medium text-black">
+            Tiempo tomado
+            {/* { order.time } */}
+          </div>
+        ) : (
+          <></>
+        )}
 
-        <div>
+        {/* <div>
           <Accordion
             expanded={expanded === "Descripcion"}
-            onChange={handleChange("Descripcion")} // Aqui se debe poner el id de la orden {/* { order.id } */}
+            onChange={handleChange("Descripcion")} 
             className="text-sm font-medium text-black"
           >
             <AccordionSummary
@@ -57,10 +57,10 @@ export const Order = ({ order }) => {
               <p>Detalles de la orden</p>
             </AccordionSummary>
             <AccordionDetails>
-              <p>Detalles...</p> {/* { order.product1234....N } */}
+              <p>Detalles...</p> 
             </AccordionDetails>
           </Accordion>
-        </div>
+        </div> */}
       </div>
     </div>
   );

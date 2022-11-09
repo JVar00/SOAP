@@ -1,3 +1,4 @@
+import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
 import { useContext, useState } from "react";
 import { Link, NavLink, Outlet } from "react-router-dom";
@@ -65,7 +66,10 @@ const AsideMenu = () => {
           onClose={closeSidebar}
           className="lg:hidden"
         >
-          <nav className="text-white h-screen pt-10 pb-5 border-black bg-red-600">
+          <Box
+            className="text-white pt-10 pb-5 bg-red-600 border-black "
+            sx={{ width: 250, height: "100%" }}
+          >
             <div className="ml-5">
               <p>Iniciaste Sesión Como</p>
               <p className="font-bold">
@@ -88,7 +92,7 @@ const AsideMenu = () => {
             <NavLink className="logoutButton md:hidden" onClick={logOut}>
               Cerrar sesión
             </NavLink>
-          </nav>
+          </Box>
         </Drawer>
 
         {/* Desktop and Tablet Menu */}

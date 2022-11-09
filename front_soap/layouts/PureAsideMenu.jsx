@@ -1,3 +1,4 @@
+import Drawer from "@mui/material/Drawer";
 import { useContext, useState } from "react";
 import { Link, NavLink, Outlet } from "react-router-dom";
 import UserSideMenu from "../components/user/MainFiles/UserSideMenu";
@@ -58,15 +59,14 @@ const AsideMenu = () => {
       <div className="lg:flex">
         {/* Mobile menu */}
 
-        <aside
-          className={
-            sidebar
-              ? "sidebar active lg:hidden fixed"
-              : "sidebar fixed lg:hidden"
-          }
+        <Drawer
+          anchor="left"
+          open={sidebar}
+          onClose={closeSidebar}
+          className="lg:hidden"
         >
-          <nav className=" text-white h-screen pt-10 pb-5 border-black bg-red-600">
-            <div className="ml-5 lg:hidden">
+          <nav className="text-white h-screen pt-10 pb-5 border-black bg-red-600">
+            <div className="ml-5">
               <p>Iniciaste Sesión Como</p>
               <p className="font-bold">
                 {isAuthenticated.name +
@@ -89,10 +89,10 @@ const AsideMenu = () => {
               Cerrar sesión
             </NavLink>
           </nav>
-        </aside>
+        </Drawer>
 
         {/* Desktop and Tablet Menu */}
-        <aside className={"sidebar fixed sm:invisible lg:visible"}>
+        <aside className={"sidebar fixed sm:hidden lg:block"}>
           <nav className=" text-white h-screen pt-10 pb-5 border-black bg-red-600">
             {isAuthenticated && isAuthenticated.role === "Administrador" ? (
               <AdminSideMenu />

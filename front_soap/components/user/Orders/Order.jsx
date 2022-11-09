@@ -43,10 +43,10 @@ export const Order = ({ order }) => {
           <></>
         )}
 
-        {/* <div>
+        <div>
           <Accordion
             expanded={expanded === "Descripcion"}
-            onChange={handleChange("Descripcion")} 
+            onChange={handleChange("Descripcion")}
             className="text-sm font-medium text-black"
           >
             <AccordionSummary
@@ -57,10 +57,10 @@ export const Order = ({ order }) => {
               <p>Detalles de la orden</p>
             </AccordionSummary>
             <AccordionDetails>
-              <p>Detalles...</p> 
+              <p>Detalles...</p>
             </AccordionDetails>
           </Accordion>
-        </div> */}
+        </div>
       </div>
     </div>
   );

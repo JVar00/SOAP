@@ -9,7 +9,7 @@ function SearchScan() {
   return (
     <Paper
       elevation={4}
-      sx={{ p: "2px 4px", display: "flex", alignItems: "center", width: 400 }}
+      className="flex items-center justify-between px-2 align-middle mr-5 md:mr-0 md:w-1/2 lg:w-1/4"
     >
       <input
         className="appearance-none block w-5/6 text-sm input leading-tight focus:outline-none focus:bg-white focus:border-red-600 border-none"

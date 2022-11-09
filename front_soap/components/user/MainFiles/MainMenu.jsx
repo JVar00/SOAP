@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { AuthContext } from "../../../contexts/authContext";
 import Order from "../Orders/Order";
+import ScannedOrders from "../Orders/ScannedOrders";
 import SearchScan from "../Orders/SearchScan";
 
 /*
@@ -21,7 +22,7 @@ function MainMenu() {
   );
 
   return (
-    <div className="w-full max-w-screen xl:max-w-5xl lg:ml-64 xl:ml-72 mb-10">
+    <div className="w-full max-w-screen lg:ml-10 lg:mr-10 xl:ml-15 mb-10">
       <div className="flex flex-row justify-center lg:justify-start">
         <h2 className="mb-5 font-bold text-3xl lg:mb-0">Menú de </h2>
         <h2 className="pb-5 mb-5 font-bold text-3xl lg:mb-0 ml-2 text-red-600">
@@ -29,10 +30,20 @@ function MainMenu() {
         </h2>
       </div>
 
-      {/* TABLA DE ORDENES SMALL, AL LADO IZQUIERDO VA EL SEARCH SCAN Y EN MOBILE VA ARRIBA */}
-      <div className="ml-2 md:ml-5 lg:ml-0">
-        <h2 className="font-medium text-red-600 mb-2 mt-5">Escanear ordenes</h2>
+      <div className=" md:ml-5 lg:ml-0">
+        <h2 className="font-medium text-red-600 mb-2">Escanear ordenes</h2>
         <SearchScan />
+      </div>
+
+      <div className="flex flex-col md:grid grid-cols-2 mt-10 md:ml-5 lg:ml-0 lg:mr-10">
+        <div className="col-auto ">
+          <h2 className="font-medium mb-2 ">Ordenes escaneadas:</h2>
+          <ScannedOrders></ScannedOrders>
+        </div>
+        <div className="mt-10 md:mt-0 col-auto">
+          <h2 className="font-medium  mb-2 ">Descripcion de la orden:</h2>
+          <Order />
+        </div>
       </div>
 
       {/* {orders[0] ? (

@@ -17,6 +17,11 @@ export default function ScannedOrders({ orders, setCurrentOrder }) {
                   <td className="p-3 text-sm text-black whitespace-nowrap">
                     {order.number}
                   </td> 
+                  <td className="p-3 text-sm text-black whitespace-nowrap">
+                  <button onClick={() => setCurrentOrder(order)} className="bg-red-600 text-white font-bold p-3 rounded-xl">
+                    Desplegar datos
+                  </button>
+                  </td>
                   </tr> ))}  */}
             <tr className="bg-white">
               <td className="p-3 text-sm text-black whitespace-nowrap">

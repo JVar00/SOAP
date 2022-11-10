@@ -31,17 +31,17 @@ function MainMenu() {
       </div>
 
       <div className=" md:ml-5 lg:ml-0">
-        <h2 className="font-medium text-red-600 mb-2">Escanear ordenes</h2>
+        <h2 className="font-bold text-red-600 mb-2">Escanear ordenes</h2>
         <SearchScan />
       </div>
 
       <div className="flex flex-col md:grid grid-cols-2 mt-10 md:ml-5 lg:ml-0 lg:mr-10">
         <div className="col-auto ">
-          <h2 className="font-medium mb-2 ">Ordenes escaneadas:</h2>
-          <ScannedOrders></ScannedOrders>
+          <h2 className="font-bold mb-2 ">Ordenes escaneadas:</h2>
+          <ScannedOrders />
         </div>
         <div className="mt-10 md:mt-0 col-auto">
-          <h2 className="font-medium  mb-2 ">Descripcion de la orden:</h2>
+          <h2 className="font-bold  mb-2 ">Descripcion de la orden:</h2>
           <Order />
         </div>
       </div>

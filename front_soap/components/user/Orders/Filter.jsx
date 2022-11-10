@@ -97,9 +97,9 @@ function Filter() {
             className="hidden lg:block"
           >
             <Box sx={style}>
-              <div className="flex justify-center bg-red-400 pb-2 pt-3 text-white">
+              <div className="flex justify-center bg-red-600 pb-2 pt-3 text-white">
                 <p className="basis-1/3"></p>
-                <p className="basis-1/3 pl-5">
+                <p className="basis-1/3 pl-5 font-bold">
                   Seleccione una fecha / rango de fechas
                 </p>
                 <div className="basis-1/3">
@@ -116,7 +116,7 @@ function Filter() {
                 ranges={range}
                 months={2}
                 direction="horizontal"
-                className="calendarElement lg:w-auto border-8 border-red-400"
+                className="lg:w-auto border-8 border-red-400 text-red-600"
               />
             </Box>
           </Modal>
@@ -130,7 +130,7 @@ function Filter() {
             className="lg:hidden"
           >
             <Box sx={style}>
-              <div className="flex justify-center bg-red-400 pb-1 pt-3 text-white">
+              <div className="flex justify-center bg-red-600 pb-3 pt-3 text-white">
                 <p className="basis-2/4 pl-2">Seleccione las Fechas</p>
                 <div className="ml-32 mr-2">
                   <button>
@@ -145,7 +145,7 @@ function Filter() {
                 ranges={range}
                 months={1}
                 direction="horizontal"
-                className="calendarElement border-8 border-red-400"
+                className=" border-8 border-red-400 text-red-600"
               />
             </Box>
           </Modal>

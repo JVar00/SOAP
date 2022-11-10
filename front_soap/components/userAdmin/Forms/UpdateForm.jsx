@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AdminContext } from "../../../contexts/EmployeesProvider";
 import { Modal } from "../../../layouts/confirmationModal";
@@ -27,7 +27,10 @@ export const UpdateForm = () => {
   const [lastName2, setLastName2] = useState("");
   const [password, setPassword] = useState("");
   const [role, setRole] = useState("");
-  const [active, setActive] = useState(false);
+
+  useEffect(() => {
+    cargarDatos();
+  }, []);
 
   const handlePassword = (e) => {
     setPassword(e.target.value);
@@ -60,7 +63,6 @@ export const UpdateForm = () => {
     setLastName(employee.lastName1);
     setLastName2(employee.lastName2);
     setRole(employee.role);
-    setActive(true);
   };
 
   const update = (data) => {
@@ -124,17 +126,8 @@ export const UpdateForm = () => {
       >
         <Modal funct={updateConfirm} />
       </div>
-      <div className={active ? "hidden" : "btn btn-primary py-0 "}>
-        <button
-          className="w-1/2 flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
-          onClick={cargarDatos}
-        >
-          Cargar Datos
-        </button>
-      </div>
-      <div
-        className={active ? "sm:mx-auto sm:w-full sm:max-w-screen" : "hidden"}
-      >
+
+      <div className="sm:mx-auto sm:w-full sm:max-w-screen">
         <div className="sm:px-10">
           <form className="mb-0 space-y-6" onSubmit={handleFuncType}>
             <div className="flex flex-wrap -mx-3 mb-6">

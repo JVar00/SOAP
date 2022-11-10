@@ -1,5 +1,8 @@
+import Box from "@mui/material/Box";
+import Drawer from "@mui/material/Drawer";
 import { useContext, useState } from "react";
 import { Link, NavLink, Outlet } from "react-router-dom";
+import UserSideMenu from "../components/user/MainFiles/UserSideMenu";
 import { AdminSideMenu } from "../components/userAdmin/AdminSideMenu";
 import { ChiefSideMenu } from "../components/warehouseAdmin/MainFiles/ChiefSideMenu";
 import { AuthContext } from "../contexts/authContext";
@@ -16,7 +19,7 @@ const AsideMenu = () => {
 
   //descubrir como hacer en react que aparexca el menu
   return (
-    <div>
+    <div className="">
       <div className="bg-red-600 lg:hidden flex sticky top-0 justify-between">
         <Link to="#" className="block">
           <svg
@@ -36,7 +39,7 @@ const AsideMenu = () => {
           </svg>
         </Link>
         <button className="md:flex-row hidden md:flex " onClick={logOut}>
-          <p className="pt-3 font-bold text-white">Cerrar Sesion</p>
+          <p className="pt-3 font-bold text-white">Cerrar Sesión</p>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -57,16 +60,18 @@ const AsideMenu = () => {
       <div className="lg:flex">
         {/* Mobile menu */}
 
-        <aside
-          className={
-            sidebar
-              ? "sidebar active lg:hidden fixed"
-              : "sidebar fixed lg:hidden"
-          }
+        <Drawer
+          anchor="left"
+          open={sidebar}
+          onClose={closeSidebar}
+          className="lg:hidden"
         >
-          <nav className=" text-white h-screen pt-10 pb-5 border-black bg-red-600">
-            <div className="ml-5 lg:hidden">
-              <p>Iniciaste Sesion Como</p>
+          <Box
+            className="text-white pt-10 pb-5 bg-red-600 border-black "
+            sx={{ width: 250, height: "100%" }}
+          >
+            <div className="ml-5">
+              <p>Iniciaste Sesión Como</p>
               <p className="font-bold">
                 {isAuthenticated.name +
                   " " +
@@ -79,36 +84,30 @@ const AsideMenu = () => {
             {isAuthenticated && isAuthenticated.role === "Administrador" ? (
               <AdminSideMenu />
             ) : isAuthenticated && isAuthenticated.role === "JefeBodega" ? (
-              //Menu para el jefe de bodega
               <ChiefSideMenu />
             ) : (
-              <a href=""></a>
-              //Menu para el empleado de alistamiento o Acomodo
-              //role==="empleadoAlisto", es el mismo menu
+              <UserSideMenu />
             )}
 
             <NavLink className="logoutButton md:hidden" onClick={logOut}>
-              Cerrar sesion
+              Cerrar sesión
             </NavLink>
-          </nav>
-        </aside>
+          </Box>
+        </Drawer>
 
         {/* Desktop and Tablet Menu */}
-        <aside className={"sidebar fixed sm:invisible lg:visible"}>
+        <aside className={"sidebar fixed sm:hidden lg:block"}>
           <nav className=" text-white h-screen pt-10 pb-5 border-black bg-red-600">
             {isAuthenticated && isAuthenticated.role === "Administrador" ? (
               <AdminSideMenu />
             ) : isAuthenticated && isAuthenticated.role === "JefeBodega" ? (
-              //Menu para el jefe de bodega
               <ChiefSideMenu />
             ) : (
-              <a href=""></a>
-              //Menu para el empleado de alistamiento o Acomodo
-              //role==="empleadoAlisto", es el mismo menu
+              <UserSideMenu />
             )}
 
             <NavLink className="logoutButton" onClick={logOut}>
-              Cerrar sesion
+              Cerrar sesión
             </NavLink>
           </nav>
         </aside>
@@ -122,7 +121,7 @@ const AsideMenu = () => {
             ></img>
 
             <div className="text-sm xl:text-base flex-1 lg:m-14 hidden lg:block">
-              <p>Iniciaste Sesion Como</p>
+              <p>Iniciaste Sesión Como</p>
               <p className="font-bold text-red-600">
                 {isAuthenticated.name +
                   " " +

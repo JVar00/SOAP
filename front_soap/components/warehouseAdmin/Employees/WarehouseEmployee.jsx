@@ -1,9 +1,8 @@
 import { useContext, useEffect, useState } from "react";
-
 import { useNavigate, useParams } from "react-router-dom";
 import { AdminContext } from "../../../contexts/EmployeesProvider";
-import CompletedOrderPerUser from "../../user/Orders/CompletedOrderPerUser";
 import Filter from "../../user/Orders/Filter";
+import Order from "../../user/Orders/Order";
 
 function WarehouseEmployee() {
   const navigate = useNavigate();
@@ -14,6 +13,13 @@ function WarehouseEmployee() {
 
   const [error, setError] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+
+  //
+  // infinity scroll implementation
+  // Esto se implementa una vez la logica en el backend este lista
+  //
+
+  //orders
 
   const search = async () => {
     try {
@@ -37,7 +43,9 @@ function WarehouseEmployee() {
     );
 
   return isLoading ? (
-    <h2 className="text-black text-2xl italic">Cargando...</h2>
+    <h2 className="lg:ml-60 xl:ml-72 text-black text-2xl italic">
+      Cargando...
+    </h2>
   ) : (
     <div className="w-full max-w-screen xl:max-w-5xl lg:ml-60 xl:ml-72">
       <div className=" md:ml-5 ">
@@ -66,7 +74,7 @@ function WarehouseEmployee() {
           </div>
         </section>
 
-        {/* orderProvider */}
+        {/* falta el orderProvider fuera */}
 
         <section className="mt-10 lg:mt-20 mb-10">
           <div className="flex flex-col lg:flex-row xl:justify-start">
@@ -75,7 +83,14 @@ function WarehouseEmployee() {
             </h2>
             <Filter />
           </div>
-          <CompletedOrderPerUser user={employee} />
+          <Order />
+          {/* {orders[0] ? (
+            orders.map((order) => <Order order={order} key={1} />) // falta el key
+          ) : (
+            <p className="text-medium text-red-600">
+              Este usuario no ha hecho ninguna orden
+            </p>
+          )} */}
         </section>
       </div>
     </div>

@@ -8,8 +8,8 @@ export const PublicRoutes = {
 };
 
 export const PrivateRoutes = {
-  ACOMODO: "acomodo",
-  ALISTO: "alisto",
+  ACOMODO: "Acomodo",
+  ALISTO: "Alisto",
   ADMIN: "administracion",
   JEFE: "jefeBodega",
 };

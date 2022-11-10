@@ -1,3 +1,4 @@
+import ClearIcon from "@mui/icons-material/Clear";
 import { useEffect, useRef, useState } from "react";
 import { DateRange, DateRangePicker } from "react-date-range";
 
@@ -6,6 +7,11 @@ import format from "date-fns/format";
 
 import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
+
+///MUI
+import Box from "@mui/material/Box";
+import Modal from "@mui/material/Modal";
+///
 
 function Filter() {
   // Filtrador de ordenes
@@ -16,6 +22,15 @@ function Filter() {
       key: "selection",
     },
   ]);
+
+  const style = {
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    bgcolor: "background.paper",
+    boxShadow: 24,
+  };
 
   // Visibilidad de cada calendario
   const [desktopOpen, setDesktopOpen] = useState(false);
@@ -40,6 +55,11 @@ function Filter() {
     }
   };
 
+  const hide = () => {
+    setDesktopOpen(false);
+    setMobileOpen(false);
+  };
+
   // Esconder al hacer click fuera del calendario
   const hideOnClickOutside = (e) => {
     if (desktop.current && !desktop.current.contains(e.target)) {
@@ -51,7 +71,7 @@ function Filter() {
   };
   return (
     <div className="sm:flex-col md:flex md:flex-row items-center mb-5 lg:ml-5 mr-8 md:mr-0 w-3/2">
-      <div className="flex flex-row md:mt-0 ">
+      <div className="flex flex-row md:mt-0">
         <div className="text-sm font-bold text-red-600">
           <h2>Elegir Fechas: </h2>
 
@@ -68,11 +88,27 @@ function Filter() {
             }}
           />
 
-          <div
+          <Modal
             ref={desktop}
-            className="hidden md:block md:absolute  lg:left-60 xl:left-72"
+            open={desktopOpen}
+            onClose={hide}
+            aria-labelledby="modal-modal-title"
+            aria-describedby="modal-modal-description"
+            className="hidden lg:block"
           >
-            {desktopOpen && (
+            <Box sx={style}>
+              <div className="flex justify-center bg-red-600 pb-2 pt-3 text-white">
+                <p className="basis-1/3"></p>
+                <p className="basis-1/3 pl-5 font-bold">
+                  Seleccione una fecha / rango de fechas
+                </p>
+                <div className="basis-1/3">
+                  <button className="ml-64">
+                    <ClearIcon onClick={hide}>Salir</ClearIcon>
+                  </button>
+                </div>
+              </div>
+
               <DateRangePicker
                 onChange={(item) => setRange([item.selection])}
                 editableDateInputs={true}
@@ -80,13 +116,28 @@ function Filter() {
                 ranges={range}
                 months={2}
                 direction="horizontal"
-                className="calendarElement md:w-0.5 lg:w-auto"
+                className="lg:w-auto border-8 border-red-400 text-red-600"
               />
-            )}
-          </div>
+            </Box>
+          </Modal>
 
-          <div ref={mobile} className="absolute md:hidden">
-            {mobileOpen && (
+          <Modal
+            ref={mobile}
+            open={mobileOpen}
+            onClose={hide}
+            aria-labelledby="modal-modal-title"
+            aria-describedby="modal-modal-description"
+            className="lg:hidden"
+          >
+            <Box sx={style}>
+              <div className="flex justify-center bg-red-600 pb-3 pt-3 text-white">
+                <p className="basis-2/4 pl-2">Seleccione las Fechas</p>
+                <div className="ml-32 mr-2">
+                  <button>
+                    <ClearIcon onClick={hide}>Salir</ClearIcon>
+                  </button>
+                </div>
+              </div>
               <DateRange
                 onChange={(item) => setRange([item.selection])}
                 editableDateInputs={true}
@@ -94,10 +145,10 @@ function Filter() {
                 ranges={range}
                 months={1}
                 direction="horizontal"
-                className="calendarElement"
+                className=" border-8 border-red-400 text-red-600"
               />
-            )}
-          </div>
+            </Box>
+          </Modal>
         </div>
       </div>
     </div>

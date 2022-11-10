@@ -1,6 +1,11 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400&family=Ubuntu&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+* {
+  @apply font-ubuntu;
+}
 
 .navItem {
   @apply hover:bg-white hover:text-red-600  
@@ -12,6 +17,7 @@
 
 .navItemActive {
   @apply bg-white text-red-600
+        
        font-bold text-sm xl:text-base
        flex ml-10 md:ml-6 mt-3
        flex-col pt-4 pb-4 md:pt-3 md:pb-3 pl-3 text-left transition ease-in-out duration-500;

@@ -19,6 +19,9 @@ module.exports = {
                 "J&T-low": "#ef4046",
                 "J&T-high": "#b7050b",
             },
+            screens: {
+                extraSmall: "340px",
+            },
         },
     },
     plugins: [require("@tailwindcss/forms")],

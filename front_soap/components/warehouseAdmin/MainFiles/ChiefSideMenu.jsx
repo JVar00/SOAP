@@ -8,7 +8,7 @@ export const ChiefSideMenu = () => {
         <div className="bg-white w-52 h-1"></div>
       </div>
 
-      <NavButton redirectTo="/jefeBodega/empleados" inputName="Empleados" />
+      <NavButton redirectTo="/jefeBodega/empleados" inputName="Colaboradores" />
 
       <NavButton
         redirectTo="/jefeBodega/bodega"
@@ -17,7 +17,7 @@ export const ChiefSideMenu = () => {
 
       <NavButton
         redirectTo="/jefeBodega/cabecera"
-        inputName="Administrar Cabeceras"
+        inputName="Administrar cabeceras"
       />
     </div>
   );

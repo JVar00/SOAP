@@ -7,6 +7,8 @@ import { AdminSideMenu } from "../components/userAdmin/AdminSideMenu";
 import { ChiefSideMenu } from "../components/warehouseAdmin/MainFiles/ChiefSideMenu";
 import { AuthContext } from "../contexts/authContext";
 import { AdminProvider } from "../contexts/EmployeesProvider";
+import { RackProvider } from "../contexts/RackProvider";
+import { WarehouseProvider } from "../contexts/WarehouseProvider";
 import LogoIcon from "../src/assets/logo.jpg";
 
 const AsideMenu = () => {
@@ -134,12 +136,16 @@ const AsideMenu = () => {
         </div>
       </div>
       <AdminProvider>
+        <WarehouseProvider>
+        <RackProvider>
         <section
           className="pl-4 lg:p-0 md:pl-2 overflow-x-hidden overflow-auto"
           onClick={closeSidebar}
         >
           <Outlet></Outlet>
-        </section>
+            </section>
+          </RackProvider>
+      </WarehouseProvider>
       </AdminProvider>
     </div>
   );

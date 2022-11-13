@@ -9,13 +9,13 @@ export const AdminSideMenu = () => {
       </div>
 
       <NavButton
-        redirectTo="/administracion/empleados"
-        inputName="Empleados Registrados"
+        redirectTo="/administracion/colaboradores"
+        inputName="Colaboradores Registrados"
       />
 
       <NavButton
         redirectTo="/administracion/incluir"
-        inputName="Incluir Empleados"
+        inputName="Incluir Colaboradores"
       />
 
       {/* <Link className="" to={`/administracion/editar/${user.id}`}>

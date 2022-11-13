@@ -144,7 +144,7 @@ export const Employees = () => {
                       {/* Botones para ver perfil del jefe de bodega */}
                       <div className="text-sm font-medium text-white bg-red-600  p-2 rounded-md">
                         {/* Button svg link + ver perfil */}
-                        <Link to={`empleado/${employee.user}`}>
+                        <Link to={`colaborador/${employee.user}`}>
                           <button className="flex font-bold">
                             Ver perfil
                             <svg
@@ -246,7 +246,7 @@ export const Employees = () => {
                 // Botones para ver perfil del jefe de bodega
                 <div className="text-sm font-medium text-white w-28 bg-red-600  p-2 rounded-md">
                   {/* Button svg link + ver perfil */}
-                  <Link to={`empleado/${employee.user}`}>
+                  <Link to={`colaborador/${employee.user}`}>
                     <button className="flex">
                       Ver perfil
                       <svg

@@ -1,8 +1,8 @@
 import { useContext, useState } from "react";
+import Logo from "../assets/JT_Logo.svg";
 import InvalidAccess from "../components/errorMessages/AlertInvalidAccess";
 import { AuthContext } from "../contexts/authContext";
 import LogingService from "../services/LoginService";
-import Logo from "../src/assets/JT_Logo.svg";
 const Login = () => {
   const { login } = useContext(AuthContext);
   const [alert, setAlert] = useState();

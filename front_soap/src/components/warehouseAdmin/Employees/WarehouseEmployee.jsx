@@ -66,7 +66,7 @@ function WarehouseEmployee() {
             <div>
               <button
                 className="bg-red-600 py-2 px-5 rounded-md text-white font-bold"
-                onClick={() => navigate("/jefeBodega/empleados")}
+                onClick={() => navigate("/jefeBodega/colaboradores")}
               >
                 Volver
               </button>

@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { Navigate, Outlet } from "react-router-dom";
-import { AuthContext } from "../contexts/authContext";
+import { AuthContext } from "../../contexts/authContext";
 import { PrivateRoutes, PublicRoutes } from "../models/routes";
 
 const AdminValidation = <Navigate to={PrivateRoutes.ADMIN} />;

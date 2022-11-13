@@ -1,21 +1,18 @@
 import { useContext } from "react";
 import { Navigate, Outlet } from "react-router-dom";
-import { AuthContext } from "../contexts/authContext"
-import { PrivateRoutes } from '../models/routes';
+import { AuthContext } from "../../contexts/authContext";
+import { PrivateRoutes } from "../models/routes";
 
-const PrivateValidation = (
-    <Navigate replace to={PrivateRoutes.ALISTO}
-    />
-);
+const PrivateValidation = <Navigate replace to={PrivateRoutes.ALISTO} />;
 const PublicValidation = <Outlet />;
 
 const PublicGuard = () => {
-    const { isAuthenticated } = useContext(AuthContext);
+  const { isAuthenticated } = useContext(AuthContext);
 
-    if (isAuthenticated) {
-        return PrivateValidation;
-    }
-    return PublicValidation;
+  if (isAuthenticated) {
+    return PrivateValidation;
+  }
+  return PublicValidation;
 };
 
 export default PublicGuard;

@@ -8,7 +8,10 @@ export const ChiefSideMenu = () => {
         <div className="bg-white w-52 h-1"></div>
       </div>
 
-      <NavButton redirectTo="/jefeBodega/empleados" inputName="Colaboradores" />
+      <NavButton
+        redirectTo="/jefeBodega/colaboradores"
+        inputName="Colaboradores"
+      />
 
       <NavButton
         redirectTo="/jefeBodega/bodega"

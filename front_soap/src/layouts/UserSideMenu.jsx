@@ -1,8 +1,8 @@
 import { useContext } from "react";
 import { Outlet } from "react-router-dom";
+import LogoIcon from "../assets/logo.jpg";
 import { AuthContext } from "../contexts/authContext";
 import { AdminProvider } from "../contexts/EmployeesProvider";
-import LogoIcon from "../src/assets/logo.jpg";
 
 const UserAsideMenu = () => {
   const { isAuthenticated, logOut } = useContext(AuthContext);

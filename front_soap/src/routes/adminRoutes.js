@@ -20,9 +20,9 @@ const edit = {
 };
 
 const users = {
-  path: "/empleados",
+  path: "/colaboradores",
   component: AdminUsers,
-  title: "Empleados",
+  title: "Colaboradores",
 };
 
 export default [create, edit, users];

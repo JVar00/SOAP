@@ -1,28 +1,28 @@
 import { BrowserRouter, Route } from "react-router-dom";
-import { AuthContextProvider } from "../contexts/authContext";
+import { AuthContextProvider } from "./contexts/authContext";
 
 //Componentes Main
-import MainMenu from "../components/user/MainFiles/MainMenu";
-import Login from "../layouts/Login";
-import MainUI from "../layouts/mainUI";
+import MainMenu from "./components/user/MainFiles/MainMenu";
+import Login from "./layouts/Login";
+import MainUI from "./layouts/mainUI";
 
 //Layouts
-import AsideMenu from "../layouts/PureAsideMenu";
-import UserAsideMenu from "../layouts/UserSideMenu";
-import RoutesNotFound from "../utilities/RoutesNotFound";
+import AsideMenu from "./layouts/PureAsideMenu";
+import UserAsideMenu from "./layouts/UserSideMenu";
+import RoutesNotFound from "./routes/RoutesNotFound";
 
 //Componentes de rutas
-import adminRoutes from "../routes/adminRoutes";
-import chiefRoutes from "../routes/chiefRoutes";
-import employeeRoutes from "../routes/employeeRoutes";
+import adminRoutes from "./routes/adminRoutes";
+import chiefRoutes from "./routes/chiefRoutes";
+import employeeRoutes from "./routes/employeeRoutes";
 
 //Guards
-import PrivateGuard from "../guards/PrivateGuard";
-import PublicGuard from "../guards/PublicGuard";
+import PrivateGuard from "./routes/guards/PrivateGuard";
+import PublicGuard from "./routes/guards/PublicGuard";
 
 //Modelos
-import { Role } from "../models/roles";
-import { PrivateRoutes, PublicRoutes } from "../models/routes";
+import { Role } from "./routes/models/roles";
+import { PrivateRoutes, PublicRoutes } from "./routes/models/routes";
 
 function App() {
   return (

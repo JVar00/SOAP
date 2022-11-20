@@ -134,7 +134,7 @@ const CreateShelf = ({funct}) => {
                                 onClick={() => {
                                     handleSubmit()
                                 }}>
-                                Actualizar
+                                Agregar
                             </button>
                         </div>
                     </div>

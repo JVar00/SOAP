@@ -18,17 +18,23 @@ const Edit = () => {
 
   //Obtengo el empleado que se va a editar y lo guardo en el estado para utilizarlo ene l formualrio
 
-  useEffect(() => {
-    const getByID = async () => {
-      try {
-        const response = await getOneEmployee(`${username}`);
-        setEmployee(response.data);
-        setLoading(false);
-      } catch (response) {
-        setLoading(false);
+  const getByID = async () => {
+    try {
+      const response = await getOneEmployee(`${username}`);
+      console.log(response);
+      if (response.data.res == false) {
         setError(true);
+      } else {
+        setEmployee(response.data);
       }
-    };
+      setLoading(false);
+    } catch {
+      setLoading(false);
+      setError(true);
+    }
+  };
+
+  useEffect(() => {
     getByID();
   }, []);
 
@@ -40,7 +46,13 @@ const Edit = () => {
     );
 
   return error ? (
-    <p className={error ? "text-red-600 text-base italic" : "hidden"}>
+    <p
+      className={
+        error
+          ? "w-full max-w-screen xl:max-w-5xl lg:ml-60 xl:ml-72 text-red-600 text-base italic"
+          : "hidden"
+      }
+    >
       Error, no se encontro el usuario.
     </p>
   ) : (

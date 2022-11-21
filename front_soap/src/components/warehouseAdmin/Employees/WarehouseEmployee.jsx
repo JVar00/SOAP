@@ -24,9 +24,14 @@ function WarehouseEmployee() {
   const search = async () => {
     try {
       const response = await getOneEmployee(username);
-      setEmployee(response.data);
+      if (response.data.res == false) {
+        setError(true);
+      } else {
+        setEmployee(response.data);
+      }
       setIsLoading(false);
     } catch {
+      setIsLoading(false);
       setError(true);
     }
   };
@@ -37,7 +42,7 @@ function WarehouseEmployee() {
 
   if (error)
     return (
-      <h2 className="text-red-600 text-2xl italic">
+      <h2 className="lg:ml-60 xl:ml-72 text-red-600 text-xl italic">
         Error, no se encontro el usuario.
       </h2>
     );

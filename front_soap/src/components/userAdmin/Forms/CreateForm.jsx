@@ -30,7 +30,7 @@ export const Form = () => {
 
   const handlePassword = (e) => {
     setPassword(e.target.value);
-    validatePassword();
+    validatePassword(password);
   };
 
   const validatePassword = (password) => {

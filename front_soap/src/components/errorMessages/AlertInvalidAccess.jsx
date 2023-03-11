@@ -1,7 +1,7 @@
 const InvalidAccess = () => {
     return (
         <div
-            className="flex p-4 mb-4 text-sm text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800"
+            className="flex flex-col extraSmall:flex-row p-4 mb-4 text-sm text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800"
             role="alert">
             <svg
                 aria-hidden="true"
@@ -16,8 +16,8 @@ const InvalidAccess = () => {
             </svg>
             <span className="sr-only">Info</span>
                 <div>
-                    <span className="font-medium">Acceso invalido!</span>{" "}
-                    Usuario o contraseña invalido.
+                    <span className="font-medium">Acceso inválido!</span>{" "}
+                    Usuario o contraseña incorrectos.
                 </div>
         </div>
     );

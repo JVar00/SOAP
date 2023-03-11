@@ -72,7 +72,7 @@ const UpdateWarehouse = ({funct, id, oldLocation}) => {
                     clearMesagges();
                 }}   
             >
-                <div className="relative sm:w-[35rem] my-6 mx-auto max-w-3xl"
+                <div className="relative w-56 extraSmall:w-[35rem] extraSmall:mx-8 my-6 max-w-3xl mx-2"
                     onClick={e => {
                     e.stopPropagation();
                 }}>
@@ -98,7 +98,6 @@ const UpdateWarehouse = ({funct, id, oldLocation}) => {
                         </div>
                         {/*body*/}
                         <div className="relative p-6 flex-auto">
-
                             <div className="w-full  mb-6  mr-5">
                                 <div className="flex flex-row pt-4">
                                     <p className="text-red-600 mr-2">*</p>
@@ -125,7 +124,7 @@ const UpdateWarehouse = ({funct, id, oldLocation}) => {
                                 </div>
                         </div>
                         {/*footer*/}
-                        <div className="flex items-center justify-end p-4 border-t border-solid border-slate-200 rounded-b">
+                        <div className="flex flex-col extraSmall:flex-row items-center justify-end p-4 border-t border-solid border-slate-200 rounded-b ">
                             <button
                                 className="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                                 type="button"

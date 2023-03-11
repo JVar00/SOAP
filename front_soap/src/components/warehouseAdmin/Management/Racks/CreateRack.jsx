@@ -31,9 +31,7 @@ const CreateRack = () => {
     setConfirmAdd(false)
   }
 
-  const prueba = () => {
-    RackDa
-  }
+ 
 
   const clearMessages= ()=>{
     setSuccessMessage(false)

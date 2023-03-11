@@ -1,8 +1,9 @@
 export const Modal = ({ funct }) => {
   return (
-    <>
-      <div className="relative p-4 w-full max-w-md h-full md:h-auto">
-        <div className="relative bg-white rounded-lg shadow border-2 border-gray-400 ">
+    <div className="flex justify-center items-center overflow-x-hidden overflow-y-auto fixed inset-0 z-60 outline-none focus:outline-none ">
+
+      <div className="relative p-4 w-full max-w-md h-full md:h-auto flex justify-center items-center">
+        <div className="relative bg-white rounded-lg shadow border-2 border-gray-400 inset-0 z-50 outline-none focus:outline-none">
           <button
             type="button"
             className="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center "
@@ -62,6 +63,7 @@ export const Modal = ({ funct }) => {
           </div>
         </div>
       </div>
-    </>
+       <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
+    </div>
   );
 };

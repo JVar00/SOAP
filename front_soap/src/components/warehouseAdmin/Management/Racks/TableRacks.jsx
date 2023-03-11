@@ -99,7 +99,9 @@ const TableRacks = () => {
                                         <td className='flex flex-row p-3 text-sm text-black whitespace-nowrap justify-center '>
                                             
                                             {/*boton agregar estante*/}
-                                            <button onClick={() => {
+                                             <button
+                                                 className='mx-4'
+                                                 onClick={() => {
                                                 getSpecificRack(rack.id)
                                                 setAddShelf(true)
                                             }}>
@@ -107,7 +109,8 @@ const TableRacks = () => {
                                             </button>
 
                                             {/*boton ver estantes*/}
-                                            <button onClick={() => {
+                                             <button
+                                            className='mr-5'     onClick={() => {
                                                 getSpecificRack(rack.id)
                                                 setSeeShelves(true)
                                             }}>
@@ -140,7 +143,9 @@ const TableRacks = () => {
                                             </button>
                                            
                                             {/*boton actualizar rack*/}
-                                            <button onClick={() => {
+                                             <button
+                                                 className='mr-4'
+                                                 onClick={() => {
                                                 setOldLocation(rack.id_rack)
                                                 getSpecificRack(rack.id)
                                                 setUpdateRack(true)

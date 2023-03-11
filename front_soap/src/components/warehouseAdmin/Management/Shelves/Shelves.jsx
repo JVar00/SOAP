@@ -44,7 +44,7 @@ const Shelves = ({ funct, idHeadbord }) => {
                     funct(false);
                     clearMesagges()
                 }}>
-                <div className="relative w-auto my-6 mx-auto max-w-3xl" onClick={(e) => {
+                <div className="relative w-72 extraSmall:mx-8 my-6 max-w-3xl mx-2" onClick={(e) => {
                     e.stopPropagation()
                 }}>
                     {/*content*/}
@@ -74,11 +74,12 @@ const Shelves = ({ funct, idHeadbord }) => {
                                     {shelves[0] ? (
                                             shelves.map((shelf) => (
                                                 <tr key={shelf.id}>
-                                                    <td className=" py-2 pl-7  pr-8 text-base text-black whitespace-nowrap ">
+                                                    <td className=" py-2 pl-6
+                                                    extraSmall:pl-7  pr-4 text-base text-black whitespace-nowrap ">
                                                         Estante {shelf.code}
                                                     </td>
-                                                    <td className="sm:pl-20 pl-10 pr-5">
-                                                        <button className="border px-5 py-1 rounded-lg border-gray-300 font-semibold text-sm"
+                                                    <td className=" pl-0 pr-5">
+                                                        <button className="border px-5 py-1 extraSmall:ml-8 -ml-14 rounded-lg border-gray-300 font-semibold text-sm"
                                                             onClick={() => {
                                                                 setIdShelf(shelf.id)
                                                                 setConfirmDelete(true)

@@ -75,7 +75,9 @@ const TableWarehouses = () => {
                                     <tr className="bg-white" key={warehouse.id}>
                                         <td className='p-3 text-sm text-black whitespace-nowrap text-center'>{warehouse.location}</td>
                                         <td className="flex flex-row p-3 text-sm text-black whitespace-nowrap justify-center">
-                                            <button onClick={() => {
+                                            <button
+                                                className='ml-2 mr-3'
+                                                onClick={() => {
                                                 setIdWarehouse(warehouse.id);
                                                 setLocation(warehouse.location)
                                                 setUpdateConfirm(true)
@@ -95,7 +97,7 @@ const TableWarehouses = () => {
                                                     />
                                                 </svg>
                                             </button>
-                                           
+                                            
                                             <button onClick={() => {
                                                 setIdWarehouse(warehouse.id);
                                                 setConfirmDelete(true)
@@ -128,9 +130,8 @@ const TableWarehouses = () => {
                         </tbody>
                     </table>
                 </div>
-
-        </div>
-        </div>
+            </div>
+       </div>
     )
 }
 

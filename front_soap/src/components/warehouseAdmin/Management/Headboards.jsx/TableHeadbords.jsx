@@ -72,8 +72,8 @@ const TableHeadbords = () => {
                                     <tr className="bg-white" key={headbord.id}>
                                         <td className='p-3 text-sm text-black whitespace-nowrap text-center'>{ headbord.description}</td>
                                         <td className='flex flex-row p-3 text-sm text-black whitespace-nowrap justify-center '>
-                                          
-                                            <Link to={`/jefebodega/cabecera/rack/${headbord.id}`}>
+                                            <Link className='mx-5'
+                                                to={`/jefebodega/cabecera/rack/${headbord.id}`}>
                                             <svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 50.000000 50.000000" preserveAspectRatio="xMidYMid meet">
                                                 <g transform="translate(0.000000,50.000000) scale(0.100000,-0.100000)"
                                                 fill="#000000" stroke="none">
@@ -102,7 +102,8 @@ const TableHeadbords = () => {
                                             </svg>
                                            </Link>
                                            
-                                            <button onClick={() => {
+                                            <button
+                                                onClick={() => {
                                                 setIdHeadbord(headbord.id);
                                                 setDescription(headbord.description);
                                                 getSpecificHeadbord(headbord.id);
@@ -124,7 +125,9 @@ const TableHeadbords = () => {
                                             </svg>
                                             </button>
                                             
-                                            <button onClick={() => {
+                                            <button
+                                                className='mx-4'
+                                                onClick={() => {
                                                 setIdHeadbord(headbord.id);
                                                 setConfirmDelete(true);
                                             }}>

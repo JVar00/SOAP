@@ -1,17 +1,35 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Outlet } from "react-router-dom";
 import LogoIcon from "../assets/logo.jpg";
 import { AuthContext } from "../contexts/authContext";
 import { AdminProvider } from "../contexts/EmployeesProvider";
+import { OrderProvider } from '../contexts/OrderProvider'
+import IconButton from "@mui/material/IconButton";
+import LiveHelpIcon from '@mui/icons-material/LiveHelp';
+import CreateReport from "../components/bugsRepoprt/CreateReport";
 
 const UserAsideMenu = () => {
   const { isAuthenticated, logOut } = useContext(AuthContext);
+  const [createReport, setCreateReport] = useState(false)
+
 
   //descubrir como hacer en react que aparexca el menu
   return (
     <div className="">
-      <div className="bg-red-600 flex sticky top-0 text-white justify-between">
-        <div></div>
+      <div className={createReport ? "" : "hidden"}>
+                <CreateReport funct={setCreateReport}/>
+      </div>
+      <div className="bg-red-600 flex sticky top-0 text-white justify-between z-10">
+        <div>
+          <IconButton style={{ color: 'white' }}
+            onClick={
+              e => {
+               setCreateReport(true) 
+              }}
+          >
+            <LiveHelpIcon fontSize="large" color="disable"/>
+          </IconButton>
+        </div>
         <button className="flex-row flex " onClick={logOut}>
           <p className="pt-3 font-bold text-white">Cerrar Sesión</p>
           <svg
@@ -45,9 +63,11 @@ const UserAsideMenu = () => {
         </div>
       </div>
       <AdminProvider>
+       <OrderProvider>
         <section className="pl-4 lg:p-0 md:pl-2 overflow-x-hidden overflow-auto">
           <Outlet></Outlet>
-        </section>
+          </section>
+        </OrderProvider>
       </AdminProvider>
     </div>
   );

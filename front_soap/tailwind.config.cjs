@@ -13,6 +13,10 @@ module.exports = {
             },
             spacing: {
                 18: "10rem",
+                "-17": "-17px",
+                "-25": "-25px",
+                "-14": "-14px",
+                600: "600px",
             },
             colors: {
                 red: {

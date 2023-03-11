@@ -3,10 +3,70 @@ import SearchIcon from "@mui/icons-material/Search";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
 import Paper from "@mui/material/Paper";
-import React from "react";
+import React, { useContext, useState } from "react";
+import { OrderContext } from '../../../contexts/OrderProvider'
+import { Modal } from "../../../layouts/confirmationModal";
+
 
 function SearchScan() {
+  const [orderId, setOrderId] = useState('')
+  const { getOrder, addOrder } = useContext(OrderContext)
+  const [emptyInputsMessage, setEmptyInputsMessage] = useState(false);
+  const [databaseErrorMessage, setDatabaseErrorMessage] = useState(false)
+  const [notFoundMessage, setNotFoundMessage] = useState(false)
+  const [confirmAdd, setConfirmAdd] = useState(false)
+  
+  const searchOrder = async (confirm) => {
+    if (confirm) {
+      try {
+        const result = await getOrder(orderId)
+        const data = result.data
+        if (data.res === false) {
+          clearMessages()
+          setNotFoundMessage(true)
+          setTimeout(clearMessages,5000)
+        } else {
+          addOrder(data)
+          setOrderId('')
+        }
+        
+      } catch (error) {
+        clearMessages()
+        setDatabaseErrorMessage(true)
+        setTimeout(clearMessages,5000)
+      }
+    } 
+    setConfirmAdd(false)
+  }
+
+   const clearMessages= ()=>{
+    setEmptyInputsMessage(false)
+     setDatabaseErrorMessage(false)
+     setNotFoundMessage(false)
+  }
+
+    const handleSubmit = () => {
+    if (orderId === "") {
+      clearMessages()
+      setEmptyInputsMessage(true)
+      setTimeout(clearMessages, 5000)
+    } else {
+      setConfirmAdd(true)
+    }
+  }
+
   return (
+    <>
+      <div
+        className={
+          confirmAdd
+            ? "justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none"
+            : "hidden"
+        }
+      >
+        <Modal funct={searchOrder} />
+      </div>
+
     <Paper
       elevation={4}
       className="flex items-center justify-between px-2 align-middle mr-5 md:mr-0 md:w-1/2 lg:w-1/4"
@@ -14,6 +74,11 @@ function SearchScan() {
       <input
         className="appearance-none block w-5/6 text-sm input leading-tight focus:outline-none focus:bg-white focus:border-red-600 border-none"
         placeholder="Busca el código de la orden"
+        value={orderId}
+        onChange={e => {
+          setOrderId(e.target.value)
+        }
+      }
       />
       <IconButton
         variant=""
@@ -21,9 +86,14 @@ function SearchScan() {
         color="error"
         sx={{ p: "10px" }}
         aria-label="search"
+        onClick={e => { 
+          handleSubmit()   
+        }}
       >
         <SearchIcon />
-      </IconButton>
+      
+        </IconButton>
+        {/*
       <Divider
         className="lg:hidden"
         sx={{ height: 28, m: 0.5 }}
@@ -38,8 +108,15 @@ function SearchScan() {
         >
           <PhotoCamera />
         </IconButton>
+        </div>
+      */}
+      </Paper>
+      <div className="mt-4">
+        <small className={emptyInputsMessage ? "text-base text-red-600" : "hidden"}>Por favor, ingrese el identificador de una orden.</small>                        
+        <small className={databaseErrorMessage ? "text-base text-red-500" : "hidden"}>Algo salio mal, intente de nuevo.</small>
+        <small className={notFoundMessage ? "text-base text-red-500" : "hidden"}>El identificador ingresado no existe.</small>
       </div>
-    </Paper>
+    </>
   );
 }
 

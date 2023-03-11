@@ -1,3 +1,5 @@
+
+
 export default function ScannedOrders({ orders, setCurrentOrder }) {
   return (
     <>

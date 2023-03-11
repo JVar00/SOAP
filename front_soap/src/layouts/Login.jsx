@@ -1,12 +1,13 @@
 import { useContext, useState } from "react";
 import Logo from "../assets/JT_Logo.svg";
+import CreateReport from "../components/bugsRepoprt/CreateReport";
 import InvalidAccess from "../components/errorMessages/AlertInvalidAccess";
 import { AuthContext } from "../contexts/authContext";
 import LogingService from "../services/LoginService";
 const Login = () => {
   const { login } = useContext(AuthContext);
   const [alert, setAlert] = useState();
-
+  const [createReport, setCreateReport] = useState(false)
   async function requestLogin(userName, password) {
     try {
       const response = await LogingService.getAuthentication(
@@ -20,11 +21,18 @@ const Login = () => {
   }
 
   return (
-    <div className="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8  ">
-      <div className="w-full max-w-md  ">
-        <div>
-          <img className="mx-auto  w-auto " src={Logo} alt="Logo J&T" />
-        </div>
+    <>
+    <div className={createReport ? "" : "hidden"}>
+        <CreateReport funct={setCreateReport} />
+      </div>
+
+    <div className="min-h-screen flex flex-col items-center justify-center">
+        <img
+        src={Logo}
+        alt="Logo"
+        className="h-48"
+      />
+      <div className=" p-6 rounded w-full sm:w-1/2 lg:w-2/5  2xl:w-1/4 -mt-25">
         <form
           className=" space-y-6 pt-8 bg-J&T rounded-3xl px-9 text-center font-bold text-slate-50 text-xl"
           onSubmit={(e) => {
@@ -64,22 +72,26 @@ const Login = () => {
           <div className="py-6 ">
             <button
               type="submit"
-              className="group relative flex  justify-center rounded-full border-2 border-black bg-J&T-high py-1 px-2  font-bold text-slate-50 text-xl hover:bg-J&T-low hover:duration-500  focus:border-white  mx-auto w-1/2"
+              className="group relative flex  justify-center rounded-full border-2 border-black bg-J&T-high py-1 px-2  font-bold text-slate-50 text-xl hover:bg-J&T-low hover:duration-500  focus:border-white  mx-auto extraSmall:w-1/2 w-28"
             >
               Ingresar
             </button>
           </div>
           <div className="text-left pb-2">
-            <a
-              href="#"
-              className="text-slate-50 font-medium text-base underline hover:text-slate-300 "
+            <button
+                className="text-slate-50 font-medium text-lg underline hover:text-slate-300 "
+                onClick={e => {
+                  e.preventDefault()
+                  setCreateReport(true)
+                }}
             >
               Reportar error
-            </a>
+            </button>
           </div>
         </form>
       </div>
-    </div>
+      </div>
+      </>
   );
 };
 

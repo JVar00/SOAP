@@ -1,4 +1,4 @@
-import { NavButton } from "../../layouts/NavButton";
+import { NavButton } from "../../layouts/navButton";
 
 export const AdminSideMenu = () => {
   return (
@@ -7,7 +7,6 @@ export const AdminSideMenu = () => {
         <h2 className="pl-3 font-bold pb-1 xl:text-lg">Menú Administrador</h2>
         <div className="bg-white w-52 h-1"></div>
       </div>
-
       <NavButton
         redirectTo="/administracion/colaboradores"
         inputName="Colaboradores Registrados"

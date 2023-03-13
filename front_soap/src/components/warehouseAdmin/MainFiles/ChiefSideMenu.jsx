@@ -1,4 +1,4 @@
-import { NavButton } from "../../../layouts/NavButton";
+import { NavButton } from "../../../layouts/navButton";
 
 export const ChiefSideMenu = () => {
   return (

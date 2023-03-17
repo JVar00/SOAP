@@ -51,7 +51,7 @@ const TableWarehouses = () => {
                 
                  <div className="mb-3">
                     <small className={errorMessage ? "text-lg text-red-600" : "hidden"}>Error al intentar eliminar el usuario.</small>                        
-                    <small className={successMessage ? "text-lg text-green-500" : "hidden"}>El usuario se elimino con exito.</small>
+                    <small className={successMessage ? "text-lg text-green-700" : "hidden"}>El usuario se elimino con exito.</small>
                 </div>
 
                 {/*<!--table -->*/}

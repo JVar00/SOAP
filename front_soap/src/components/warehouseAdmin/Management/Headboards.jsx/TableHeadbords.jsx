@@ -48,7 +48,7 @@ const TableHeadbords = () => {
 
             <div className="mb-3">
                     <small className={errorMessage ? "text-lg text-red-600" : "hidden"}>Error al intentar eliminar la cabecera.</small>                        
-                    <small className={successMessage ? "text-lg text-green-500" : "hidden"}>La cabecera se eliminó con éxito.</small>
+                    <small className={successMessage ? "text-lg text-green-700" : "hidden"}>La cabecera se eliminó con éxito.</small>
             </div>   
 
              {/*<!--table -->*/}

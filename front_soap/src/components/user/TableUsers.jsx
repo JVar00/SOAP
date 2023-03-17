@@ -59,7 +59,7 @@ export const Employees = () => {
         Error al intentar eliminar el usuario.
       </p>
 
-      <p className={nice ? "text-green-600 text-base italic" : "hidden"}>
+      <p className={nice ? "text-green-700 text-base italic" : "hidden"}>
         El usuario se elimino con exito!
       </p>
       <div
@@ -78,7 +78,7 @@ export const Employees = () => {
           <thead className="bg-red-600 border-b-2 border-black text-white">
             <tr>
               <th className="lg:w-10 p-3 text-sm font-semibold tracking-wide text-left">
-                Nombre Completo
+                Nombre completo
               </th>
               <th className="lg:w-10 p-3 text-sm font-semibold tracking-wide text-left">
                 Ocupación

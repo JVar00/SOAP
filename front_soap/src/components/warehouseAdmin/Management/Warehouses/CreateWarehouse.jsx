@@ -91,7 +91,7 @@ const CreateWarehouse = () => {
 
       <div className="mb-6">
         <small className={emptyInputsMessage ? "text-lg text-red-600" : "hidden"}>Por favor, rellene todos los campos requeridos.</small>                        
-        <small className={successMessage ? "text-lg text-green-500" : "hidden"}>Se agregó con exito.</small>
+        <small className={successMessage ? "text-lg text-green-700" : "hidden"}>Se agregó con exito.</small>
         <small className={databaseErrorMessage ? "text-lg text-red-500" : "hidden"}>Fallo en el sistema, no se pudo agregar.</small>
       </div>
     </>

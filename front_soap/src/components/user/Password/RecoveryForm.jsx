@@ -174,7 +174,7 @@ function RecoveryForm() {
               verificar esta falla.
             </p>
 
-            <p className={nice ? "text-green-600 text-base italic" : "hidden"}>
+            <p className={nice ? "text-green-700 text-base italic" : "hidden"}>
               Se cambio su contraseña!
             </p>
           </div>

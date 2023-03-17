@@ -106,7 +106,7 @@ const CreateReport = ({ funct }) => {
                             <div>
                                  <small className={emptyInputsMessage ? "text-lg text-red-600" : "hidden"}>Por favor, rellene el campo requerido.</small> 
                                     <small className={errorMessage ? "text-lg text-red-600" : "hidden"}>Algo ha salido mal, intente de nuevo.</small> 
-                                    <small className={successMessage ? "text-lg text-green-500" : "hidden"}>Reporte creado con éxito.</small>
+                                    <small className={successMessage ? "text-lg text-green-700" : "hidden"}>Reporte creado con éxito.</small>
                                 
                             </div>
                             

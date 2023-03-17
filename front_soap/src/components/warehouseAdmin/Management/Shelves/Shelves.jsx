@@ -102,7 +102,7 @@ const Shelves = ({ funct, idHeadbord }) => {
                         {/*footer*/}
                         <div className="flex items-center justify-star p-3 border-t border-solid border-slate-200 rounded-b ">
                             <small className={errorMessage ? "text-lg text-red-600" : "hidden"}>Error al intentar eliminar el estante.</small>                        
-                            <small className={successMessage ? "text-lg text-green-500" : "hidden"}>El estante se eliminó con éxito.</small>
+                            <small className={successMessage ? "text-lg text-green-700" : "hidden"}>El estante se eliminó con éxito.</small>
                         </div>
                     </div>
                 </div>

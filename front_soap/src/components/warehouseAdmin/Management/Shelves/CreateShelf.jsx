@@ -111,7 +111,7 @@ const CreateShelf = ({funct}) => {
                             <div>
                                  <small className={emptyInputsMessage ? "text-lg text-red-600" : "hidden"}>Por favor, rellene el campo requerido.</small> 
                                     <small className={errorMessage ? "text-lg text-red-600" : "hidden"}>Error, no se ha podido agregar el estante, verifique que el codigo no se repita.</small> 
-                                    <small className={successMessage ? "text-lg text-green-500" : "hidden"}>Se agregó con éxito.</small>
+                                    <small className={successMessage ? "text-lg text-green-700" : "hidden"}>Se agregó con éxito.</small>
                                 
                             </div>
                             

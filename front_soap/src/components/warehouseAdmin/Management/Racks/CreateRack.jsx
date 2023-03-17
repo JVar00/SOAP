@@ -93,7 +93,7 @@ const CreateRack = () => {
       </div>
       <div className="mb-6">
         <small className={emptyInputsMessage ? "text-lg text-red-600" : "hidden"}>Por favor, rellene todos los campos requeridos.</small>                        
-        <small className={successMessage ? "text-lg text-green-500" : "hidden"}>Se agregó con éxito.</small>
+        <small className={successMessage ? "text-lg text-green-700" : "hidden"}>Se agregó con éxito.</small>
         <small className={databaseErrorMessage ? "text-lg text-red-500" : "hidden"}>No se ha podido agregar, verifique que no haya agregado una ubicación repetida.</small>
       </div>
     </>

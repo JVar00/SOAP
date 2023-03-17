@@ -121,7 +121,7 @@ const UpdateHeardbord = ({ funct, oldDescription }) => {
                             <div>
                                     <small className={emptyInputsMessage ? "text-lg text-red-600" : "hidden"}>Por favor, rellene el campo requerido.</small> 
                                     <small className={errorMessage ? "text-lg text-red-600" : "hidden"}>Error, no se ha podido actualizar la cabecera, verifique que la descripción no se repita.</small> 
-                                    <small className={successMessage ? "text-lg text-green-500" : "hidden"}>Actualización con éxito.</small>
+                                    <small className={successMessage ? "text-lg text-green-700" : "hidden"}>Actualización con éxito.</small>
                             </div>
                             
                         </div>

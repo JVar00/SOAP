@@ -118,7 +118,7 @@ const UpdateRack = ({ funct, oldLocation }) => {
                             <div>
                                  <small className={emptyInputsMessage ? "text-lg text-red-600" : "hidden"}>Por favor, rellene el campo requerido.</small> 
                                     <small className={errorMessage ? "text-lg text-red-600" : "hidden"}>Error, no se ha podido actualizar el rack, verifique que la ubicación no se repita.</small> 
-                                    <small className={successMessage ? "text-lg text-green-500" : "hidden"}>Actualizacion con éxito.</small>
+                                    <small className={successMessage ? "text-lg text-green-700" : "hidden"}>Actualizacion con éxito.</small>
                                 
                             </div>
                             

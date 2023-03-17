@@ -68,7 +68,7 @@ const TableRacks = () => {
 
            <div className="mb-3">
                 <small className={errorMessage ? "text-lg text-red-600" : "hidden"}>Error al intentar eliminar el rack.</small>                        
-                <small className={successMessage ? "text-lg text-green-500" : "hidden"}>El rack se eliminó con éxito.</small>
+                <small className={successMessage ? "text-lg text-green-700" : "hidden"}>El rack se eliminó con éxito.</small>
             </div>
 
              {/*<!--table -->*/}

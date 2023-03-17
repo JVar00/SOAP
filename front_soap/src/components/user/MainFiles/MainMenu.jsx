@@ -10,11 +10,23 @@ function MainMenu() {
 
   return (
     <div className="w-full max-w-screen lg:ml-10 lg:mr-10 xl:ml-15 mb-10">
+
       <div className="flex flex-row justify-center lg:justify-start">
         <h2 className="mb-5 font-bold text-3xl lg:mb-0">Menú de </h2>
-        <h2 className="pb-5 mb-5 font-bold text-3xl lg:mb-0 ml-2 text-red-600">
+        <h2 className="pb-3 font-bold text-3xl lg:mb-0 ml-2 text-red-600">
           {isAuthenticated.role}
         </h2>
+      </div>
+
+      <div className="flex flex-row justify-center lg:justify-start mb-8">
+        <p className="mb-5 font-bold lg:mb-0">Bienvenido! </p>
+        <p className="pb-3 font-bold lg:mb-0 ml-2 text-red-600">
+          {isAuthenticated.name +
+            " " +
+            isAuthenticated.lastName1 +
+            " " +
+            isAuthenticated.lastName2}
+        </p>
       </div>
 
       <div className=" md:ml-5 lg:ml-0">
@@ -33,7 +45,7 @@ function MainMenu() {
                 ))}
             </div>
           ) : (
-            <h2 className="text-medium ">Sin ordenes para mostrar...</h2>
+            <h2 className="text-medium "></h2>
             )
     
           }

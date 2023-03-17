@@ -4,7 +4,7 @@ import TableWarehouses from "./Management/Warehouses/TableWarehouses";
 function Warehouse() {
   return (
     <div className="w-full max-w-screen xl:max-w-5xl lg:ml-60 xl:ml-72">
-      <h1 className="text-2xl font-bold text-red-600 ">Administracion de bodegas</h1> 
+      <h1 className="text-2xl font-bold text-red-600 ">Administración de bodegas</h1> 
 
     <CreateWarehouse />
     <TableWarehouses/>  

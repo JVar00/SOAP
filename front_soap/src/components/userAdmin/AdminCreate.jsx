@@ -9,7 +9,7 @@ const Create = () => {
           Agregar un empleado al sistema
         </h2>
         <h2 className="mb-5 flex flex-row ml-5 mt-2 lg:ml-16 text-sm lg:mb-0">
-          <p className="text-red-600 mr-2">*</p> Campos Obligatorios
+          <p className="text-red-600 mr-2">*</p> Campos obligatorios
         </h2>
       </div>
       <div className="lg:w-3/4 xl:w-full">

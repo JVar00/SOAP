@@ -72,7 +72,7 @@ const AsideMenu = () => {
             sx={{ width: 250, height: "100%" }}
           >
             <div className="ml-5">
-              <p>Iniciaste Sesión Como</p>
+              <p>Iniciaste sesión como</p>
               <p className="font-bold">
                 {isAuthenticated.name +
                   " " +
@@ -113,16 +113,16 @@ const AsideMenu = () => {
           </nav>
         </aside>
 
-        <div onClick={closeSidebar}>
-          <div className="h-18 lg:ml-60 xl:ml-72 flex items-center justify-center transition duration-200 ease-in-out">
+        <div onClick={closeSidebar} className="w-full max-w-screen lg:ml-60 xl:ml-72">
+          <div className="h-18  flex items-center justify-center transition duration-200 ease-in-out flex-col lg:grid grid-cols-2">
             <img
               className="w-52 md:w-1/4 lg:w-40 stroke-current"
               src={LogoIcon}
               alt="Jimenes & Tanzi"
             ></img>
 
-            <div className="text-sm xl:text-base flex-1 lg:m-14 hidden lg:block">
-              <p>Iniciaste Sesión Como</p>
+            <div className="text-sm xl:text-base hidden lg:block md:justify-end lg:ml-60 xl:ml-72">
+              <p>Iniciaste sesión como</p>
               <p className="font-bold text-red-600">
                 {isAuthenticated.name +
                   " " +

@@ -6,6 +6,7 @@ const ORDERS = 'ORDERS'
 export const OrderContext = createContext('');
 
 export const OrderProvider = ({ children }) => {
+  
   const [orders, setOrders] = useState(() => {
     const ordersLocalStorage = JSON.parse(window.localStorage.getItem(ORDERS));
     if (ordersLocalStorage) {

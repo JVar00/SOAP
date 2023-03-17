@@ -14,7 +14,7 @@ function Filter() {
   return (
     <div className="sm:flex-col md:flex md:flex-row items-center mb-5 ml-5 mr-8 lg:ml-10 md:mr-0">
       <div>
-        <h2 className="text-sm font-bold text-gray-900">Filtrar Por Nombre</h2>
+        <h2 className="text-sm font-bold text-gray-900">Filtrar por nombre</h2>
         <input
           type="search"
           className="input placeholder-red-600 outline-none"

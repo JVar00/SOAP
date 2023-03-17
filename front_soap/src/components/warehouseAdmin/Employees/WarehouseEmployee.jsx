@@ -28,6 +28,7 @@ function WarehouseEmployee() {
         setError(true);
       } else {
         setEmployee(response.data);
+        //load orders
       }
       setIsLoading(false);
     } catch {
@@ -84,7 +85,7 @@ function WarehouseEmployee() {
         <section className="mt-10 lg:mt-20 mb-10">
           <div className="flex flex-col lg:flex-row xl:justify-start">
             <h2 className="mb-5 font-bold lg:ml-0 text-lg lg:mb-0">
-              Historial de Ordenes
+              Historial de ordenes
             </h2>
             <Filter />
           </div>

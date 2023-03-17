@@ -14,7 +14,7 @@ const Headboard = () => {
   
  return (
    <div className="w-full max-w-screen xl:max-w-5xl lg:ml-60 xl:ml-72">
-      <h1 className="text-2xl font-bold text-red-600 mb-2">Administracion de cabeceras</h1> 
+      <h1 className="text-2xl font-bold text-red-600 mb-2">Administración de cabeceras</h1> 
      
       <div className="flex flex-row">
         <p className="text-red-600 mr-2 mt-4">*</p>

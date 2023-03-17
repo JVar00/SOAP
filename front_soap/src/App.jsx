@@ -70,7 +70,7 @@ function App() {
 
           <Route element={<PrivateGuard rol={Role.JEFE} />}>
             <Route path={PrivateRoutes.JEFE} element={<AsideMenu />}>
-              <Route index element={<MainUI name="Jefe De Bodega" />} />
+              <Route index element={<MainUI name="Jefe de Bodega" />} />
               {chiefRoutes.map(({ path, component: Component, title }) => {
                 return (
                   <Route

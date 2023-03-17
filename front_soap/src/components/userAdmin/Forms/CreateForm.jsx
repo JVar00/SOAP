@@ -145,7 +145,7 @@ export const Form = () => {
                     htmlFor="grid-last-name"
                     className="block text-sm font-medium"
                   >
-                    Primer Apellido
+                    Primer apellido
                   </label>
                 </div>
                 <input
@@ -164,7 +164,7 @@ export const Form = () => {
                     htmlFor="grid-last-name2"
                     className="block text-sm font-medium"
                   >
-                    Segundo Apellido
+                    Segundo apellido
                   </label>
                 </div>
                 <input
@@ -182,7 +182,7 @@ export const Form = () => {
               <div className="flex flex-row">
                 <p className="text-red-600 mr-2">*</p>
                 <label htmlFor="user" className="block text-sm font-medium">
-                  Nombre de Usuario
+                  Nombre de usuario
                 </label>
               </div>
 
@@ -250,7 +250,7 @@ export const Form = () => {
               <DBError />
             </div>
 
-            <p className={nice ? "text-green-600 text-base italic" : "hidden"}>
+            <p className={nice ? "text-green-700 text-base italic" : "hidden"}>
               El usuario se agrego con exito!
             </p>
 
@@ -259,7 +259,7 @@ export const Form = () => {
                 type="submit"
                 className="w-1/2 flex justify-center mt-10 py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
               >
-                Agregar Empleado
+                Agregar empleado
               </button>
             </div>
           </form>

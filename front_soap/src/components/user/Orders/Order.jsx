@@ -8,9 +8,7 @@ import { AuthContext } from "../../../contexts/authContext";
 import { OrderContext } from "../../../contexts/OrderProvider";
 import { Modal } from "../../../layouts/confirmationModal";
 
-
-
-export const Order = ({ order}) => {
+export const Order = ({order}) => {
   const [expanded, setExpanded] = useState(false);
   const { isAuthenticated } = useContext(AuthContext);
   const {updateOrders, saveHistory} = useContext(OrderContext)
@@ -70,46 +68,66 @@ export const Order = ({ order}) => {
 
       </div>
       <div className="bg-white space-y-3  rounded-lg shadow ">
-        <div className="  text-sm bg-red-600 p-2 rounded-t-md">
-          <div className="flex  justify-between" >
-            <label className="text-white font-bold text-lg">
+        <div className="space-y-3 p-4 rounded-lg shadow text-sm bg-red-600 rounded-t-md">
+          <div className="flex items-center space-x-2  justify-between" >
+            <label className="text-white font-bold text-md hover:underline">
               {`Numero de orden: ${order && order.id}`}
             </label>
+
+            {isAuthenticated.role == "Alisto" &&
+              isAuthenticated.role == "Acomodo" ? (
+                <div>
+                  <button className="ml-auto float-right text-3xl leading-none font-semibold outline-none focus:outline-none -mt-17"
+                    onClick={e => {
+                      setFunctionConfirm('delete')
+                      setConfirm(true)
+                  }}
+                  >
+                      <span className=" text-white  h-6 w-6 text-xl  outline-none focus:outline-none ">
+                          x
+                      </span>
+                  </button>
+                </div>
+              ) : (
+                <></>
+              )}
             
-            <button className="ml-auto float-right text-3xl leading-none font-semibold outline-none focus:outline-none -mt-17"
-              onClick={e => {
-                setFunctionConfirm('delete')
-                setConfirm(true)
-            }}
-            >
-                <span className=" text-white  h-6 w-6 text-2xl  outline-none focus:outline-none ">
-                    ×
-                </span>
-            </button>
+            
           </div>
+
+          <div className="flex justify-between">
 
           {isAuthenticated.role != "Alisto" &&
-          isAuthenticated.role != "Acomodo" ? (
-            <div>
-              <span className="p-1.5 text-xs font-medium uppercase tracking-wider text-green-800 bg-green-200 rounded-lg bg-opacity-50">
-                Fecha
-                {/* { order.date } */}
-              </span>
-            </div>
-          ) : (
-            <></>
-          )}
+              isAuthenticated.role != "Acomodo" ? (
+                <div>
+                  <span className="p-1.5 text-xs font-bold uppercase tracking-wider text-white bg-red-200 rounded-lg bg-opacity-50">
+                    Fecha
+                    {/* { order.date } */}
+                  </span>
+                </div>
+              ) : (
+                <></>
+              )}
+
+              {isAuthenticated.role != "Alisto" &&
+            isAuthenticated.role != "Acomodo" ? (
+              <div className="text-sm font-bold text-white">
+                {/* Tiempo tomado */}
+                {/* { order.time } */}
+              </div>
+            ) : (
+              <></>
+            )}
+
+              
+
+          </div>
+
+          
+          
         </div>
 
-        {isAuthenticated.role != "Alisto" &&
-        isAuthenticated.role != "Acomodo" ? (
-          <div className="text-sm font-medium text-black">
-            Tiempo tomado
-            {/* { order.time } */}
-          </div>
-        ) : (
-          <></>
-        )}
+        
 
         <div className="m-4 pb-4">
           <Accordion
@@ -134,19 +152,19 @@ export const Order = ({ order}) => {
                       <table className="min-w-full divide-y divide-gray-200">
                         <thead className="bg-gray-50">
                           <tr>
-                            <th scope="col" className="px-3 py-3 text-left text-base font-medium text-gray-500 uppercase tracking-wider">
+                            <th scope="col" className="px-3 py-3 text-left text-base font-medium text-gray-500  tracking-wider">
 
                             </th>
-                            <th scope="col" className="px-3 py-3 text-left text-base font-medium text-gray-500 uppercase tracking-wider">
+                            <th scope="col" className="px-3 py-3 text-left text-base font-medium text-gray-500  tracking-wider">
                               Id
                             </th>
-                            <th scope="col" className="px-3 py-3 text-left text-base font-medium text-gray-500 uppercase tracking-wider truncate">
+                            <th scope="col" className="px-3 py-3 text-left text-base font-medium text-gray-500  tracking-wider truncate">
                               Descripción
                             </th>
-                            <th scope="col" className="px-3 py-3 text-left text-base font-medium text-gray-500 uppercase tracking-wider">
+                            <th scope="col" className="px-3 py-3 text-left text-base font-medium text-gray-500  tracking-wider">
                               Unidades
                             </th>
-                            <th scope="col" className="px-3 py-3 text-left text-base font-medium text-gray-500 uppercase tracking-wider">
+                            <th scope="col" className="px-3 py-3 text-left text-base font-medium text-gray-500  tracking-wider">
                               Ubicación
                             </th>
                           </tr>
@@ -179,7 +197,11 @@ export const Order = ({ order}) => {
                   </div>            
                 </div>
 
-                <button className="w-30 flex justify-center  mx-3 py-2 px-4 border border-transparent rounded-full shadow-sm text-lg font-semibold text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 mt-8"
+
+                {isAuthenticated.role == "Alisto" &&
+              isAuthenticated.role == "Acomodo" ? (
+                <div>
+                  <button className="w-30 flex justify-center  mx-3 py-2 px-4 border border-transparent rounded-full shadow-sm text-lg font-semibold text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 mt-8"
                   onClick={e => {
                     setFunctionConfirm('complete')
                     setConfirm(true)
@@ -188,6 +210,12 @@ export const Order = ({ order}) => {
                 Finalizar orden
                 </button>
                 <small className={databaseErrorMessage ? "text-base text-red-500" : "hidden"}>Algo salio mal, intente de nuevo.</small>
+                </div>
+              ) : (
+                <></>
+              )}
+
+                
 
               </div>  
             </AccordionDetails>

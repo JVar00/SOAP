@@ -1,4 +1,5 @@
 import ClearIcon from "@mui/icons-material/Clear";
+import * as locales from 'react-date-range/dist/locale';
 import { useEffect, useRef, useState } from "react";
 import { DateRange, DateRangePicker } from "react-date-range";
 
@@ -97,9 +98,9 @@ function Filter() {
             className="hidden lg:block"
           >
             <Box sx={style}>
-              <div className="flex justify-center bg-red-600 pb-2 pt-3 text-white">
-                <p className="basis-1/3"></p>
-                <p className="basis-1/3 pl-5 font-bold">
+              <div className="flex justify-between bg-red-600 pb-2 pt-3 text-white">
+                <p className=""></p>
+                <p className="font-bold">
                   Seleccione una fecha / rango de fechas
                 </p>
                 <div className="basis-1/3">
@@ -109,11 +110,13 @@ function Filter() {
                 </div>
               </div>
 
-              <DateRangePicker
+              <DateRange
                 onChange={(item) => setRange([item.selection])}
                 editableDateInputs={true}
                 moveRangeOnFirstSelection={false}
                 ranges={range}
+                rangeColors={["#fc7474"]}
+                locale={locales.es}
                 months={2}
                 direction="horizontal"
                 className="lg:w-auto border-8 border-red-400 text-red-600"
@@ -144,6 +147,8 @@ function Filter() {
                 moveRangeOnFirstSelection={false}
                 ranges={range}
                 months={1}
+                locale={locales.es}
+                color="#fc7474"
                 direction="horizontal"
                 className=" border-8 border-red-400 text-red-600"
               />

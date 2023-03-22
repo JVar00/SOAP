@@ -74,7 +74,7 @@ export const Order = ({order}) => {
               {`Numero de orden: ${order && order.id}`}
             </label>
 
-            {isAuthenticated.role == "Alisto" &&
+            {isAuthenticated.role == "Alisto" ||
               isAuthenticated.role == "Acomodo" ? (
                 <div>
                   <button className="ml-auto float-right text-3xl leading-none font-semibold outline-none focus:outline-none -mt-17"

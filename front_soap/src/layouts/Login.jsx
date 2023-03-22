@@ -52,7 +52,7 @@ const Login = () => {
                 autoComplete="on"
                 required
                 className="relative block w-full appearance-none  border-0 bg-transparent border-b-2 border-black px-3 py-2 text-white placeholder-slate-50/75   focus:border-b-white  focus:ring-transparent sm:text-sm mt-6"
-                placeholder="Nombre Usuario"
+                placeholder="Nombre de usuario"
               />
             </div>
             <div>

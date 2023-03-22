@@ -198,21 +198,21 @@ export const Order = ({order}) => {
                 </div>
 
 
-                {isAuthenticated.role == "Alisto" &&
-              isAuthenticated.role == "Acomodo" ? (
-                <div>
-                  <button className="w-30 flex justify-center  mx-3 py-2 px-4 border border-transparent rounded-full shadow-sm text-lg font-semibold text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 mt-8"
-                  onClick={e => {
-                    setFunctionConfirm('complete')
-                    setConfirm(true)
-                  }}
-                >
-                Finalizar orden
-                </button>
-                <small className={databaseErrorMessage ? "text-base text-red-500" : "hidden"}>Algo salio mal, intente de nuevo.</small>
-                </div>
-              ) : (
-                <></>
+              {isAuthenticated.role == "Alisto" ||
+                isAuthenticated.role == "Acomodo" ? (
+                  <div>
+                    <button className="w-30 flex justify-center  mx-3 py-2 px-4 border border-transparent rounded-full shadow-sm text-lg font-semibold text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 mt-8"
+                    onClick={e => {
+                      setFunctionConfirm('complete')
+                      setConfirm(true)
+                    }}
+                  >
+                  Finalizar orden
+                  </button>
+                  <small className={databaseErrorMessage ? "text-base text-red-500" : "hidden"}>Algo salio mal, intente de nuevo.</small>
+                  </div>
+                ) : (
+                  <></>
               )}
 
                 

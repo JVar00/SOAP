@@ -14,13 +14,6 @@ function WarehouseEmployee() {
   const [error, setError] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
-  //
-  // infinity scroll implementation
-  // Esto se implementa una vez la logica en el backend este lista
-  //
-
-  //orders
-
   const search = async () => {
     try {
       const response = await getOneEmployee(username);
@@ -91,7 +84,7 @@ function WarehouseEmployee() {
           </div>
           <Order />
           {/* {orders[0] ? (
-            orders.map((order) => <Order order={order} key={1} />) // falta el key
+            orders.map((order) => <Order order={order} key={order.id} />) // falta el key
           ) : (
             <p className="text-medium text-red-600">
               Este usuario no ha hecho ninguna orden

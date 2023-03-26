@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useState } from "react";
 import OrderServiceData from "../services/OrderService";
 
 const ORDERS = 'ORDERS'
@@ -6,6 +6,8 @@ const ORDERS = 'ORDERS'
 export const OrderContext = createContext('');
 
 export const OrderProvider = ({ children }) => {
+
+  const [history, setUserHistory] = useState([]);
   
   const [orders, setOrders] = useState(() => {
     const ordersLocalStorage = JSON.parse(window.localStorage.getItem(ORDERS));
@@ -45,5 +47,18 @@ export const OrderProvider = ({ children }) => {
     return OrderServiceData.saveHistory(data)
   }
 
-  return <OrderContext.Provider value={{getOrder, orders, addOrder, updateOrders, saveHistory}}>{children}</OrderContext.Provider>;
+  const getHistory = (user_id) => {
+    const response = OrderServiceData.getHistory(user_id)
+    setUserHistory(response.data);
+  }
+
+  const getHistoryByDateRange = (startDate, endDate) => {
+    const filteredHistory = history.filter(item => {
+      const createdAt = new Date(item.created_at);
+      return createdAt >= startDate && createdAt <= endDate;
+    });
+    setUserHistory(filteredHistory);
+  };
+
+  return <OrderContext.Provider value={{getOrder, orders, addOrder, updateOrders, saveHistory, getHistory, getHistoryByDateRange}}>{children}</OrderContext.Provider>;
 };

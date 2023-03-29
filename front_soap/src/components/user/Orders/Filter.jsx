@@ -1,6 +1,6 @@
 import ClearIcon from "@mui/icons-material/Clear";
 import * as locales from 'react-date-range/dist/locale';
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { DateRange, DateRangePicker } from "react-date-range";
 
 import { subDays } from "date-fns";
@@ -13,8 +13,11 @@ import "react-date-range/dist/theme/default.css";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 ///
+//import { OrderContext } from "../../../contexts/OrderProvider";
 
-function Filter() {
+function Filter({user_id, searchOrders}) {
+
+
   // Filtrador de ordenes
   const [range, setRange] = useState([
     {
@@ -23,6 +26,7 @@ function Filter() {
       key: "selection",
     },
   ]);
+
 
   const style = {
     position: "absolute",
@@ -46,6 +50,10 @@ function Filter() {
     document.addEventListener("keydown", hideOnEscape, true);
     document.addEventListener("click", hideOnClickOutside, true);
   }, []);
+
+  useEffect(() => {
+    searchOrders(user_id, startDate, endDate);
+  }, [desktopOpen, mobileOpen]);
 
   // cerrar calendario al presionar ESC
   const hideOnEscape = (e) => {

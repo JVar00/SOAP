@@ -1,27 +1,48 @@
 import { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { AdminContext } from "../../../contexts/EmployeesProvider";
+import { OrderContext } from "../../../contexts/OrderProvider";
 import Filter from "../../user/Orders/Filter";
-import Order from "../../user/Orders/Order";
+import History from "../../user/Orders/History";
+import { subDays } from "date-fns";
 
 function WarehouseEmployee() {
   const navigate = useNavigate();
 
   const { username } = useParams();
-
   const { setEmployee, employee, getOneEmployee } = useContext(AdminContext);
+  const { history, getHistoryByDateRange } = useContext(OrderContext);
 
   const [error, setError] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  
+  const [history_error, setHistoryError] = useState(false);
+  const [historyLoading, setHistoryLoading] = useState(true);
+
+  const searchOrders = async (id, startDate, endDate) => {
+    
+    try {
+      const response = await getHistoryByDateRange(id, startDate, endDate);
+      if (response.data.res == false) {
+        setHistoryError(true);
+      } 
+      setHistoryLoading(false);
+    } catch {
+      setHistoryLoading(false);
+      setHistoryError(true);
+    }
+  };
 
   const search = async () => {
+    const startDate = subDays(new Date(), 7);
+    const endDate = new Date();
     try {
       const response = await getOneEmployee(username);
       if (response.data.res == false) {
         setError(true);
       } else {
         setEmployee(response.data);
-        //load orders
+        searchOrders(employee.id, startDate, endDate)
       }
       setIsLoading(false);
     } catch {
@@ -75,22 +96,32 @@ function WarehouseEmployee() {
 
         {/* falta el orderProvider fuera */}
 
-        <section className="mt-10 lg:mt-20 mb-10">
-          <div className="flex flex-col lg:flex-row xl:justify-start">
-            <h2 className="mb-5 font-bold lg:ml-0 text-lg lg:mb-0">
-              Historial de ordenes
-            </h2>
-            <Filter />
-          </div>
-          <Order />
-          {/* {orders[0] ? (
-            orders.map((order) => <Order order={order} key={order.id} />) // falta el key
+        { historyLoading ? (
+
+          <section className="mt-10 lg:mt-20 mb-10">
+            <div className="flex flex-col lg:flex-row xl:justify-start">
+              <h2 className="mb-5 font-bold lg:ml-0 text-lg lg:mb-0">
+                Historial de ordenes
+              </h2>
+              <Filter user_id={employee.id} search={searchOrders}/>
+            </div>
+            { history_error ? ( 
+              history[0] ? (
+                history.map((order) => <History order={order} key={order.id} />) // falta el key
+              ) : (
+                <p className="text-medium text-red-600">
+                  No se encontraron ordenes para este usuario
+                </p>
+              ) ) : (
+              <p className="text-red-600 text-l italic">Error al cargar el historial</p>
+            )}
+            
+          </section>
+
           ) : (
-            <p className="text-medium text-red-600">
-              Este usuario no ha hecho ninguna orden
-            </p>
-          )} */}
-        </section>
+            <p className="text-black text-base italic">Cargando Historial</p>
+          )}
+
       </div>
     </div>
   );

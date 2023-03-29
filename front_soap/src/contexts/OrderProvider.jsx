@@ -52,7 +52,8 @@ export const OrderProvider = ({ children }) => {
     setUserHistory(response.data);
   }
 
-  const getHistoryByDateRange = (startDate, endDate) => {
+  const getHistoryByDateRange = (userid, startDate, endDate) => {
+    getHistory(user_id)
     const filteredHistory = history.filter(item => {
       const createdAt = new Date(item.created_at);
       return createdAt >= startDate && createdAt <= endDate;
@@ -60,5 +61,5 @@ export const OrderProvider = ({ children }) => {
     setUserHistory(filteredHistory);
   };
 
-  return <OrderContext.Provider value={{getOrder, orders, addOrder, updateOrders, saveHistory, getHistory, getHistoryByDateRange}}>{children}</OrderContext.Provider>;
+  return <OrderContext.Provider value={{getOrder, orders, addOrder, updateOrders, saveHistory, getHistoryByDateRange, history}}>{children}</OrderContext.Provider>;
 };

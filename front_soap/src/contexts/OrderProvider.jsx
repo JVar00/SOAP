@@ -8,6 +8,7 @@ export const OrderContext = createContext('');
 export const OrderProvider = ({ children }) => {
 
   const [history, setUserHistory] = useState([]);
+  const [historyCache, setUserHistoryCache] = useState([]);
   
   const [orders, setOrders] = useState(() => {
     const ordersLocalStorage = JSON.parse(window.localStorage.getItem(ORDERS));
@@ -49,17 +50,16 @@ export const OrderProvider = ({ children }) => {
 
   const getHistory = (user_id) => {
     const response = OrderServiceData.getHistory(user_id)
-    setUserHistory(response.data);
+    setUserHistoryCache(response.data);
   }
 
-  const getHistoryByDateRange = (userid, startDate, endDate) => {
-    getHistory(user_id)
-    const filteredHistory = history.filter(item => {
+  const getHistoryByDateRange = (startDate, endDate) => {
+    const filteredHistory = historyCache.filter(item => {
       const createdAt = new Date(item.created_at);
       return createdAt >= startDate && createdAt <= endDate;
     });
     setUserHistory(filteredHistory);
   };
 
-  return <OrderContext.Provider value={{getOrder, orders, addOrder, updateOrders, saveHistory, getHistoryByDateRange, history}}>{children}</OrderContext.Provider>;
+  return <OrderContext.Provider value={{getOrder, orders, addOrder, updateOrders, saveHistory, getHistory, getHistoryByDateRange, history}}>{children}</OrderContext.Provider>;
 };

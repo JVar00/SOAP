@@ -52,7 +52,7 @@ function Filter({user_id, searchOrders}) {
   }, []);
 
   useEffect(() => {
-    searchOrders(user_id, startDate, endDate);
+    searchOrders(user_id, range.startDate, range.endDate);
   }, [desktopOpen, mobileOpen]);
 
   // cerrar calendario al presionar ESC

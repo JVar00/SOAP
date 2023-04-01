@@ -11,7 +11,7 @@ function WarehouseEmployee() {
 
   const { username } = useParams();
   const { setEmployee, employee, getOneEmployee } = useContext(AdminContext);
-  const { history, getHistory, getHistoryByDateRange } = useContext(OrderContext);
+  const { history, getHistoryByDateRange, getHistory } = useContext(OrderContext);
 
   const [error, setError] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
@@ -19,18 +19,21 @@ function WarehouseEmployee() {
   const [history_error, setHistoryError] = useState(false);
   const [historyLoading, setHistoryLoading] = useState(true);
 
-  const searchOrders = async (id, startDate, endDate) => {
+  const searchOrders = async (user, startDate, endDate) => {
     try {
-      const response = await getHistory(id);
-      
+      console.log(1)
+      const response = await getHistory(user);
+
       if (response.data.res == false) {
         setHistoryError(true);
-      } 
-      try { 
-        getHistoryByDateRange(startDate, endDate);
-      } catch {
-        setHistoryError(true);
+      } else {
+        try { 
+          getHistoryByDateRange(startDate, endDate);
+        } catch {
+          setHistoryError(true);
+        }
       }
+      
       setHistoryLoading(false);
     } catch {
       setHistoryLoading(false);
@@ -48,11 +51,11 @@ function WarehouseEmployee() {
         setError(true);
       } else {
         setEmployee(response.data);
-        searchOrders(response.data.id, startDate, endDate)
+        searchOrders(response.user, startDate, endDate)
       }
       setIsLoading(false);
-    } catch (e) {
-      console.log(e)
+    } catch  {
+
       setIsLoading(false);
       setError(true);
     }
@@ -109,7 +112,7 @@ function WarehouseEmployee() {
               <h2 className="mb-5 font-bold lg:ml-0 text-lg lg:mb-0">
                 Historial de ordenes
               </h2>
-              <Filter user_id={employee.id} searchOrders={searchOrders}/>
+              <Filter user={employee.user} searchOrders={searchOrders}/>
             </div>
 
             { !history_error ? ( 

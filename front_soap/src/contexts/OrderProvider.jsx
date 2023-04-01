@@ -48,9 +48,10 @@ export const OrderProvider = ({ children }) => {
     return OrderServiceData.saveHistory(data)
   }
 
-  const getHistory = (user_id) => {
-    const response = OrderServiceData.getHistory(user_id)
+  const getHistory = async (user) => {
+    const response = await OrderServiceData.getHistory(user);
     setUserHistoryCache(response.data);
+    return response;
   }
 
   const getHistoryByDateRange = (startDate, endDate) => {
@@ -61,5 +62,5 @@ export const OrderProvider = ({ children }) => {
     setUserHistory(filteredHistory);
   };
 
-  return <OrderContext.Provider value={{getOrder, orders, addOrder, updateOrders, saveHistory, getHistory, getHistoryByDateRange, history}}>{children}</OrderContext.Provider>;
+  return <OrderContext.Provider value={{ getOrder, orders, addOrder, updateOrders, saveHistory, getHistoryByDateRange, history, getHistory }}>{children}</OrderContext.Provider>;
 };

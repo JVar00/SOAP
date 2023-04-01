@@ -9,6 +9,7 @@ import { ChiefSideMenu } from "../components/warehouseAdmin/MainFiles/ChiefSideM
 import { AuthContext } from "../contexts/authContext";
 import { AdminProvider } from "../contexts/EmployeesProvider";
 import { WarehouseProvider } from "../contexts/WarehouseProvider";
+import { OrderProvider } from "../contexts/OrderProvider";
 
 const AsideMenu = () => {
   const [sidebar, setSidebar] = useState(false);
@@ -135,14 +136,16 @@ const AsideMenu = () => {
         </div>
       </div>
       <AdminProvider>
-        <WarehouseProvider>
+        <OrderProvider>
+         <WarehouseProvider>
           <section
             className="pl-4 lg:p-0 md:pl-2 overflow-x-hidden overflow-auto"
             onClick={closeSidebar}
           >
             <Outlet></Outlet>
           </section>
-        </WarehouseProvider>
+         </WarehouseProvider>
+        </OrderProvider>
       </AdminProvider>
     </div>
   );

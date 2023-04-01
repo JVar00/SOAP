@@ -15,7 +15,7 @@ import Modal from "@mui/material/Modal";
 ///
 //import { OrderContext } from "../../../contexts/OrderProvider";
 
-function Filter({user_id, searchOrders}) {
+function Filter({user, searchOrders}) {
 
 
   // Filtrador de ordenes
@@ -51,18 +51,22 @@ function Filter({user_id, searchOrders}) {
     document.addEventListener("click", hideOnClickOutside, true);
   }, []);
 
-  useEffect(() => {
-    searchOrders(user_id, range.startDate, range.endDate);
-  }, [desktopOpen, mobileOpen]);
+  // useEffect(() => {
+  //   searchOrders(user, range.startDate, range.endDate);
+  // }, [desktopOpen, mobileOpen]);
 
   // cerrar calendario al presionar ESC
   const hideOnEscape = (e) => {
     // console.log(e.key)
     if (e.key === "Escape") {
-      setDesktopOpen(false);
-      setMobileOpen(false);
+      handleClose();
     }
   };
+
+  const handleClose = () => {
+    searchOrders(user, range.startDate, range.endDate);
+    hide();
+  }
 
   const hide = () => {
     setDesktopOpen(false);
@@ -71,10 +75,12 @@ function Filter({user_id, searchOrders}) {
 
   // Esconder al hacer click fuera del calendario
   const hideOnClickOutside = (e) => {
-    if (desktop.current && !desktop.current.contains(e.target)) {
+    if (!mobile.current && desktop.current && !desktop.current.contains(e.target)) {
+      searchOrders(user, range.startDate, range.endDate);
       setDesktopOpen(false);
     }
-    if (mobile.current && !mobile.current.contains(e.target)) {
+    if (!desktop.current && mobile.current && !mobile.current.contains(e.target)) {
+      searchOrders(user, range.startDate, range.endDate);
       setMobileOpen(false);
     }
   };
@@ -100,7 +106,7 @@ function Filter({user_id, searchOrders}) {
           <Modal
             ref={desktop}
             open={desktopOpen}
-            onClose={hide}
+            onClose={handleClose}
             aria-labelledby="modal-modal-title"
             aria-describedby="modal-modal-description"
             className="hidden lg:block"
@@ -113,7 +119,7 @@ function Filter({user_id, searchOrders}) {
                 </p>
                 <div className="basis-1/3">
                   <button className="ml-64">
-                    <ClearIcon onClick={hide}>Salir</ClearIcon>
+                    <ClearIcon onClick={handleClose}>Salir</ClearIcon>
                   </button>
                 </div>
               </div>
@@ -135,7 +141,7 @@ function Filter({user_id, searchOrders}) {
           <Modal
             ref={mobile}
             open={mobileOpen}
-            onClose={hide}
+            onClose={handleClose}
             aria-labelledby="modal-modal-title"
             aria-describedby="modal-modal-description"
             className="lg:hidden"
@@ -145,7 +151,7 @@ function Filter({user_id, searchOrders}) {
                 <p className="basis-2/4 pl-2">Seleccione las Fechas</p>
                 <div className="ml-32 mr-2">
                   <button>
-                    <ClearIcon onClick={hide}>Salir</ClearIcon>
+                    <ClearIcon onClick={handleClose}>Salir</ClearIcon>
                   </button>
                 </div>
               </div>

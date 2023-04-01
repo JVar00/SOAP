@@ -8,10 +8,10 @@ const saveHistory = (data) => {
     return http.post("/historys", data);
 };
 
-const getHistory = (user_id) => {
-    return http.get(`/historys/${user_id}`);
+const getHistory = (user) => {
+    return http.get(`/historys?txtBuscar=${user}`);
 };
 
-const OrderServiceData = { get, saveHistory };
+const OrderServiceData = { get, saveHistory, getHistory };
 
 export default OrderServiceData;

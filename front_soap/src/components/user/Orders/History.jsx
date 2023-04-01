@@ -24,7 +24,7 @@ export const History = ({history}) => {
               isAuthenticated.role != "Acomodo" ? (
                 <div>
                   <span className="p-1.5 text-xs font-bold uppercase tracking-wider text-white bg-red-200 rounded-lg bg-opacity-50">
-                    {history.created_at}
+                    Fecha de finalización: {history.created_at}
                   </span>
                 </div>
               ) : (

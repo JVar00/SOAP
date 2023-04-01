@@ -105,7 +105,7 @@ function WarehouseEmployee() {
               <h2 className="mb-5 font-bold lg:ml-0 text-lg lg:mb-0">
                 Historial de ordenes
               </h2>
-              <Filter searchOrders={filterByDate}/>
+              {/* <Filter searchOrders={filterByDate}/> */}
             </div>
 
             { !history_error ? ( 

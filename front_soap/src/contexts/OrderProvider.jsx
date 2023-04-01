@@ -49,17 +49,22 @@ export const OrderProvider = ({ children }) => {
   }
 
   const getHistory = async (user) => {
+
     const response = await OrderServiceData.getHistory(user);
+    setUserHistory(response.data);
     setUserHistoryCache(response.data);
     return response;
+
   }
 
   const getHistoryByDateRange = (startDate, endDate) => {
-    const filteredHistory = historyCache.filter(item => {
-      const createdAt = new Date(item.created_at);
-      return createdAt >= startDate && createdAt <= endDate;
-    });
-    setUserHistory(filteredHistory);
+
+    const aux = { ...historyCache };
+    console.log(Object.values(aux));
+
+    const filterHistory = (history) => history.createdAt >= startDate && history.createdAt <= endDate;
+    setUserHistory(Object.values(aux).filter(filterHistory));
+
   };
 
   return <OrderContext.Provider value={{ getOrder, orders, addOrder, updateOrders, saveHistory, getHistoryByDateRange, history, getHistory }}>{children}</OrderContext.Provider>;

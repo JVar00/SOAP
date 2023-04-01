@@ -3,7 +3,7 @@ import { useContext, useState } from "react";
 import { AuthContext } from "../../../contexts/authContext";
 import { OrderContext } from "../../../contexts/OrderProvider";
 
-export const Order = ({history}) => {
+export const History = ({history}) => {
   const { isAuthenticated } = useContext(AuthContext);
 
   return (
@@ -24,8 +24,7 @@ export const Order = ({history}) => {
               isAuthenticated.role != "Acomodo" ? (
                 <div>
                   <span className="p-1.5 text-xs font-bold uppercase tracking-wider text-white bg-red-200 rounded-lg bg-opacity-50">
-                    Fecha
-                    {/* { history.date } */}
+                    {history.created_at}
                   </span>
                 </div>
               ) : (
@@ -56,4 +55,4 @@ export const Order = ({history}) => {
   );
 };
 
-export default Order;
+export default History;

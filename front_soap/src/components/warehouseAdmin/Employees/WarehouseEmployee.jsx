@@ -19,21 +19,16 @@ function WarehouseEmployee() {
   const [history_error, setHistoryError] = useState(false);
   const [historyLoading, setHistoryLoading] = useState(true);
 
-  const searchOrders = async (user, startDate, endDate) => {
-    try {
-      console.log(1)
-      const response = await getHistory(user);
+  const filterByDate = (startDate, endDate) => {
+    getHistoryByDateRange(startDate, endDate);
+  };
 
+  const searchOrders = async (user) => {
+    try {
+      const response = await getHistory(user);
       if (response.data.res == false) {
         setHistoryError(true);
-      } else {
-        try { 
-          getHistoryByDateRange(startDate, endDate);
-        } catch {
-          setHistoryError(true);
-        }
-      }
-      
+      } 
       setHistoryLoading(false);
     } catch {
       setHistoryLoading(false);
@@ -42,16 +37,14 @@ function WarehouseEmployee() {
   };
 
   const search = async () => {
-    const startDate = subDays(new Date(), 7);
-    const endDate = new Date();
-
+    
     try {
       const response = await getOneEmployee(username);
       if (response.data.res == false) {
         setError(true);
       } else {
         setEmployee(response.data);
-        searchOrders(response.user, startDate, endDate)
+        searchOrders(username)
       }
       setIsLoading(false);
     } catch  {
@@ -112,19 +105,23 @@ function WarehouseEmployee() {
               <h2 className="mb-5 font-bold lg:ml-0 text-lg lg:mb-0">
                 Historial de ordenes
               </h2>
-              <Filter user={employee.user} searchOrders={searchOrders}/>
+              <Filter searchOrders={filterByDate}/>
             </div>
 
             { !history_error ? ( 
+
                 history[0] ? (
-                  history.map((order) => <History order={order} key={order.id} />) // falta el key
+                  history.map((history) => <History history={history} key={history.id} />) // falta el key
                 ) : (
                   <p className="text-medium text-red-600">
                     No se encontraron ordenes para este usuario
                   </p>
                 )
+
               ) : (
+
               <p className="text-red-600 text-l italic">Error al cargar el historial</p>
+
             )}
             
           </section>

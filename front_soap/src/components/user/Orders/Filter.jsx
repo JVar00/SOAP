@@ -15,7 +15,7 @@ import Modal from "@mui/material/Modal";
 ///
 //import { OrderContext } from "../../../contexts/OrderProvider";
 
-function Filter({user, searchOrders}) {
+function Filter({searchOrders}) {
 
 
   // Filtrador de ordenes
@@ -64,7 +64,7 @@ function Filter({user, searchOrders}) {
   };
 
   const handleClose = () => {
-    searchOrders(user, range.startDate, range.endDate);
+    searchOrders(range.startDate, range.endDate);
     hide();
   }
 
@@ -76,11 +76,11 @@ function Filter({user, searchOrders}) {
   // Esconder al hacer click fuera del calendario
   const hideOnClickOutside = (e) => {
     if (!mobile.current && desktop.current && !desktop.current.contains(e.target)) {
-      searchOrders(user, range.startDate, range.endDate);
+      searchOrders(range.startDate, range.endDate);
       setDesktopOpen(false);
     }
     if (!desktop.current && mobile.current && !mobile.current.contains(e.target)) {
-      searchOrders(user, range.startDate, range.endDate);
+      searchOrders(range.startDate, range.endDate);
       setMobileOpen(false);
     }
   };

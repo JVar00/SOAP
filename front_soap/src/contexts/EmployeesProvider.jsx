@@ -18,8 +18,10 @@ export const AdminProvider = ({ children }) => {
   //esto solo deberia cargar los empleados de acomodo y alisto, hacer cambio para el siguiente sprint, esto es algo del backend
   const getAllEmployees = async () => {
     const response = await AdminServiceData.getAll();
-    setEmployees(response.data);
-    setCacheEmployees(response.data);
+    const getOnlyEmployees = (user) => user.role.includes("Alisto") || user.role.includes("Acomodo");
+
+    setEmployees(response.data.filter(getOnlyEmployees));
+    setCacheEmployees(response.data.filter(getOnlyEmployees));
     //return response.status;
   };
 

@@ -53,6 +53,7 @@ export const Order = ({order}) => {
   }
  
   return (
+    // if responsive is not working, change lg to 72px
     <div className="mr-7 lg:mr-7 xl:mr-7 pb-4 ">
        <div
         className={

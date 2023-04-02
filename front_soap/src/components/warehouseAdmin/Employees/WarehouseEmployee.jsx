@@ -1,40 +1,66 @@
 import { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { AdminContext } from "../../../contexts/EmployeesProvider";
+import { OrderContext } from "../../../contexts/OrderProvider";
 import Filter from "../../user/Orders/Filter";
-import Order from "../../user/Orders/Order";
+import History from "../../user/Orders/History";
+
+import { subDays } from "date-fns";
+import format from "date-fns/format";
 
 function WarehouseEmployee() {
   const navigate = useNavigate();
 
   const { username } = useParams();
-
   const { setEmployee, employee, getOneEmployee } = useContext(AdminContext);
+  const { history, getHistory } = useContext(OrderContext);
 
   const [error, setError] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  
+  const [history_error, setHistoryError] = useState(false);
+  const [historyLoading, setHistoryLoading] = useState(true);
 
-  //
-  // infinity scroll implementation
-  // Esto se implementa una vez la logica en el backend este lista
-  //
+  const searchOrders = async (user, startDate, endDate) => {
 
-  //orders
+    startDate = format(startDate, 'yyyy-MM-dd');
+    endDate = format(endDate, 'yyyy-MM-dd');
+
+    console.log(startDate, endDate)
+
+    try {
+      const response = await getHistory(user, startDate, endDate);
+      if (response.data.res == false) {
+        setHistoryError(true);
+      } 
+      setHistoryLoading(false);
+    } catch {
+      setHistoryLoading(false);
+      setHistoryError(true);
+    }
+
+  };
 
   const search = async () => {
+
+    let startDate = subDays(new Date(), 7);
+    let endDate = new Date();
+    
     try {
       const response = await getOneEmployee(username);
       if (response.data.res == false) {
         setError(true);
       } else {
         setEmployee(response.data);
-        //load orders
+        searchOrders(username, startDate, endDate)
       }
       setIsLoading(false);
-    } catch {
+    } catch  {
+
       setIsLoading(false);
       setError(true);
     }
+
   };
 
   useEffect(() => {
@@ -80,24 +106,39 @@ function WarehouseEmployee() {
           </div>
         </section>
 
-        {/* falta el orderProvider fuera */}
+        { !historyLoading ? (
 
-        <section className="mt-10 lg:mt-20 mb-10">
-          <div className="flex flex-col lg:flex-row xl:justify-start">
-            <h2 className="mb-5 font-bold lg:ml-0 text-lg lg:mb-0">
-              Historial de ordenes
-            </h2>
-            <Filter />
-          </div>
-          <Order />
-          {/* {orders[0] ? (
-            orders.map((order) => <Order order={order} key={1} />) // falta el key
+          <section className="mt-10 lg:mt-20 mb-4">
+            
+            <div className="flex flex-col lg:flex-row xl:justify-start">
+              <h2 className="mb-5 font-bold lg:ml-0 text-lg lg:mb-0">
+                Historial de ordenes
+              </h2>
+              <Filter username={employee.user} searchOrders={searchOrders}/>
+            </div>
+
+            { !history_error ? ( 
+
+                history[0] ? (
+                  history.map((history) => <History history={history} key={history.id} />) // falta el key
+                ) : (
+                  <p className="text-medium text-red-600">
+                    No se encontraron ordenes para este usuario
+                  </p>
+                )
+
+              ) : (
+
+              <p className="text-red-600 text-l italic">Error al cargar el historial</p>
+
+            )}
+            
+          </section>
+
           ) : (
-            <p className="text-medium text-red-600">
-              Este usuario no ha hecho ninguna orden
-            </p>
-          )} */}
-        </section>
+            <p className="text-black text-base italic">Cargando Historial</p>
+          )}
+
       </div>
     </div>
   );

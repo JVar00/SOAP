@@ -1,6 +1,6 @@
 import ClearIcon from "@mui/icons-material/Clear";
 import * as locales from 'react-date-range/dist/locale';
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { DateRange, DateRangePicker } from "react-date-range";
 
 import { subDays } from "date-fns";
@@ -13,8 +13,11 @@ import "react-date-range/dist/theme/default.css";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 ///
+//import { OrderContext } from "../../../contexts/OrderProvider";
 
-function Filter() {
+function Filter({username, searchOrders}) {
+
+
   // Filtrador de ordenes
   const [range, setRange] = useState([
     {
@@ -23,6 +26,7 @@ function Filter() {
       key: "selection",
     },
   ]);
+
 
   const style = {
     position: "absolute",
@@ -51,10 +55,17 @@ function Filter() {
   const hideOnEscape = (e) => {
     // console.log(e.key)
     if (e.key === "Escape") {
-      setDesktopOpen(false);
-      setMobileOpen(false);
+      handleClose();
     }
   };
+
+  const handleClose = () => {
+
+    
+
+    searchOrders(username, range[0].startDate, range[0].endDate);
+    hide();
+  }
 
   const hide = () => {
     setDesktopOpen(false);
@@ -63,11 +74,15 @@ function Filter() {
 
   // Esconder al hacer click fuera del calendario
   const hideOnClickOutside = (e) => {
-    if (desktop.current && !desktop.current.contains(e.target)) {
-      setDesktopOpen(false);
+    if (!mobile.current && desktop.current && !desktop.current.contains(e.target)) {
+      handleClose();
+      // searchOrders(username, range.startDate, range.endDate);
+      // setDesktopOpen(false);
     }
-    if (mobile.current && !mobile.current.contains(e.target)) {
-      setMobileOpen(false);
+    if (!desktop.current && mobile.current && !mobile.current.contains(e.target)) {
+      handleClose();
+      // searchOrders(username, range.startDate, range.endDate);
+      // setMobileOpen(false);
     }
   };
   return (
@@ -92,7 +107,7 @@ function Filter() {
           <Modal
             ref={desktop}
             open={desktopOpen}
-            onClose={hide}
+            onClose={handleClose}
             aria-labelledby="modal-modal-title"
             aria-describedby="modal-modal-description"
             className="hidden lg:block"
@@ -105,7 +120,7 @@ function Filter() {
                 </p>
                 <div className="basis-1/3">
                   <button className="ml-64">
-                    <ClearIcon onClick={hide}>Salir</ClearIcon>
+                    <ClearIcon onClick={handleClose}>Salir</ClearIcon>
                   </button>
                 </div>
               </div>
@@ -127,7 +142,7 @@ function Filter() {
           <Modal
             ref={mobile}
             open={mobileOpen}
-            onClose={hide}
+            onClose={handleClose}
             aria-labelledby="modal-modal-title"
             aria-describedby="modal-modal-description"
             className="lg:hidden"
@@ -137,7 +152,7 @@ function Filter() {
                 <p className="basis-2/4 pl-2">Seleccione las Fechas</p>
                 <div className="ml-32 mr-2">
                   <button>
-                    <ClearIcon onClick={hide}>Salir</ClearIcon>
+                    <ClearIcon onClick={handleClose}>Salir</ClearIcon>
                   </button>
                 </div>
               </div>

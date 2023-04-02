@@ -8,6 +8,10 @@ const saveHistory = (data) => {
     return http.post("/historys", data);
 };
 
-const OrderServiceData = { get, saveHistory };
+const getHistory = (user, startDate, endDate) => {
+    return http.get(`/getBy_Date?txtFechaInicio=${startDate}&txtFechaFinal=${endDate}&txtBuscar=${user}`);
+};
+
+const OrderServiceData = { get, saveHistory, getHistory };
 
 export default OrderServiceData;

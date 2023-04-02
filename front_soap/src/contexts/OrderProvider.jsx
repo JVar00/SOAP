@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useState } from "react";
 import OrderServiceData from "../services/OrderService";
 
 const ORDERS = 'ORDERS'
@@ -6,6 +6,9 @@ const ORDERS = 'ORDERS'
 export const OrderContext = createContext('');
 
 export const OrderProvider = ({ children }) => {
+
+  const [history, setUserHistory] = useState([]);
+  const [historyCache, setUserHistoryCache] = useState([]);
   
   const [orders, setOrders] = useState(() => {
     const ordersLocalStorage = JSON.parse(window.localStorage.getItem(ORDERS));
@@ -45,5 +48,24 @@ export const OrderProvider = ({ children }) => {
     return OrderServiceData.saveHistory(data)
   }
 
-  return <OrderContext.Provider value={{getOrder, orders, addOrder, updateOrders, saveHistory}}>{children}</OrderContext.Provider>;
+  const getHistory = async (user, startDate, endDate) => {
+
+    const response = await OrderServiceData.getHistory(user, startDate, endDate);
+    setUserHistory(response.data);
+    //setUserHistoryCache(response.data);
+    return response;
+
+  }
+
+  // const getHistoryByDateRange = (startDate, endDate) => {
+
+  //   const aux = { ...historyCache };
+  //   console.log(Object.values(aux));
+
+  //   const filterHistory = (history) => history.createdAt >= startDate && history.createdAt <= endDate;
+  //   setUserHistory(Object.values(aux).filter(filterHistory));
+
+  // };
+
+  return <OrderContext.Provider value={{ getOrder, orders, addOrder, updateOrders, saveHistory, history, getHistory }}>{children}</OrderContext.Provider>;
 };

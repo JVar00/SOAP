@@ -15,7 +15,7 @@ import Modal from "@mui/material/Modal";
 ///
 //import { OrderContext } from "../../../contexts/OrderProvider";
 
-function Filter({searchOrders}) {
+function Filter({username, searchOrders}) {
 
 
   // Filtrador de ordenes
@@ -51,10 +51,6 @@ function Filter({searchOrders}) {
     document.addEventListener("click", hideOnClickOutside, true);
   }, []);
 
-  // useEffect(() => {
-  //   searchOrders(user, range.startDate, range.endDate);
-  // }, [desktopOpen, mobileOpen]);
-
   // cerrar calendario al presionar ESC
   const hideOnEscape = (e) => {
     // console.log(e.key)
@@ -64,7 +60,10 @@ function Filter({searchOrders}) {
   };
 
   const handleClose = () => {
-    searchOrders(range.startDate, range.endDate);
+
+    
+
+    searchOrders(username, range[0].startDate, range[0].endDate);
     hide();
   }
 
@@ -76,12 +75,14 @@ function Filter({searchOrders}) {
   // Esconder al hacer click fuera del calendario
   const hideOnClickOutside = (e) => {
     if (!mobile.current && desktop.current && !desktop.current.contains(e.target)) {
-      searchOrders(range.startDate, range.endDate);
-      setDesktopOpen(false);
+      handleClose();
+      // searchOrders(username, range.startDate, range.endDate);
+      // setDesktopOpen(false);
     }
     if (!desktop.current && mobile.current && !mobile.current.contains(e.target)) {
-      searchOrders(range.startDate, range.endDate);
-      setMobileOpen(false);
+      handleClose();
+      // searchOrders(username, range.startDate, range.endDate);
+      // setMobileOpen(false);
     }
   };
   return (

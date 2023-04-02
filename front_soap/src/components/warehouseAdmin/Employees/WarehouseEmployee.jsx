@@ -4,14 +4,16 @@ import { AdminContext } from "../../../contexts/EmployeesProvider";
 import { OrderContext } from "../../../contexts/OrderProvider";
 import Filter from "../../user/Orders/Filter";
 import History from "../../user/Orders/History";
+
 import { subDays } from "date-fns";
+import format from "date-fns/format";
 
 function WarehouseEmployee() {
   const navigate = useNavigate();
 
   const { username } = useParams();
   const { setEmployee, employee, getOneEmployee } = useContext(AdminContext);
-  const { history, getHistoryByDateRange, getHistory } = useContext(OrderContext);
+  const { history, getHistory } = useContext(OrderContext);
 
   const [error, setError] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
@@ -19,13 +21,15 @@ function WarehouseEmployee() {
   const [history_error, setHistoryError] = useState(false);
   const [historyLoading, setHistoryLoading] = useState(true);
 
-  const filterByDate = (startDate, endDate) => {
-    getHistoryByDateRange(startDate, endDate);
-  };
+  const searchOrders = async (user, startDate, endDate) => {
 
-  const searchOrders = async (user) => {
+    startDate = format(startDate, 'yyyy-MM-dd');
+    endDate = format(endDate, 'yyyy-MM-dd');
+
+    console.log(startDate, endDate)
+
     try {
-      const response = await getHistory(user);
+      const response = await getHistory(user, startDate, endDate);
       if (response.data.res == false) {
         setHistoryError(true);
       } 
@@ -34,9 +38,13 @@ function WarehouseEmployee() {
       setHistoryLoading(false);
       setHistoryError(true);
     }
+
   };
 
   const search = async () => {
+
+    let startDate = subDays(new Date(), 7);
+    let endDate = new Date();
     
     try {
       const response = await getOneEmployee(username);
@@ -44,7 +52,7 @@ function WarehouseEmployee() {
         setError(true);
       } else {
         setEmployee(response.data);
-        searchOrders(username)
+        searchOrders(username, startDate, endDate)
       }
       setIsLoading(false);
     } catch  {
@@ -105,7 +113,7 @@ function WarehouseEmployee() {
               <h2 className="mb-5 font-bold lg:ml-0 text-lg lg:mb-0">
                 Historial de ordenes
               </h2>
-              {/* <Filter searchOrders={filterByDate}/> */}
+              <Filter username={employee.user} searchOrders={searchOrders}/>
             </div>
 
             { !history_error ? ( 

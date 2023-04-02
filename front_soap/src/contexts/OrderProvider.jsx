@@ -48,24 +48,24 @@ export const OrderProvider = ({ children }) => {
     return OrderServiceData.saveHistory(data)
   }
 
-  const getHistory = async (user) => {
+  const getHistory = async (user, startDate, endDate) => {
 
-    const response = await OrderServiceData.getHistory(user);
+    const response = await OrderServiceData.getHistory(user, startDate, endDate);
     setUserHistory(response.data);
-    setUserHistoryCache(response.data);
+    //setUserHistoryCache(response.data);
     return response;
 
   }
 
-  const getHistoryByDateRange = (startDate, endDate) => {
+  // const getHistoryByDateRange = (startDate, endDate) => {
 
-    const aux = { ...historyCache };
-    console.log(Object.values(aux));
+  //   const aux = { ...historyCache };
+  //   console.log(Object.values(aux));
 
-    const filterHistory = (history) => history.createdAt >= startDate && history.createdAt <= endDate;
-    setUserHistory(Object.values(aux).filter(filterHistory));
+  //   const filterHistory = (history) => history.createdAt >= startDate && history.createdAt <= endDate;
+  //   setUserHistory(Object.values(aux).filter(filterHistory));
 
-  };
+  // };
 
-  return <OrderContext.Provider value={{ getOrder, orders, addOrder, updateOrders, saveHistory, getHistoryByDateRange, history, getHistory }}>{children}</OrderContext.Provider>;
+  return <OrderContext.Provider value={{ getOrder, orders, addOrder, updateOrders, saveHistory, history, getHistory }}>{children}</OrderContext.Provider>;
 };

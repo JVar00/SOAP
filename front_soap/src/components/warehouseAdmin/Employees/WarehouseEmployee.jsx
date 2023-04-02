@@ -108,7 +108,8 @@ function WarehouseEmployee() {
 
         { !historyLoading ? (
 
-          <section className="mt-10 lg:mt-20 mb-10">
+          <section className="mt-10 lg:mt-20 mb-4">
+            
             <div className="flex flex-col lg:flex-row xl:justify-start">
               <h2 className="mb-5 font-bold lg:ml-0 text-lg lg:mb-0">
                 Historial de ordenes

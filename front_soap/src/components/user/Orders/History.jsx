@@ -7,7 +7,7 @@ export const History = ({history}) => {
   const { isAuthenticated } = useContext(AuthContext);
 
   return (
-    <div className="mr-7 lg:mr-72 xl:mr-7 ">
+    <div className="mr-7 lg:mr-72 xl:mr-7 pb-4 ">
       <div className="bg-white space-y-3  rounded-lg shadow ">
         <div className="space-y-3 p-4 rounded-lg shadow text-sm bg-red-600 rounded-t-md">
           <div className="flex items-center space-x-2  justify-between" >

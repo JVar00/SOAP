@@ -10,7 +10,7 @@ import { Modal } from "../../../layouts/confirmationModal";
 
 export const Order = ({order}) => {
   const [expanded, setExpanded] = useState(false);
-  const { isAuthenticated } = useContext(AuthContext);
+  const { isAuthenticated} = useContext(AuthContext);
   const {updateOrders, saveHistory} = useContext(OrderContext)
   const [confirm, setConfirm] = useState(false)
   const [databaseErrorMessage, setDatabaseErrorMessage] = useState(false)
@@ -26,7 +26,7 @@ export const Order = ({order}) => {
       try {
         const data = {
           id_order: order.id,
-          user_order : order.user
+          user_order : isAuthenticated.user
         }
         const response = await saveHistory(data)
         const result = response.data

@@ -57,6 +57,8 @@ export const OrderProvider = ({ children }) => {
 
   }
 
+  const checkRepeatOrder=(orderId) => orders.find(order=> order.id == orderId)
+
   // const getHistoryByDateRange = (startDate, endDate) => {
 
   //   const aux = { ...historyCache };
@@ -67,5 +69,5 @@ export const OrderProvider = ({ children }) => {
 
   // };
 
-  return <OrderContext.Provider value={{ getOrder, orders, addOrder, updateOrders, saveHistory, history, getHistory }}>{children}</OrderContext.Provider>;
+  return <OrderContext.Provider value={{ getOrder, orders, addOrder, updateOrders, saveHistory, history, getHistory, checkRepeatOrder}}>{children}</OrderContext.Provider>;
 };

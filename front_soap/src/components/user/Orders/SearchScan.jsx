@@ -10,30 +10,38 @@ import { Modal } from "../../../layouts/confirmationModal";
 
 function SearchScan() {
   const [orderId, setOrderId] = useState('')
-  const { getOrder, addOrder } = useContext(OrderContext)
+  const { getOrder, addOrder, checkRepeatOrder, orders } = useContext(OrderContext)
   const [emptyInputsMessage, setEmptyInputsMessage] = useState(false);
   const [databaseErrorMessage, setDatabaseErrorMessage] = useState(false)
   const [notFoundMessage, setNotFoundMessage] = useState(false)
   const [confirmAdd, setConfirmAdd] = useState(false)
+  const [repeatOrderMessage, setRepeatOrderMessage] = useState(false)
+
   
   const searchOrder = async (confirm) => {
     if (confirm) {
-      try {
-        const result = await getOrder(orderId)
-        const data = result.data
-        if (data.res === false) {
+      if (!checkRepeatOrder(orderId)) {
+        try {
+          const result = await getOrder(orderId)
+          const data = result.data
+          if (data.res === false) {
+            clearMessages()
+            setNotFoundMessage(true)
+            setTimeout(clearMessages, 5000)
+          } else {
+            addOrder(data)
+            setOrderId('')
+          }
+            
+        } catch (error) {
           clearMessages()
-          setNotFoundMessage(true)
-          setTimeout(clearMessages,5000)
-        } else {
-          addOrder(data)
-          setOrderId('')
+          setDatabaseErrorMessage(true)
+          setTimeout(clearMessages, 5000)
         }
-        
-      } catch (error) {
+      } else {
         clearMessages()
-        setDatabaseErrorMessage(true)
-        setTimeout(clearMessages,5000)
+        setRepeatOrderMessage(true)
+        setTimeout(clearMessages, 5000)
       }
     } 
     setConfirmAdd(false)
@@ -43,6 +51,7 @@ function SearchScan() {
     setEmptyInputsMessage(false)
      setDatabaseErrorMessage(false)
      setNotFoundMessage(false)
+     setRepeatOrderMessage(false)
   }
 
     const handleSubmit = () => {
@@ -115,6 +124,7 @@ function SearchScan() {
         <small className={emptyInputsMessage ? "text-base text-red-600" : "hidden"}>Por favor, ingrese el identificador de una orden.</small>                        
         <small className={databaseErrorMessage ? "text-base text-red-500" : "hidden"}>Algo salio mal, intente de nuevo.</small>
         <small className={notFoundMessage ? "text-base text-red-500" : "hidden"}>El identificador ingresado no existe.</small>
+        <small className={repeatOrderMessage ? "text-base text-red-500" : "hidden"}>Esta orden ya está escaneada.</small>
       </div>
     </>
   );

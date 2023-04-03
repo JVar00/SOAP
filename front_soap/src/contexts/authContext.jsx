@@ -1,6 +1,8 @@
 import { createContext, useCallback, useMemo, useState } from "react";
 
 const USER = "user";
+const ORDERS = 'ORDERS'
+
 /*creacion del contexto utilizado para mantener la sesion del usuario, en el cual se crea una variable isAuthenticated
 utilizada para verificar si ya hay una sesion iniciada y almacenar los datos del usuario obteniendo los datos del localstorage
 ,tambien se crean las variables login y logOut en las cuales se envian o eliminan los datos del localstorage y actualiza el valor
@@ -25,6 +27,7 @@ export function AuthContextProvider({ children }) {
    
     const logOut = useCallback(function () {
         window.localStorage.removeItem(USER);
+        window.localStorage.removeItem(ORDERS);
         setIsAuthenticated(null);
     }, []);
 

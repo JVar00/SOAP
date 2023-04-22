@@ -172,23 +172,23 @@ export const Order = ({order}) => {
                         </thead>
                         <tbody className="bg-white divide-y divide-gray-200">
                           {order && order.products.map((product, index)=>(
-                            <tr key= {product.id} className={index%2===0 ? 'bg-gray-100' : 'bg-white' }>
+                            <tr key= {product.sCodigo_Producto} className={index%2===0 ? 'bg-gray-100' : 'bg-white' }>
                               <td className="px-3 py-3 whitespace-nowrap">
                                 <div className="text-sm text-gray-900">
                                   <input type="checkbox" className="form-checkbox"/>
                                 </div>
                               </td>
                               <td className="px-3 py-3 whitespace-nowrap">
-                                <div className="text-base text-gray-900">{ product.id}</div>
+                                <div className="text-base text-gray-900">{ product.sCodigo_Producto}</div>
                               </td>
                               <td className="px-3 py-3 ">
                                 <div className="text-base text-gray-900 max-w-xs">{ product.description}</div>
                               </td>
                               <td className="px-3 py-3 whitespace-nowrap">
-                                <div className="text-base text-gray-900">{product.uni }</div>
+                                <div className="text-base text-gray-900">{product.cCantidad }</div>
                               </td>
                               <td className="px-3 py-3 whitespace-nowrap">
-                                <div className="text-base text-gray-900">{ product.shelf}</div>
+                                <div className="text-base text-gray-900">{ product.sEstante}</div>
                               </td>
                             </tr>
                           ))}

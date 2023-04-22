@@ -29,7 +29,11 @@ function SearchScan() {
             setNotFoundMessage(true)
             setTimeout(clearMessages, 5000)
           } else {
-            addOrder(data)
+            const order = {
+              id: orderId,
+              products : data
+            }
+            addOrder(order)
             setOrderId('')
           }
             

@@ -182,7 +182,7 @@ export const Order = ({order}) => {
                                 <div className="text-base text-gray-900">{ product.sCodigo_Producto}</div>
                               </td>
                               <td className="px-3 py-3 ">
-                                <div className="text-base text-gray-900 max-w-xs">{ product.description}</div>
+                                <div className="text-base text-gray-900 max-w-xs">{ product.sDescripcion}</div>
                               </td>
                               <td className="px-3 py-3 whitespace-nowrap">
                                 <div className="text-base text-gray-900">{product.cCantidad }</div>

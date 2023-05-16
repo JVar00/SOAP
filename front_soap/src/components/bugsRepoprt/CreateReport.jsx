@@ -32,7 +32,7 @@ const CreateReport = ({ funct }) => {
     const create = async (confirm) => {
         if (confirm) {
             const data = {
-                "user": isAuthenticated ? isAuthenticated.use : 'Login',
+                "user": isAuthenticated ? isAuthenticated.user : 'Login',
                 "description": report
             }
             try {

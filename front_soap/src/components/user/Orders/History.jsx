@@ -13,7 +13,7 @@ export const History = ({history}) => {
           <div className="flex items-center space-x-2  justify-between" >
 
             <label className="text-white font-bold text-md hover:underline">
-              {`Numero de orden: ${history && history.id_order}`}
+              {`Numero de orden(s): ${history && history.id_order}`}
             </label>
             
             <span className="p-1.5 text-xs font-bold uppercase tracking-wider text-white bg-red-200 rounded-lg bg-opacity-50">

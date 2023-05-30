@@ -20,9 +20,9 @@ function SearchScan() {
   
   const searchOrder = async (confirm) => {
     if (confirm) {
-      if (!checkRepeatOrder(orderId)) {
-        try {
-          const result = await getOrder(orderId)
+      try {
+          const correctOrderId = orderId.replace(/\s/g, "") //elimina los espacios en blanco
+          const result = await getOrder(correctOrderId)
           const data = result.data
           if (data.res === false) {
             clearMessages()
@@ -30,7 +30,7 @@ function SearchScan() {
             setTimeout(clearMessages, 5000)
           } else {
             const order = {
-              id: orderId,
+              id: correctOrderId.split(",").map(id => id.trim()).filter(id => id !== ""),//separa la cadena de ids por comas(,) y guardo lso ids en un array
               products : data
             }
             addOrder(order)
@@ -42,11 +42,6 @@ function SearchScan() {
           setDatabaseErrorMessage(true)
           setTimeout(clearMessages, 5000)
         }
-      } else {
-        clearMessages()
-        setRepeatOrderMessage(true)
-        setTimeout(clearMessages, 5000)
-      }
     } 
     setConfirmAdd(false)
   }
@@ -86,7 +81,7 @@ function SearchScan() {
     >
       <input
         className="appearance-none block w-5/6 text-sm input leading-tight focus:outline-none focus:bg-white focus:border-red-600 border-none"
-        placeholder="Busca el código de la orden"
+        placeholder="Busca el código de la orden(s)"
         value={orderId}
         onChange={e => {
           setOrderId(e.target.value)

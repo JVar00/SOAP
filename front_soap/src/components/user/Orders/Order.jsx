@@ -25,7 +25,7 @@ export const Order = ({order}) => {
     if (confirm) {
       try {
         const data = {
-          id_order: order.id,
+          id_order: order.id.join(', '),
           user_order : isAuthenticated.user
         }
         const response = await saveHistory(data)
@@ -72,7 +72,8 @@ export const Order = ({order}) => {
         <div className="space-y-3 p-4 rounded-lg shadow text-sm bg-red-600 rounded-t-md">
           <div className="flex items-center space-x-2  justify-between" >
             <label className="text-white font-bold text-md hover:underline">
-              {`Numero de orden: ${order && order.id}`}
+              Numero de orden(s): {order && order.id.map((id, index) => `${id}=${index + 1}`).join(", ")
+              }
             </label>
 
             {isAuthenticated.role == "Alisto" ||
@@ -168,6 +169,9 @@ export const Order = ({order}) => {
                             <th scope="col" className="px-3 py-3 text-left text-base font-medium text-gray-500  tracking-wider">
                               Ubicación
                             </th>
+                            <th scope="col" className="px-3 py-3 text-left text-base font-medium text-gray-500  tracking-wider">
+                              Orden
+                            </th>
                           </tr>
                         </thead>
                         <tbody className="bg-white divide-y divide-gray-200">
@@ -189,6 +193,9 @@ export const Order = ({order}) => {
                               </td>
                               <td className="px-3 py-3 whitespace-nowrap">
                                 <div className="text-base text-gray-900">{ product.sEstante}</div>
+                              </td>
+                              <td className="px-3 py-3 whitespace-nowrap">
+                                <div className="text-base text-gray-900">{order.id.indexOf(product.sPedido) + 1}</div>
                               </td>
                             </tr>
                           ))}

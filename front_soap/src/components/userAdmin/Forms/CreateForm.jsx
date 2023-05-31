@@ -234,6 +234,8 @@ export const Form = () => {
                   <option value="">Seleccione el rol</option>
                   <option value="Alisto">Alisto</option>
                   <option value="Acomodo">Acomodo</option>
+                  <option value="Administrador">Administrador</option>
+                  <option value="JefeBodega">Jefe De Bodega</option>
                 </select>
               </div>
             </div>

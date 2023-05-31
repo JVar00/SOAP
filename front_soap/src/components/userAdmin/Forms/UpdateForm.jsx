@@ -236,6 +236,8 @@ export const UpdateForm = () => {
                   <option value={role}>Rol actual : {role}</option>
                   <option value="Alisto">Alisto</option>
                   <option value="Acomodo">Acomodo</option>
+                  <option value="Administrador">Administrador</option>
+                  <option value="JefeBodega">Jefe De Bodega</option>
                 </select>
               </div>
             </div>
